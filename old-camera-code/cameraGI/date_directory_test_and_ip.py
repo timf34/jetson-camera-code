@@ -26,3 +26,23 @@ print("hostname:", hostname, "\nlocal_ip:", local_ip)
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 print("The main IP address", s.getsockname()[0])
+
+
+
+def get_global_variables():
+    global global_today, ip_address
+    # Lets get some of our variables for our folders
+    # date/time object 
+    global_today = datetime.now()
+
+    # IP address 
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    print("The main IP address", s.getsockname()[0])
+    ip_address = s.getsockname()[0]
+
+
+if __name__ == '__main__':
+    get_global_variables()
+
+    print("ip is here:", ip_address)
