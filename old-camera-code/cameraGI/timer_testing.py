@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import threading
 from time import sleep, time 
 
@@ -55,8 +55,12 @@ def old_code_func():
     print("this statement comes after t.start() - notice how it executes even though the threading Timer hasn't executed yet!")
 
 
+def debugging_timer():
+    current_time = get_current_time()
+    print(current_time.second)
 
 
 if __name__ == '__main__':
     print("hello world")
-    old_code_func()
+    debugging_timer()
+    
