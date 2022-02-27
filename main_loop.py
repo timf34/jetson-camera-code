@@ -107,14 +107,14 @@ if __name__ == '__main__':
     
     # Set our file directory 
     if DEBUG is False: 
-        path = "/home/tim/bohsVids/" + today.strftime('%m_%d_%Y_tim@192.168.43.53')
+        path = "../tim/bohsVids/" + today.strftime('%m_%d_%Y_tim@192.168.73.207')
     else:
-        path = "/home/tim/bohsVids/test"
+        path = "../tim/bohsVids/test"
 
 
     # Check if directory exists, else create a new one
-    if not os.path.isdir(path):
-        os.mkdir(path)
+    if not os.path.isdir(path):	
+        os.makedirs(path)
         print("the following folder was created: " + path)
     else:
         print("The following folder arleady exists: " + path)
