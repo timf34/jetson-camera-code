@@ -15,7 +15,8 @@ import sys
 
 DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
-sys.stdout = open("test123.txt", "w")
+# sys.stdout = open("test123.txt", "w")
+# This isn't what I want for Bohs where I want to see output! This redirects all console output besides that from the nvargus (which is different somehow)
 
 # This might as well be a global constant
 today = datetime.now()
