@@ -44,7 +44,7 @@ def get_seconds_till_match():
     returns int
     """
     current_time=datetime.today()
-    time_of_match=current_time.replace(day=current_time.day, hour=19, minute=30, second=1, microsecond=0)
+    time_of_match=current_time.replace(day=current_time.day, hour=18, minute=01, second=1, microsecond=0)
     delta_t=time_of_match-current_time
      
     print("current time is ", current_time, "\ntime of the match is ", time_of_match) 
