@@ -8,7 +8,9 @@ from time import sleep
 from datetime import datetime
 import socket
 import os
-import sys 
+import sys
+
+from config import BohsConfig
 # TODO: I should look more into threading.Timer and the best way to use!
 # TODO: look into subprocess more! It will be useful for looging all the output from the terminal it seems 
 
@@ -20,6 +22,8 @@ CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
 
 # This might as well be a global constant
 today = datetime.now()
+
+conf = BohsConfig()
     
 
 # TODO: I need a flag for entering test or debug mode! And to change directory accordingly. And we can make it so that I default to normal mode:)
@@ -44,7 +48,11 @@ def get_seconds_till_match():
     returns int
     """
     current_time=datetime.today()
-    time_of_match=current_time.replace(day=current_time.day, hour=18, minute=01, second=1, microsecond=0)
+    time_of_match=current_time.replace(day=current_time.day,
+                                       hour=conf.hour,
+                                       minute=conf.minute,
+                                       second=conf.second,
+                                       microsecond=conf.microsecond)
     delta_t=time_of_match-current_time
      
     print("current time is ", current_time, "\ntime of the match is ", time_of_match) 
@@ -76,7 +84,6 @@ def record_in_batches_match_mode():
         sleep(5)
         main_loop.quit()
         thread.join()
-
 
 
 def record_test_mode():
