@@ -10,4 +10,6 @@
 # This follows the instructions here:
 # https://askubuntu.com/questions/258580/how-to-run-a-script-depending-on-internet-connection
 
+# Remember to give execution permission to this file in the if-up.d folder!
+
 ./home/tim/jetson-camera-code/run_on_internet_connection.sh
