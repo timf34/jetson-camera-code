@@ -3,6 +3,8 @@
 # Copy this file to /etc/NetworkManager/dispatcher.d 
 # Most of this file is superfluous besidest the command to run the update_match_config_file.sh
 
+# Make sure to chmod +x the update_config python file!
+
 IF=$1
 STATUS=$2
 
