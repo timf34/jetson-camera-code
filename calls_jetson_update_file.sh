@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Copy this file to /etc/NetworkManager... 
+# Copy this file to /etc/NetworkManager/dispatcher.d 
+# Most of this file is superfluous besidest the command to run the update_match_config_file.sh
 
 IF=$1
 STATUS=$2
