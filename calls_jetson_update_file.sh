@@ -5,6 +5,8 @@
 
 # Make sure to chmod +x the update_config python file!
 
+# Source: https://www.techytalk.info/start-script-on-network-manager-successful-connection/
+
 IF=$1
 STATUS=$2
 
