@@ -3,7 +3,7 @@ Backup for the camera controlling code on our Jetsons
 
 # TODO 
 
-- [ ] Update the process for a match day in Bohs, absolutely step by step, for when I inevitably (potentially) forget everything!
+- [ ] Update the process for a match day in Bohs, absolutely step by step, for when I inevitably (potentially) forget everything! In Notion and in Logseq (experiment with moving over there more! Maybe Obsidian too!) 
 
 ## Some notes on usage
 ### Streaming to laptop to check camera angle
