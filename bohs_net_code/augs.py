@@ -1,4 +1,4 @@
-import numpy
+from PIL import Image
 import cv2
 import torchvision.transforms as transforms
 
@@ -7,6 +7,7 @@ NORMALIZATION_STD = [0.229, 0.224, 0.225]
 
 normalize_trans = transforms.Compose([transforms.ToTensor(),
                                       transforms.Normalize(NORMALIZATION_MEAN, NORMALIZATION_STD)])
+
 
 def image2tensor(image):
     # Convert PIL Image to the tensor (with normalization)
