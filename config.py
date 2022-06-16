@@ -6,7 +6,7 @@ class BohsConfig:
     def __init__(self):
         self.hour : int = 19
         self.minute : int = 45
-        self.second : int = 3
+        self.second : int = 4
         self.microsecond : int = 1
 
         assert 0 <= self.hour <= 23, "Hour must be between 0 and 23"
