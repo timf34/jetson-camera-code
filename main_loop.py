@@ -14,6 +14,8 @@ from config import BohsConfig
 # TODO: I should look more into threading.Timer and the best way to use!
 # TODO: look into subprocess more! It will be useful for looging all the output from the terminal it seems 
 
+# TODO: This is a big one, **the paths to creating new folders are hardcoded**. I need to replace these with env variables or similar,
+
 
 DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
