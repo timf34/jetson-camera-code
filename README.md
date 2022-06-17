@@ -3,6 +3,8 @@ Backup for the camera controlling code on our Jetsons
 
 # TODO 
 
+- [ ] ==**The paths in `main_loop.py` are hardcoded... replace these with environment variables when you can. It could cause some confusion later potentially**==
+
 - [ ] Update the process for a match day in Bohs, absolutely step by step, for when I inevitably (potentially) forget everything! In Notion and in Logseq (experiment with moving over there more! Maybe Obsidian too!) 
 
 ## Some notes on usage
