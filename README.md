@@ -1,6 +1,13 @@
 # jetson-camera-code
 Backup for the camera controlling code on our Jetsons
 
+**Note that we have to make the `update_jetson_config_file.sh` executable via `chmod +x update_jetson_config_file.py`**
+
+Note taht I also have to do the same for the `calls_jetson_update_file.sh` script which will be in the `dispatcher.d` directory... except that I need to prepend the 
+command with sudo (it needs root permission)
+
+I shouldn't need to make another 
+
 # TODO 
 
 - [ ] ==**The paths in `main_loop.py` are hardcoded... replace these with environment variables when you can. It could cause some confusion later potentially**==
