@@ -6,9 +6,13 @@ Backup for the camera controlling code on our Jetsons
 Note taht I also have to do the same for the `calls_jetson_update_file.sh` script which will be in the `dispatcher.d` directory... except that I need to prepend the 
 command with sudo (it needs root permission)
 
+Also note that it seems to only work when I hardcode the path into `calls...file.py` file... I don't know why the env variables aren't working
+
 I shouldn't need to make another 
 
 # TODO 
+
+- [ ] Look into making the environment variables work as a path in the .sh scripts. Primarily the `calls_jetson_update_file.sh` script
 
 - [ ] ==**The paths in `main_loop.py` are hardcoded... replace these with environment variables when you can. It could cause some confusion later potentially**==
 
