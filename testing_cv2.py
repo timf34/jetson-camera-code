@@ -1,10 +1,17 @@
 import cv2
 print(cv2.__version__)
-dispW=1920
-dispH=1080
-flip=2
 
-cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! nvvidconv flip-method='+str(flip)+' ! video/x-raw, width='+str(dispW)+', height='+str(dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+WIDTH: int = 1920
+HEIGHT: int = 1080
+
+
+# This isn't very clean but I am going to keep track of the pipelines that didn't work here for now 
+# This wouldn't work. Apparently `nvvidconv` is needed
+# cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! video/x-raw, width='+str(dispW)+', height='+str(dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+
+
+cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width='+str(WIDTH)+', height='+str(HEIGHT)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+
 
 if cap.isOpened():
     print("cap.isOpened:", cap.isOpened())
