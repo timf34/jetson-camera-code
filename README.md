@@ -1,7 +1,22 @@
 # jetson-camera-code
 Backup for the camera controlling code on our Jetsons
 
+**Note that we have to make the `update_jetson_config_file.sh` executable via `chmod +x update_jetson_config_file.py`**
+
+Note taht I also have to do the same for the `calls_jetson_update_file.sh` script which will be in the `dispatcher.d` directory... except that I need to prepend the 
+command with sudo (it needs root permission)
+
+Also note that it seems to only work when I hardcode the path into `calls...file.py` file... I don't know why the env variables aren't working
+
+I shouldn't need to make another 
+
+Also note that I need to be careful when running git pull on `calls_jetson_update_file.sh`... even though the main copy will be in the dispatcher.d folder it would be best not to change the original too much, otherwise I could accidentally changed the hardcoded filepaths 
+
 # TODO 
+
+- [ ] Look into making the environment variables work as a path in the .sh scripts. Primarily the `calls_jetson_update_file.sh` script
+
+- [ ] ==**The paths in `main_loop.py` are hardcoded... replace these with environment variables when you can. It could cause some confusion later potentially**==
 
 - [ ] Update the process for a match day in Bohs, absolutely step by step, for when I inevitably (potentially) forget everything! In Notion and in Logseq (experiment with moving over there more! Maybe Obsidian too!) 
 
