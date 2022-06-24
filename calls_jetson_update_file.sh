@@ -15,9 +15,9 @@ then
     case "$2" in
         up)
         logger -s "NM Script up triggered"
-	(cd $HOME/jetson-camera-code; source update_match_config_file.sh)
-	(cd /home/$USER/jetson-camera-code; source update_match_config_file.sh)
-	# source /home/tim/jetson-camera-code; ./update_match_config_file.sh 
+	# (cd $HOME/jetson-camera-code; source update_match_config_file.sh)
+	(cd /home/timf34/jetson-camera-code; source update_match_config_file.sh)
+	#source /home/tim/jetson-camera-code; ./update_match_config_file.sh 
 	# wouldn't work. It said something like fatal: no git repository in directory
         ;;
         down)
