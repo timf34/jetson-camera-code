@@ -10,6 +10,8 @@ Also note that it seems to only work when I hardcode the path into `calls...file
 
 I shouldn't need to make another 
 
+Also note that I need to be careful when running git pull on `calls_jetson_update_file.sh`... even though the main copy will be in the dispatcher.d folder it would be best not to change the original too much, otherwise I could accidentally changed the hardcoded filepaths 
+
 # TODO 
 
 - [ ] Look into making the environment variables work as a path in the .sh scripts. Primarily the `calls_jetson_update_file.sh` script
