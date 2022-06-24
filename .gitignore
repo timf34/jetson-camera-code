@@ -3,4 +3,4 @@
 /logs
 test_file.py
 
-update_match_config_file.sh
+calls_match_config_file.sh
