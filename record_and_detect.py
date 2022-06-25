@@ -26,43 +26,49 @@ avg_fps = FPS()
 reading_fps = FPS()
 writing_fps = FPS()
 
-if cap.isOpened():
-
-    print("cap.isOpened:", cap.isOpened())
-
-    avg_fps.start()
-
+try:
     while True:
+        if cap.isOpened():
 
-        # Read the next frame
-        reading_fps.start()
-        ret_val, img = cap.read();
-        reading_fps.stop()
+            print("cap.isOpened:", cap.isOpened())
 
-        if not ret_val:
-            break
+            avg_fps.start()
 
-        # cv2.imshow('demo',img)
+            while True:
 
-        # Write the frame to the file
-        writing_fps.start()
-        writer.write(img)
-        writing_fps.stop()
-        avg_fps.update()
+                # Read the next frame
+                reading_fps.start()
+                ret_val, img = cap.read();
+                reading_fps.stop()
 
-        # Exit if any key is pressed
-        print("prio")
-        key = cv2.waitKey(25)
-        print("jere os tje leu", key)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+                if not ret_val:
+                    break
 
-else:
-    print ("camera open failed")
+                # cv2.imshow('demo',img)
 
-avg_fps.stop()
-print("Average FPS:", avg_fps.average_fps())
-print("Reading FPS:", reading_fps.average_fps())
-print("Writing FPS:", writing_fps.average_fps())
-cap.release()
-writer.release()
+                # Write the frame to the file
+                writing_fps.start()
+                writer.write(img)
+                writing_fps.stop()
+                avg_fps.update()
+
+                # Exit if any key is pressed
+                print("prio")
+                key = cv2.waitKey(25)
+                print("jere os tje leu", key)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+        else:
+            print ("camera open failed")
+except KeyboardInterrupt:
+    print("KeyboardInterrupt")
+    avg_fps.stop()
+    print("Average FPS:", avg_fps.average_fps())
+    print("Reading FPS:", reading_fps.average_fps())
+    print("Writing FPS:", writing_fps.average_fps())
+    cap.release()
+    writer.release()
+    pass
+
+print("we made it out here")
