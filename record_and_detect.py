@@ -50,8 +50,11 @@ if cap.isOpened():
         writing_fps.stop()
         avg_fps.update()
 
-        # Exit if 'a' key is pressed
-        if cv2.waitKey(10) == ord('q'):
+        # Exit if any key is pressed
+        print("prio")
+        key = cv2.waitKey(25)
+        print("jere os tje leu", key)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
 else:
