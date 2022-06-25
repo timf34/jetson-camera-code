@@ -65,8 +65,8 @@ except KeyboardInterrupt:
     print("KeyboardInterrupt")
     avg_fps.stop()
     print("Average FPS:", avg_fps.average_fps())
-    print("Reading FPS:", reading_fps.average_fps())
-    print("Writing FPS:", writing_fps.average_fps())
+    print("Reading FPS:", reading_fps.fps())
+    print("Writing FPS:", writing_fps.fps())
     cap.release()
     writer.release()
     pass
