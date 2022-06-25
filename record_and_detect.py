@@ -4,8 +4,8 @@ from bohs_net_detector import BohsNetDetector
 import cv2
 print(cv2.__version__)
 
-WIDTH: int = 640
-HEIGHT: int = 480
+WIDTH: int = 1920
+HEIGHT: int = 1080
 
 FRAME_SIZE = (WIDTH, HEIGHT)
 
@@ -25,6 +25,7 @@ writer = cv2.VideoWriter('filename.avi',
 avg_fps = FPS()
 reading_fps = FPS()
 writing_fps = FPS()
+bohs_fps = FPS()
 
 bohs_net = BohsNetDetector()
 
@@ -40,7 +41,7 @@ try:
 
                 # Read the next frame
                 reading_fps.start()
-                ret_val, img = cap.read();
+                ret_val, img = cap.read()
                 reading_fps.stop()
 
                 if not ret_val:
@@ -53,11 +54,14 @@ try:
                 avg_fps.update()
 
                 # Detect the ball
+                bohs_fps.start()
                 bohs_net.detect(img)
+                bohs_fps.stop()
 
                 # Exit if any key is pressed
                 print("Reading FPS:", reading_fps.fps())
                 print("Writing FPS:", writing_fps.fps())
+                print("Bohs FPS:", bohs_fps.fps())
 
         else:
             print ("camera open failed")
