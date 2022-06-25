@@ -2,11 +2,17 @@ import torch
 import torch.nn as nn
 import kornia
 
+import os
+import sys
+sys.path.append(os.path.abspath('..'))
 
-import network.fpn as fpn
-from data.augmentation import BALL_LABEL, PLAYER_LABEL, BALL_BBOX_SIZE
+import bohs_net_code.network.fpn as fpn
+from bohs_net_code.data.augs import BALL_LABEL
 
 BALL_DELTA = 3
+PLAYER_LABEL = 2
+# Size of the ball bbox in pixels (fixed as we detect only ball center)
+BALL_BBOX_SIZE = 20
 
 
 # Get ranges of cells to mark with ground truth location

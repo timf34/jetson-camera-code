@@ -4,8 +4,8 @@ from bohs_net_detector import BohsNetDetector
 import cv2
 print(cv2.__version__)
 
-WIDTH: int = 1920
-HEIGHT: int = 1080
+WIDTH: int = 640
+HEIGHT: int = 480
 
 FRAME_SIZE = (WIDTH, HEIGHT)
 
@@ -15,7 +15,8 @@ FRAME_SIZE = (WIDTH, HEIGHT)
 # cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! video/x-raw, width='+str(dispW)+', height='+str(dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
 
 
-cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width='+str(WIDTH)+', height='+str(HEIGHT)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+# cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width='+str(WIDTH)+', height='+str(HEIGHT)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+cap = cv2.VideoCapture(0)
 
 writer = cv2.VideoWriter('filename.avi',
                          cv2.VideoWriter_fourcc(*'MJPG'),
@@ -52,7 +53,7 @@ try:
                 avg_fps.update()
 
                 # Detect the ball
-                bohs_net.detect_ball(img)
+                bohs_net.detect(img)
 
                 # Exit if any key is pressed
                 print("Reading FPS:", reading_fps.fps())

@@ -3,7 +3,10 @@ import cv2
 import torch
 import torch.nn as nn
 
-import data.augmentation as augmentations
+import sys
+sys.path.append('..')
+
+import data.augs as augmentations
 
 """
 # VGG-like network configuration

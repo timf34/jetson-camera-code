@@ -2,6 +2,8 @@ from PIL import Image
 import cv2
 import torchvision.transforms as transforms
 
+BALL_LABEL = 1
+
 NORMALIZATION_MEAN = [0.485, 0.456, 0.406]
 NORMALIZATION_STD = [0.229, 0.224, 0.225]
 
