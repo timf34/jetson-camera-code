@@ -9,6 +9,8 @@ class BohsConfig:
         self.second : int = 4
         self.microsecond : int = 1
 
+        self.path_to_weights: str = "./weights/model_12_06_2022_2349_final_with_augs.pth"
+
         assert 0 <= self.hour <= 23, "Hour must be between 0 and 23"
         assert isinstance(self.hour, int), "Hour must be an int"
         assert 0 <= self.minute <= 59 and isinstance(self.minute, int), "Minute must be between 0 and 59"
