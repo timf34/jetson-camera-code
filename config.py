@@ -23,7 +23,6 @@ class BohsConfig:
         return f"hour: {self.hour}, minute: {self.minute}, second: {self.second}, microsecond: {self.microsecond}"
 
 
-
 def test():
     x = BohsConfig()
     print(x)
