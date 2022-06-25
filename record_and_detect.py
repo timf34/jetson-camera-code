@@ -19,7 +19,7 @@ cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920
 # threads... probably best to just leave this for tmrw for now 
 writer = cv2.VideoWriter('filename.avi',
                          cv2.VideoWriter_fourcc(*'MJPG'),
-                         60, FRAME_SIZE)
+                         5, FRAME_SIZE)
 count = 0 
 if cap.isOpened():
     print("cap.isOpened:", cap.isOpened())
@@ -32,8 +32,8 @@ if cap.isOpened():
         writer.write(img)
         print(count)
         count+=1
-        # if cv2.waitKey(1) == ord('q'):
-        #    break
+        if cv2.waitKey(1) == ord('q'):
+            break
 else:
     print ("camera open failed")
 
