@@ -50,8 +50,10 @@ if cap.isOpened():
         writing_fps.stop()
         avg_fps.update()
 
-        if cv2.waitKey(1) == ord('q'):
+        # Exit if 'a' key is pressed
+        if cv2.waitKey(1) & 0xFF == ord('a'):
             break
+
 else:
     print ("camera open failed")
 
