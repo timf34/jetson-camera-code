@@ -1,4 +1,6 @@
 from fps import FPS
+from bohs_net_detector import BohsNetDetector
+
 import cv2
 print(cv2.__version__)
 
@@ -23,6 +25,8 @@ avg_fps = FPS()
 reading_fps = FPS()
 writing_fps = FPS()
 
+bohs_net = BohsNetDetector()
+
 try:
     while True:
         if cap.isOpened():
@@ -46,6 +50,9 @@ try:
                 writer.write(img)
                 writing_fps.stop()
                 avg_fps.update()
+
+                # Detect the ball
+                bohs_net.detect_ball(img)
 
                 # Exit if any key is pressed
                 print("Reading FPS:", reading_fps.fps())
