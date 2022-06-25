@@ -51,7 +51,7 @@ if cap.isOpened():
         avg_fps.update()
 
         # Exit if 'a' key is pressed
-        if cv2.waitKey(1) & 0xFF == ord('a'):
+        if cv2.waitKey(10) == ord('q'):
             break
 
 else:
