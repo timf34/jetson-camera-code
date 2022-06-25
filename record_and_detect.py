@@ -1,3 +1,4 @@
+from fps import FPS
 import cv2
 print(cv2.__version__)
 
@@ -20,22 +21,33 @@ cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920
 writer = cv2.VideoWriter('filename.avi',
                          cv2.VideoWriter_fourcc(*'MJPG'),
                          5, FRAME_SIZE)
+avg_fps = FPS()
+
+
+
 count = 0 
 if cap.isOpened():
+
     print("cap.isOpened:", cap.isOpened())
-    # cv2.namedWindow("demo", cv2.WINDOW_AUTOSIZE)
+
+    avg_fps.start()
+
     while True:
         ret_val, img = cap.read();
         if not ret_val:
             break
+
         # cv2.imshow('demo',img)
+
         writer.write(img)
-        print(count)
-        count+=1
+        avg_fps.update()
+
         if cv2.waitKey(1) == ord('q'):
             break
 else:
     print ("camera open failed")
 
+avg_fps.stop()
+print("Average FPS:", avg_fps.average_fps())
 cap.release()
 writer.release()
