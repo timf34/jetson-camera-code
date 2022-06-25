@@ -15,9 +15,6 @@ FRAME_SIZE = (WIDTH, HEIGHT)
 
 cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width='+str(WIDTH)+', height='+str(HEIGHT)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
 
-# so with this setup, its way too slow, not close to 60fps, I'm gonna try it with another
-# ... I was about to say that I was going to try it with thie filesink but that miight make things difficult with the
-# threads... probably best to just leave this for tmrw for now 
 writer = cv2.VideoWriter('filename.avi',
                          cv2.VideoWriter_fourcc(*'MJPG'),
                          5, FRAME_SIZE)
@@ -44,8 +41,6 @@ try:
                 if not ret_val:
                     break
 
-                # cv2.imshow('demo',img)
-
                 # Write the frame to the file
                 writing_fps.start()
                 writer.write(img)
@@ -60,11 +55,9 @@ try:
             print ("camera open failed")
 except KeyboardInterrupt:
     print("KeyboardInterrupt")
-    avg_fps.stop()
-    print("Average FPS:", avg_fps.average_fps())
 
-    cap.release()
-    writer.release()
-    pass
-
-print("we made it out here")
+print("This code is reached")
+cap.release()
+writer.release()
+avg_fps.stop()
+print("Average FPS:", avg_fps.average_fps())
