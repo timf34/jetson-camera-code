@@ -53,11 +53,8 @@ try:
                 avg_fps.update()
 
                 # Exit if any key is pressed
-                print("prio")
-                key = cv2.waitKey(25)
-                print("jere os tje leu", key)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+                print("Reading FPS:", reading_fps.fps())
+                print("Writing FPS:", writing_fps.fps())
 
         else:
             print ("camera open failed")
@@ -65,8 +62,7 @@ except KeyboardInterrupt:
     print("KeyboardInterrupt")
     avg_fps.stop()
     print("Average FPS:", avg_fps.average_fps())
-    print("Reading FPS:", reading_fps.fps())
-    print("Writing FPS:", writing_fps.fps())
+
     cap.release()
     writer.release()
     pass
