@@ -4,10 +4,10 @@
 
 class BohsConfig:
     def __init__(self):
-        self.hour : int = 19
-        self.minute : int = 45
-        self.second : int = 4
-        self.microsecond : int = 1
+        self.hour: int = 19
+        self.minute: int = 45
+        self.second: int = 4
+        self.microsecond: int = 1
 
         self.path_to_weights: str = "./weights/model_12_06_2022_2349_final_with_augs.pth"
 
