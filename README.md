@@ -1,6 +1,12 @@
 # jetson-camera-code
 Backup for the camera controlling code on our Jetsons
 
+## Todo
+
+_This repo is in need of a cleanup soonish_
+
+---
+
 **Note that we have to make the `update_jetson_config_file.sh` executable via `chmod +x update_jetson_config_file.py`**
 
 Note taht I also have to do the same for the `calls_jetson_update_file.sh` script which will be in the `dispatcher.d` directory... except that I need to prepend the 
