@@ -38,5 +38,7 @@ The `calls_jetson_update_file.sh` file gets added to the `/etc/NetworkManager/di
 **This means that we only have to update the time of the match, and the IP address of this laptop in case its changed, in preparation for a game** (assuming that the cameras are working ok (I should write some sort of test for them when I have time)). 
 
 
+### Useful commands 
 
+- Run `sudo jtop` to get a grpahical overview of RAM, CPU, GPU useage
 
