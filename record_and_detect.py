@@ -54,22 +54,22 @@ try:
                     break
 
                 # Write the frame to the file
-                writing_fps.start()
-                print("Writing frame")
-                writer.write(img)
-                writing_fps.stop()
-                avg_fps.update()
+                # writing_fps.start()
+                # print("Writing frame")
+                # writer.write(img)
+                # writing_fps.stop()
+                # avg_fps.update()
 
                 # Detect the ball
-                # bohs_fps.start()
-                # print("Ball detection")
-                # bohs_net.detect(img)
-                # bohs_fps.stop()
-                # count+=1
+                bohs_fps.start()
+                print("Ball detection")
+                bohs_net.detect(img)
+                bohs_fps.stop()
+                count+=1
 
                 # Exit if any key is pressed
                 print("Reading FPS:", reading_fps.fps())
-                print("Writing FPS:", writing_fps.fps())
+                # print("Writing FPS:", writing_fps.fps())
                 print("Bohs FPS:", bohs_fps.fps())
                 print("Frame: ", count)
 
