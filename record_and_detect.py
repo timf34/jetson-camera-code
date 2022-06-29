@@ -29,6 +29,8 @@ reading_fps = FPS()
 writing_fps = FPS()
 bohs_fps = FPS()
 
+count = 0
+
 bohs_net = BohsNetDetector()
 
 try:
@@ -59,11 +61,13 @@ try:
                 bohs_fps.start()
                 bohs_net.detect(img)
                 bohs_fps.stop()
+                count+=1
 
                 # Exit if any key is pressed
                 print("Reading FPS:", reading_fps.fps())
                 print("Writing FPS:", writing_fps.fps())
                 print("Bohs FPS:", bohs_fps.fps())
+                print("Frame: ", count)
 
         else:
             print ("camera open failed")
