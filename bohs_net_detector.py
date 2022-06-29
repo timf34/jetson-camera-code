@@ -14,6 +14,7 @@ class BohsNetDetector:
         self.state_dict = torch.load(self.weights)
         self.ball_threshold: float = 0.7
         self.device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
+        print("The model is on: ", self.device)
 
 
         assert os.path.exists(self.weights), f'Cannot find weights file: {self.weights}'
