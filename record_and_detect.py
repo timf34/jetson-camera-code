@@ -45,20 +45,24 @@ try:
 
                 # Read the next frame
                 reading_fps.start()
+                print("Reading frame")
                 ret_val, img = cap.read()
                 reading_fps.stop()
 
                 if not ret_val:
+                    print("Breaking!")
                     break
 
                 # Write the frame to the file
                 writing_fps.start()
+                print("Writing frame")
                 writer.write(img)
                 writing_fps.stop()
                 avg_fps.update()
 
                 # Detect the ball
                 bohs_fps.start()
+                print("Ball detection")
                 bohs_net.detect(img)
                 bohs_fps.stop()
                 count+=1
