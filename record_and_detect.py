@@ -61,11 +61,11 @@ try:
                 avg_fps.update()
 
                 # Detect the ball
-                bohs_fps.start()
-                print("Ball detection")
-                bohs_net.detect(img)
-                bohs_fps.stop()
-                count+=1
+                # bohs_fps.start()
+                # print("Ball detection")
+                # bohs_net.detect(img)
+                # bohs_fps.stop()
+                # count+=1
 
                 # Exit if any key is pressed
                 print("Reading FPS:", reading_fps.fps())
