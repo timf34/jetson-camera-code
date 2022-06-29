@@ -4,8 +4,8 @@ from bohs_net_detector import BohsNetDetector
 import cv2
 print(cv2.__version__)
 
-WIDTH: int = 1920
-HEIGHT: int = 1080
+WIDTH: int = 1280
+HEIGHT: int = 720
 
 FRAME_SIZE = (WIDTH, HEIGHT)
 
@@ -48,6 +48,9 @@ try:
                 print("Reading frame")
                 ret_val, img = cap.read()
                 reading_fps.stop()
+
+                # Resize the frame to (720, 1280)
+                img = cv2.resize(img, FRAME_SIZE)
 
                 if not ret_val:
                     print("Breaking!")
