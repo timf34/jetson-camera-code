@@ -41,7 +41,7 @@ try:
 
             avg_fps.start()
 
-            while True:
+            while cap.isOpened():
 
                 # Read the next frame
                 reading_fps.start()
