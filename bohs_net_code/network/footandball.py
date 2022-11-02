@@ -1,12 +1,13 @@
 import torch
 import torch.nn as nn
-import kornia
+
 
 import os
 import sys
 sys.path.append(os.path.abspath('..'))
 
 import bohs_net_code.network.fpn as fpn
+import bohs_net_code.network.nms as nms
 from bohs_net_code.data.augs import BALL_LABEL
 
 BALL_DELTA = 3
@@ -120,18 +121,9 @@ class FootAndBall(nn.Module):
 
         # Note that this softmax code can be tidied up but we will wait until we have trained the network with softmax
         # and see if it works before we tidy it up/ keep the softmax permananetly during training mode.
-        self.softmax = None
-        self.nms = None
-
-        if phase == 'eval':
-            # In eval phase pass confidence feature maps through the Softmax to have normalized values
-            self.softmax = nn.Softmax(dim=1)
-        elif phase == 'detect':
-            # In detect phase we are working on feature maps (B, C, H, W)
-            self.softmax = nn.Softmax(dim=1)
-            # Non-maximum suppression layer
-            self.nms_kernel_size = (3, 3)
-            self.nms = kornia.feature.nms.NonMaximaSuppression2d(self.nms_kernel_size)
+        self.softmax = nn.Softmax(dim=1)
+        self.nms_kernel_size = (3, 3)
+        self.nms = nms.NonMaximaSuppression2d(self.nms_kernel_size)
 
     def detect_from_map(self, confidence_map, downscale_factor, max_detections, bbox_map=None):
         # downscale_factor: downscaling factor of the confidence map versus an original image
