@@ -1,6 +1,5 @@
 *.mp4
 *.avi
-/logs
 test_file.py
 
 calls_match_config_file.sh
