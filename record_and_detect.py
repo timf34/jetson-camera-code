@@ -66,7 +66,7 @@ try:
                 # Detect the ball
                 bohs_fps.start()
                 print("Ball detection")
-                bohs_net.detect(img)
+                print(bohs_net.detect(img))
                 bohs_fps.stop()
                 count+=1
 

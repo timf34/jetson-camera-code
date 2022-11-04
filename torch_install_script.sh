@@ -1,12 +1,18 @@
-wget https://nvidia.box.com/shared/static/p57jwntv436lfrd78inwl7iml6p13fzh.whl -O torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+# Source: https://qengineering.eu/install-pytorch-on-jetson-nano.html
 
-# This, even though its straight from nvidia, doesn't seem to work!
-# sudo apt-get install python3-pip libopenblas-base libopenmpi-dev libomp5 libomp-dev 
-csudo apt-get install libopenblas-base libopenmpi-dev 
-python3 -m pip install Cython
-python3 -m pip install numpy torch-1.8.0-cp36-cp36m-linux_aarch64.whl
-
-
-# Source: https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-11-now-available/72048
-
-
+# install the dependencies (if not already onboard)
+sudo apt-get install python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev
+sudo -H pip3 install future
+sudo pip3 install -U --user wheel mock pillow
+sudo -H pip3 install testresources
+# above 58.3.0 you get version issues
+sudo -H pip3 install setuptools==58.3.0
+sudo -H pip3 install Cython
+# install gdown to download from Google drive
+sudo -H pip3 install gdown
+# download the wheel
+gdown https://drive.google.com/uc?id=1-XmTOEN0z1_-VVCI3DPwmcdC-eLT_-n3
+# install PyTorch 1.8.0
+sudo -H pip3 install torch-1.8.0a0+37c1f4a-cp36-cp36m-linux_aarch64.whl
+# clean up
+rm torch-1.8.0a0+37c1f4a-cp36-cp36m-linux_aarch64.whl
