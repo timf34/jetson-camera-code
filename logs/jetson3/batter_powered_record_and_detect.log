@@ -1,0 +1,3108 @@
+GST_ARGUS: Creating output stream
+CONSUMER: Waiting until producer is connected...
+GST_ARGUS: Available Sensor modes :
+GST_ARGUS: 3840 x 2160 FR = 29.999999 fps Duration = 33333334 ; Analog Gain range min 1.000000, max 22.250000; Exposure Range min 13000, max 683709000;
+
+GST_ARGUS: 1920 x 1080 FR = 59.999999 fps Duration = 16666667 ; Analog Gain range min 1.000000, max 22.250000; Exposure Range min 13000, max 683709000;
+
+GST_ARGUS: Running with following settings:
+   Camera index = 0 
+   Camera mode  = 1 
+   Output Stream W = 1920 H = 1080 
+   seconds to Run    = 0 
+   Frame Rate = 59.999999 
+GST_ARGUS: Setup Complete, Starting captures for 0 seconds
+GST_ARGUS: Starting repeat capture requests.
+CONSUMER: Producer has connected; continuing.
+4.1.1
+The model is on:  cuda
+cap.isOpened: True
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 24.02364253139389
+Writing FPS: 5.010475677074994
+Bohs FPS: 0.032254514901561816
+Frame:  1
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 5.636649880817316
+Writing FPS: 2.342628962361713
+Bohs FPS: 0.16535802132912863
+Frame:  2
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 8.081306868876442
+Writing FPS: 2.653581248973098
+Bohs FPS: 0.3890458443772295
+Frame:  3
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 5.988892556684873
+Writing FPS: 2.2748886703037474
+Bohs FPS: 0.29567227737051227
+Frame:  4
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 8.240709203999499
+Writing FPS: 2.095009133485127
+Bohs FPS: 1.4046702834370286
+Frame:  5
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 706.9161137283586
+Writing FPS: 9.33904584090056
+Bohs FPS: 4.06927459829127
+Frame:  6
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 736.593446887052
+Writing FPS: 9.49426319590039
+Bohs FPS: 4.229865903858281
+Frame:  7
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 55.178197989986984
+Writing FPS: 8.413717216360087
+Bohs FPS: 3.9941326032302307
+Frame:  8
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 648.6514536574298
+Writing FPS: 8.947100474221001
+Bohs FPS: 3.6575797000699555
+Frame:  9
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 570.614386257998
+Writing FPS: 8.955432047614014
+Bohs FPS: 3.1058848896814215
+Frame:  10
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 695.0144528321524
+Writing FPS: 9.277085780876472
+Bohs FPS: 4.208359179145161
+Frame:  11
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 855.8075527807587
+Writing FPS: 9.520478716317005
+Bohs FPS: 4.3200363636453325
+Frame:  12
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 808.2068556233761
+Writing FPS: 9.362279704623596
+Bohs FPS: 4.300601906651844
+Frame:  13
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 849.069419902306
+Writing FPS: 9.704461682537254
+Bohs FPS: 4.120807504866306
+Frame:  14
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 495.19904525949175
+Writing FPS: 9.652675220108694
+Bohs FPS: 4.342514889158113
+Frame:  15
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 863.0808533509244
+Writing FPS: 9.58120973006192
+Bohs FPS: 4.383609587316047
+Frame:  16
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 903.8436857011505
+Writing FPS: 9.598049707016147
+Bohs FPS: 4.316483574239699
+Frame:  17
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 784.1384474721617
+Writing FPS: 9.407108607690187
+Bohs FPS: 4.133220252286125
+Frame:  18
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 285.80043414562044
+Writing FPS: 9.18309028693278
+Bohs FPS: 4.398610996065185
+Frame:  19
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 732.8826105570017
+Writing FPS: 9.640702025894823
+Bohs FPS: 4.316214563116582
+Frame:  20
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 843.8070889110836
+Writing FPS: 9.4321586752386
+Bohs FPS: 4.362921510846039
+Frame:  21
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 890.7162426809635
+Writing FPS: 9.194425280198166
+Bohs FPS: 3.9896281636619455
+Frame:  22
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 622.7472119583222
+Writing FPS: 9.694602474808557
+Bohs FPS: 4.197956960974602
+Frame:  23
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 727.8528921711771
+Writing FPS: 9.729140722276632
+Bohs FPS: 4.4649235007023815
+Frame:  24
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 789.4279804110735
+Writing FPS: 9.246755761882879
+Bohs FPS: 4.294025605378389
+Frame:  25
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 706.8921276234881
+Writing FPS: 9.689228367579599
+Bohs FPS: 4.028792588103569
+Frame:  26
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 891.0892853252451
+Writing FPS: 9.087898683165637
+Bohs FPS: 4.189774828553205
+Frame:  27
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 670.9176005445083
+Writing FPS: 9.625881268683695
+Bohs FPS: 4.431390866826393
+Frame:  28
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 575.4743203371703
+Writing FPS: 9.431485876284986
+Bohs FPS: 3.8532292197471967
+Frame:  29
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 865.4172349809548
+Writing FPS: 9.502322871330103
+Bohs FPS: 3.989692740516395
+Frame:  30
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 822.1595005681285
+Writing FPS: 9.695113781899027
+Bohs FPS: 4.283694890747145
+Frame:  31
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 578.6846151364194
+Writing FPS: 9.333186652969706
+Bohs FPS: 4.282898848735239
+Frame:  32
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 632.2663206469264
+Writing FPS: 9.311788090517204
+Bohs FPS: 4.255700314807308
+Frame:  33
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 746.7401060074967
+Writing FPS: 9.30185157633432
+Bohs FPS: 4.378223023407679
+Frame:  34
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 893.2040569698597
+Writing FPS: 9.553151619587256
+Bohs FPS: 4.329702985619576
+Frame:  35
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 906.8781264717289
+Writing FPS: 9.566014598011929
+Bohs FPS: 4.427884824303753
+Frame:  36
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 664.6920880280443
+Writing FPS: 9.643365117439942
+Bohs FPS: 3.9704573672667944
+Frame:  37
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 207.63895406342448
+Writing FPS: 9.469310216528731
+Bohs FPS: 4.122750203876873
+Frame:  38
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 911.052985936194
+Writing FPS: 9.500518866073179
+Bohs FPS: 4.325113000495276
+Frame:  39
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 796.1751744877105
+Writing FPS: 9.720665970605907
+Bohs FPS: 4.26479416045298
+Frame:  40
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 693.3851060129501
+Writing FPS: 9.552023471995536
+Bohs FPS: 4.514811799506239
+Frame:  41
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 629.0554418017557
+Writing FPS: 9.65753529964077
+Bohs FPS: 4.3784888729785845
+Frame:  42
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 707.8578592923346
+Writing FPS: 9.694889232494972
+Bohs FPS: 4.338329991889108
+Frame:  43
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 635.5327638861324
+Writing FPS: 9.188540592474116
+Bohs FPS: 3.583336767365972
+Frame:  44
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 884.399284983489
+Writing FPS: 9.259141290945097
+Bohs FPS: 4.366421975730026
+Frame:  45
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 642.8978750317489
+Writing FPS: 9.594936329911812
+Bohs FPS: 4.242520655636649
+Frame:  46
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 891.8776699945931
+Writing FPS: 9.307371735317036
+Bohs FPS: 4.094198684641016
+Frame:  47
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 792.2982273963747
+Writing FPS: 9.566906890418846
+Bohs FPS: 4.283059798217695
+Frame:  48
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 550.6786839040844
+Writing FPS: 9.545963158715558
+Bohs FPS: 4.4604720505082165
+Frame:  49
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 664.209975340961
+Writing FPS: 9.70669615947889
+Bohs FPS: 4.397123828990554
+Frame:  50
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 905.2968920469308
+Writing FPS: 9.739532184550768
+Bohs FPS: 4.533706578282155
+Frame:  51
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 894.2880036791115
+Writing FPS: 9.642279343058725
+Bohs FPS: 4.413003286641473
+Frame:  52
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 619.5736960813177
+Writing FPS: 9.531607377184523
+Bohs FPS: 4.510118260893133
+Frame:  53
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 844.107664230462
+Writing FPS: 9.718415991099972
+Bohs FPS: 4.323793409239435
+Frame:  54
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 887.3019984824654
+Writing FPS: 9.596861288938944
+Bohs FPS: 4.430728307743407
+Frame:  55
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 893.7892373677743
+Writing FPS: 9.553523255774195
+Bohs FPS: 4.4358310659696185
+Frame:  56
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 737.334800142188
+Writing FPS: 9.617256928858362
+Bohs FPS: 4.5524451768041985
+Frame:  57
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 700.8808670655758
+Writing FPS: 9.538858299186858
+Bohs FPS: 4.364053135474792
+Frame:  58
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 825.1315259821512
+Writing FPS: 9.673794147301201
+Bohs FPS: 4.48663738059056
+Frame:  59
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 836.421121350792
+Writing FPS: 9.547278461871272
+Bohs FPS: 4.384760084061746
+Frame:  60
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 781.3342375689781
+Writing FPS: 9.709147250736692
+Bohs FPS: 4.479348202515698
+Frame:  61
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 839.8618594362187
+Writing FPS: 9.462868022885383
+Bohs FPS: 4.170061635471332
+Frame:  62
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 815.3534312672076
+Writing FPS: 9.305761008660948
+Bohs FPS: 4.3000035784621895
+Frame:  63
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 702.9605182903075
+Writing FPS: 9.700755366773867
+Bohs FPS: 4.1882550447457
+Frame:  64
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 877.5678732945802
+Writing FPS: 9.536087190662176
+Bohs FPS: 4.318577935819316
+Frame:  65
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 899.2765319527911
+Writing FPS: 9.496292974842204
+Bohs FPS: 4.147888501389616
+Frame:  66
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 879.4169818175127
+Writing FPS: 9.561043231037857
+Bohs FPS: 4.497219110829575
+Frame:  67
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 109.83539737810099
+Writing FPS: 9.602318445217765
+Bohs FPS: 4.304375753063622
+Frame:  68
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 726.4527602242961
+Writing FPS: 9.466804484411714
+Bohs FPS: 4.34852381705832
+Frame:  69
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 900.922003599898
+Writing FPS: 9.537554775244262
+Bohs FPS: 4.318074870263638
+Frame:  70
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 597.0099354191142
+Writing FPS: 9.725572357721028
+Bohs FPS: 4.235972776301063
+Frame:  71
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 589.8006945507769
+Writing FPS: 9.506067670703745
+Bohs FPS: 4.456885314877026
+Frame:  72
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 694.1653321250166
+Writing FPS: 9.732841198051528
+Bohs FPS: 4.499712715840635
+Frame:  73
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 902.1932318153672
+Writing FPS: 9.540842107745265
+Bohs FPS: 4.49965673243878
+Frame:  74
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 756.3369691950609
+Writing FPS: 9.591735637802353
+Bohs FPS: 4.417911977016349
+Frame:  75
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 901.8547544365587
+Writing FPS: 9.66149773640765
+Bohs FPS: 4.470928815923784
+Frame:  76
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 812.4559241972496
+Writing FPS: 9.73942110653915
+Bohs FPS: 4.523186671310983
+Frame:  77
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 702.4474674581336
+Writing FPS: 9.580617934722609
+Bohs FPS: 4.187474769676315
+Frame:  78
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 826.6970228828721
+Writing FPS: 9.510417045103077
+Bohs FPS: 4.350197568791233
+Frame:  79
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 846.828964235393
+Writing FPS: 9.567884942603204
+Bohs FPS: 4.425219814496292
+Frame:  80
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 895.0836636260578
+Writing FPS: 9.525433020460717
+Bohs FPS: 4.377704126994326
+Frame:  81
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 871.8304603258273
+Writing FPS: 9.539345847564464
+Bohs FPS: 4.293178424120007
+Frame:  82
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 680.8941774547006
+Writing FPS: 9.515633419702244
+Bohs FPS: 4.28690102239861
+Frame:  83
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 892.2970671329899
+Writing FPS: 9.6367462239574
+Bohs FPS: 4.355449316275546
+Frame:  84
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 844.1482797528471
+Writing FPS: 9.62129893886492
+Bohs FPS: 4.361533438393231
+Frame:  85
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 784.882534575326
+Writing FPS: 9.490541470127809
+Bohs FPS: 4.393753109461395
+Frame:  86
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 118.3202453395877
+Writing FPS: 9.587911469179298
+Bohs FPS: 4.106753817022191
+Frame:  87
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 588.2650533988939
+Writing FPS: 9.451456106916336
+Bohs FPS: 4.4561905666750485
+Frame:  88
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 892.1314896222091
+Writing FPS: 9.483666068547913
+Bohs FPS: 4.463062635881548
+Frame:  89
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 890.1865832364288
+Writing FPS: 9.71747897228321
+Bohs FPS: 4.424045407021531
+Frame:  90
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 779.9715778071281
+Writing FPS: 9.713215562133135
+Bohs FPS: 4.395762874935278
+Frame:  91
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 903.2991194214087
+Writing FPS: 9.557098810388661
+Bohs FPS: 4.539946661528312
+Frame:  92
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 900.0373515242599
+Writing FPS: 9.485886035545976
+Bohs FPS: 4.532737024581755
+Frame:  93
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 746.1361340234706
+Writing FPS: 9.74123225049474
+Bohs FPS: 4.479852662306391
+Frame:  94
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 670.8532381351262
+Writing FPS: 9.388650334764263
+Bohs FPS: 4.382093025579749
+Frame:  95
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 842.4081754150848
+Writing FPS: 9.55562228353032
+Bohs FPS: 4.411861630590872
+Frame:  96
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 752.3956275948879
+Writing FPS: 9.705511582421199
+Bohs FPS: 4.4054993989974065
+Frame:  97
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 896.5080116985483
+Writing FPS: 9.606691575599594
+Bohs FPS: 4.579106733867269
+Frame:  98
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 902.0687140876857
+Writing FPS: 9.313327003054466
+Bohs FPS: 4.541919878889596
+Frame:  99
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 879.2592416837973
+Writing FPS: 9.728057408295026
+Bohs FPS: 4.432002827617697
+Frame:  100
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 787.3631366007739
+Writing FPS: 9.739522034724283
+Bohs FPS: 4.463231594623377
+Frame:  101
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 706.612408215921
+Writing FPS: 9.638096604688792
+Bohs FPS: 4.412578606007734
+Frame:  102
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 863.7115064148215
+Writing FPS: 9.683245826314803
+Bohs FPS: 4.467129421070729
+Frame:  103
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 711.9327765462342
+Writing FPS: 9.612355429457006
+Bohs FPS: 4.507602425335963
+Frame:  104
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 865.4644212259046
+Writing FPS: 9.64089302781018
+Bohs FPS: 4.567356598155769
+Frame:  105
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 827.0559784487483
+Writing FPS: 9.53803518535594
+Bohs FPS: 4.483394039761078
+Frame:  106
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 861.7732881966549
+Writing FPS: 9.634469944524477
+Bohs FPS: 4.499626220547062
+Frame:  107
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 863.9458132630347
+Writing FPS: 9.636395014223863
+Bohs FPS: 4.515314655932045
+Frame:  108
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 809.3751543535294
+Writing FPS: 9.618745627090444
+Bohs FPS: 4.471680876314099
+Frame:  109
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 867.1071571701392
+Writing FPS: 9.491050304974708
+Bohs FPS: 4.401400604896217
+Frame:  110
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 702.6552640160434
+Writing FPS: 9.786855882609109
+Bohs FPS: 4.532197065605476
+Frame:  111
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 632.29270594785
+Writing FPS: 9.78487023443231
+Bohs FPS: 4.4930747699428695
+Frame:  112
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 658.450954637752
+Writing FPS: 9.720989047257978
+Bohs FPS: 4.432094344610754
+Frame:  113
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 900.1669810519816
+Writing FPS: 9.637780221824102
+Bohs FPS: 4.493888987307658
+Frame:  114
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 699.200464315072
+Writing FPS: 9.638762692845855
+Bohs FPS: 4.308918334171332
+Frame:  115
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 899.1964778773657
+Writing FPS: 9.634319852037084
+Bohs FPS: 4.46768919592844
+Frame:  116
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 721.7579715049122
+Writing FPS: 9.66007033593858
+Bohs FPS: 4.512600536736076
+Frame:  117
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 844.114076871101
+Writing FPS: 9.680922318493806
+Bohs FPS: 4.4844250670658825
+Frame:  118
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 852.9286584981716
+Writing FPS: 9.603108979646425
+Bohs FPS: 4.3598511820628065
+Frame:  119
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 916.6306124111634
+Writing FPS: 9.403752266430896
+Bohs FPS: 4.495611637921642
+Frame:  120
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 772.348084977398
+Writing FPS: 9.548640900878873
+Bohs FPS: 4.231302026557469
+Frame:  121
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 669.3346344756644
+Writing FPS: 9.770996185304067
+Bohs FPS: 4.46560601855069
+Frame:  122
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 933.20927870336
+Writing FPS: 9.52667832419414
+Bohs FPS: 4.326796538927445
+Frame:  123
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 713.4163654737381
+Writing FPS: 9.560490759483761
+Bohs FPS: 4.374088781624372
+Frame:  124
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 901.0121068910821
+Writing FPS: 9.489291908192325
+Bohs FPS: 4.509252849315232
+Frame:  125
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 762.1062483709122
+Writing FPS: 9.444809271189015
+Bohs FPS: 4.450457982389088
+Frame:  126
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 913.5774046654436
+Writing FPS: 9.58992612782053
+Bohs FPS: 4.534140196274948
+Frame:  127
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 715.9180073520293
+Writing FPS: 9.706247975875353
+Bohs FPS: 4.572897982042201
+Frame:  128
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 899.1980951556286
+Writing FPS: 9.691042115271122
+Bohs FPS: 4.434785225989179
+Frame:  129
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 616.197996721119
+Writing FPS: 8.428751222261589
+Bohs FPS: 4.545731752441245
+Frame:  130
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 878.6188111608229
+Writing FPS: 9.724804563032123
+Bohs FPS: 4.461017859378076
+Frame:  131
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 856.0874236232299
+Writing FPS: 9.67024699503335
+Bohs FPS: 4.486190460479771
+Frame:  132
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 868.128653241909
+Writing FPS: 9.612407172265627
+Bohs FPS: 4.492933137354747
+Frame:  133
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 708.2574317192166
+Writing FPS: 9.58742501064345
+Bohs FPS: 4.508535765047291
+Frame:  134
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 816.7472387444442
+Writing FPS: 9.671034350790178
+Bohs FPS: 4.533092595896887
+Frame:  135
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 536.8084162818876
+Writing FPS: 9.38729386406442
+Bohs FPS: 4.46724650156376
+Frame:  136
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 890.6043908942769
+Writing FPS: 9.725795965936749
+Bohs FPS: 4.420170537694601
+Frame:  137
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 889.4897885931042
+Writing FPS: 9.585187404116539
+Bohs FPS: 4.395206972295881
+Frame:  138
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 856.2025022580175
+Writing FPS: 9.614459223692577
+Bohs FPS: 4.459065223861041
+Frame:  139
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 625.1492543844095
+Writing FPS: 9.783225251538674
+Bohs FPS: 4.529605968897488
+Frame:  140
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 894.2560147566867
+Writing FPS: 9.704856392624517
+Bohs FPS: 4.394395270504911
+Frame:  141
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 863.7152365489366
+Writing FPS: 9.645638438585552
+Bohs FPS: 4.448606283681282
+Frame:  142
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 824.6429707491225
+Writing FPS: 9.697132561781249
+Bohs FPS: 4.526111590374268
+Frame:  143
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 765.3287700276512
+Writing FPS: 9.693450069854418
+Bohs FPS: 4.414770924666691
+Frame:  144
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 907.875181637031
+Writing FPS: 9.700420742173394
+Bohs FPS: 4.468884295975615
+Frame:  145
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 872.072995990687
+Writing FPS: 9.75645374292841
+Bohs FPS: 4.436337894634716
+Frame:  146
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 667.3580496443107
+Writing FPS: 9.647573652103304
+Bohs FPS: 4.497728736943622
+Frame:  147
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 888.6677093728254
+Writing FPS: 9.454864114427412
+Bohs FPS: 4.534847948360517
+Frame:  148
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 671.7721349359064
+Writing FPS: 9.669557754845668
+Bohs FPS: 4.548774509881379
+Frame:  149
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 841.3422100591247
+Writing FPS: 9.652573475038215
+Bohs FPS: 4.478586901927406
+Frame:  150
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 716.4268069650569
+Writing FPS: 9.8173284781593
+Bohs FPS: 4.4818274870271875
+Frame:  151
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 877.4554493578812
+Writing FPS: 9.524829678421447
+Bohs FPS: 4.366796781196947
+Frame:  152
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 894.1320794312711
+Writing FPS: 9.572138247019192
+Bohs FPS: 4.28405838086747
+Frame:  153
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 892.9671691723123
+Writing FPS: 9.656805905814581
+Bohs FPS: 4.604767000305621
+Frame:  154
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 897.2247045179025
+Writing FPS: 9.527210374985193
+Bohs FPS: 4.529463029164145
+Frame:  155
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 796.9454673713011
+Writing FPS: 9.802514427305345
+Bohs FPS: 4.454290465448109
+Frame:  156
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 792.3402879567603
+Writing FPS: 9.622211759665618
+Bohs FPS: 4.470715161528336
+Frame:  157
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 878.7415718081315
+Writing FPS: 9.799588421213826
+Bohs FPS: 4.451227085795884
+Frame:  158
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 781.5333059111277
+Writing FPS: 9.600481068583553
+Bohs FPS: 4.516498411895394
+Frame:  159
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 625.3744429662789
+Writing FPS: 9.657671472825376
+Bohs FPS: 4.514122391271353
+Frame:  160
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 890.8963752232145
+Writing FPS: 9.780551803090248
+Bohs FPS: 4.560956407015621
+Frame:  161
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 731.7494372258285
+Writing FPS: 9.592639544658716
+Bohs FPS: 4.529547905595485
+Frame:  162
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 843.3025753612095
+Writing FPS: 9.686462198507131
+Bohs FPS: 4.486399860167847
+Frame:  163
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 835.8115144480624
+Writing FPS: 9.681362355114072
+Bohs FPS: 4.500989069846139
+Frame:  164
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 921.5638569558713
+Writing FPS: 9.731561020128812
+Bohs FPS: 4.485392610272878
+Frame:  165
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 910.5038454790518
+Writing FPS: 9.575028540049752
+Bohs FPS: 4.411095172991443
+Frame:  166
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 849.8357266756973
+Writing FPS: 9.744000360759365
+Bohs FPS: 4.469015329072437
+Frame:  167
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 889.8222135413432
+Writing FPS: 9.660960755115465
+Bohs FPS: 4.4580590397344375
+Frame:  168
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 810.4739165985403
+Writing FPS: 9.621947708918029
+Bohs FPS: 4.286321216548732
+Frame:  169
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 657.2370674429544
+Writing FPS: 9.613794271955097
+Bohs FPS: 4.227925090925687
+Frame:  170
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 893.7173458565086
+Writing FPS: 9.546969927320863
+Bohs FPS: 4.2514903110362186
+Frame:  171
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 625.2934971206879
+Writing FPS: 9.506708765535917
+Bohs FPS: 4.472960301924103
+Frame:  172
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 614.9369412540943
+Writing FPS: 9.755282019392592
+Bohs FPS: 4.3769449693597045
+Frame:  173
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 681.8682371749976
+Writing FPS: 9.719432637068767
+Bohs FPS: 4.509156491577252
+Frame:  174
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 724.2949531488473
+Writing FPS: 9.661894933728462
+Bohs FPS: 4.446356357919
+Frame:  175
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 875.576238536112
+Writing FPS: 9.659425558800498
+Bohs FPS: 4.389413181370571
+Frame:  176
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 871.8783485343141
+Writing FPS: 9.547093885628355
+Bohs FPS: 4.381164961751979
+Frame:  177
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 678.014367123889
+Writing FPS: 9.794925601658043
+Bohs FPS: 4.3509577360811145
+Frame:  178
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 770.1834268371131
+Writing FPS: 9.800297284179043
+Bohs FPS: 4.493923561476227
+Frame:  179
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 883.801335458125
+Writing FPS: 9.593518496105897
+Bohs FPS: 4.329886257480244
+Frame:  180
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 895.260758047736
+Writing FPS: 9.707184526049653
+Bohs FPS: 4.158545823725597
+Frame:  181
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 569.1872745618466
+Writing FPS: 9.740741211182083
+Bohs FPS: 4.484967219596926
+Frame:  182
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 634.3660177768321
+Writing FPS: 9.509521422581479
+Bohs FPS: 4.521428823592684
+Frame:  183
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 184.76368447557113
+Writing FPS: 9.771406447291042
+Bohs FPS: 4.447468485819895
+Frame:  184
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 894.3015996914424
+Writing FPS: 9.68184526986843
+Bohs FPS: 4.443766207223654
+Frame:  185
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 688.9168436443811
+Writing FPS: 9.67279198477422
+Bohs FPS: 4.420783175072176
+Frame:  186
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 842.0832802519491
+Writing FPS: 9.753405906407076
+Bohs FPS: 4.332684710210979
+Frame:  187
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 583.8693253837897
+Writing FPS: 9.392857083491869
+Bohs FPS: 4.121130221116568
+Frame:  188
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 728.2530883002073
+Writing FPS: 9.662846659952116
+Bohs FPS: 4.526522427128074
+Frame:  189
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 765.454136385422
+Writing FPS: 9.702589813339001
+Bohs FPS: 4.561429396880775
+Frame:  190
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 868.1331751017927
+Writing FPS: 9.645494045245986
+Bohs FPS: 4.477924212021684
+Frame:  191
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 888.1775573336405
+Writing FPS: 9.681065993794839
+Bohs FPS: 4.443653355651731
+Frame:  192
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 896.2227794390726
+Writing FPS: 9.67954782496892
+Bohs FPS: 4.323939292720642
+Frame:  193
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 597.1101064806476
+Writing FPS: 9.82105931711604
+Bohs FPS: 4.442099687057325
+Frame:  194
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 745.0720931721075
+Writing FPS: 9.629394922044265
+Bohs FPS: 4.3010107259076795
+Frame:  195
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 861.3160564888981
+Writing FPS: 9.66146077209948
+Bohs FPS: 4.226674615353881
+Frame:  196
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 816.7865981669745
+Writing FPS: 9.286692492825164
+Bohs FPS: 4.105442476707837
+Frame:  197
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 898.1941805824928
+Writing FPS: 9.57329488801762
+Bohs FPS: 4.534567235030869
+Frame:  198
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 690.528095154642
+Writing FPS: 9.685227960543445
+Bohs FPS: 4.192838258253268
+Frame:  199
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 689.0659023465147
+Writing FPS: 9.650540793132745
+Bohs FPS: 4.495879119912235
+Frame:  200
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 859.7742576505716
+Writing FPS: 9.720346789297784
+Bohs FPS: 4.446727532703916
+Frame:  201
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 897.0194733442046
+Writing FPS: 9.583162062248379
+Bohs FPS: 4.502445832128784
+Frame:  202
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 603.0762921733501
+Writing FPS: 9.598512276682627
+Bohs FPS: 4.449375578637074
+Frame:  203
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 893.096365004059
+Writing FPS: 9.355697354461348
+Bohs FPS: 4.551595972519006
+Frame:  204
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 646.3505753396322
+Writing FPS: 9.485277526099932
+Bohs FPS: 4.394494317365405
+Frame:  205
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 770.7414224085671
+Writing FPS: 9.536512248945545
+Bohs FPS: 4.376879853485793
+Frame:  206
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 806.153856086238
+Writing FPS: 9.662628177671706
+Bohs FPS: 4.588670792988
+Frame:  207
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 856.3990134426643
+Writing FPS: 9.654934569477211
+Bohs FPS: 4.54851786886176
+Frame:  208
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 897.1039689371142
+Writing FPS: 9.583359240336769
+Bohs FPS: 4.5314803046971965
+Frame:  209
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 891.0241787595603
+Writing FPS: 9.642399838280602
+Bohs FPS: 4.5720666124692135
+Frame:  210
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 807.1702548698285
+Writing FPS: 9.612491255512495
+Bohs FPS: 4.460695630943426
+Frame:  211
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 711.887669808355
+Writing FPS: 9.62141011599386
+Bohs FPS: 4.497807309943607
+Frame:  212
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 892.7232344173513
+Writing FPS: 9.59503732389038
+Bohs FPS: 4.420133787193718
+Frame:  213
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 803.8249205357926
+Writing FPS: 9.690163795754213
+Bohs FPS: 4.368039646214271
+Frame:  214
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 833.0584240128737
+Writing FPS: 9.683980157685891
+Bohs FPS: 4.596222518228736
+Frame:  215
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 713.1833365209518
+Writing FPS: 9.698107232049285
+Bohs FPS: 4.505092216106993
+Frame:  216
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 668.1754066460365
+Writing FPS: 9.66447438373945
+Bohs FPS: 4.549991900786236
+Frame:  217
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 881.0456249125133
+Writing FPS: 9.458734242969063
+Bohs FPS: 4.355144338956159
+Frame:  218
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 736.6108093496773
+Writing FPS: 9.631018443907633
+Bohs FPS: 4.465028862528241
+Frame:  219
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 856.5523255576418
+Writing FPS: 9.563800875959668
+Bohs FPS: 4.469142455092219
+Frame:  220
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 801.3083763096726
+Writing FPS: 9.6819720054787
+Bohs FPS: 4.527251434618422
+Frame:  221
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 746.9587573301882
+Writing FPS: 9.612750998903005
+Bohs FPS: 4.521352305551179
+Frame:  222
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 887.85108964287
+Writing FPS: 9.59913254557946
+Bohs FPS: 4.541914267797048
+Frame:  223
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 568.0272243957425
+Writing FPS: 9.588363132936136
+Bohs FPS: 4.428428550386231
+Frame:  224
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 785.8898199213742
+Writing FPS: 9.647015416513968
+Bohs FPS: 4.410926675220112
+Frame:  225
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 704.3131432055744
+Writing FPS: 9.615579978071958
+Bohs FPS: 4.526329117844247
+Frame:  226
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 566.2180709226533
+Writing FPS: 9.733116959639762
+Bohs FPS: 4.51107199540374
+Frame:  227
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 612.8983225468605
+Writing FPS: 9.815985607408738
+Bohs FPS: 4.497493499645005
+Frame:  228
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 772.9468598681709
+Writing FPS: 9.660660788419682
+Bohs FPS: 4.566792342965228
+Frame:  229
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 877.0206556039551
+Writing FPS: 9.583020910876138
+Bohs FPS: 4.538825405269902
+Frame:  230
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 746.8722855236141
+Writing FPS: 9.790214788003599
+Bohs FPS: 4.534663180747986
+Frame:  231
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 865.2405195792751
+Writing FPS: 9.699304866335316
+Bohs FPS: 4.348697792880956
+Frame:  232
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 896.7274828345762
+Writing FPS: 9.535759919766585
+Bohs FPS: 4.515783813694152
+Frame:  233
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 818.530884346615
+Writing FPS: 9.573304236104692
+Bohs FPS: 4.32192744410339
+Frame:  234
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 883.9685236922561
+Writing FPS: 9.5511352307373
+Bohs FPS: 4.43532026130148
+Frame:  235
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 859.6604341355309
+Writing FPS: 9.603651354334266
+Bohs FPS: 4.453669438820517
+Frame:  236
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 901.6563427145032
+Writing FPS: 9.555169225198409
+Bohs FPS: 4.519573475012599
+Frame:  237
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 885.599967466164
+Writing FPS: 9.608980230056654
+Bohs FPS: 4.519381963852781
+Frame:  238
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 750.3468478482025
+Writing FPS: 9.608624301455894
+Bohs FPS: 4.55800507458537
+Frame:  239
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 903.9923919571605
+Writing FPS: 9.494139343733924
+Bohs FPS: 4.471359005003962
+Frame:  240
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 709.6778772494995
+Writing FPS: 9.73561648338959
+Bohs FPS: 4.447025992446042
+Frame:  241
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 895.2230897330744
+Writing FPS: 9.586389566202921
+Bohs FPS: 4.456088639768116
+Frame:  242
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 903.9498995156755
+Writing FPS: 9.599148394282029
+Bohs FPS: 4.447233096783187
+Frame:  243
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 785.9231728966508
+Writing FPS: 9.374922451802652
+Bohs FPS: 4.509458103603984
+Frame:  244
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 717.8797278133377
+Writing FPS: 9.715956820000587
+Bohs FPS: 4.539089153781364
+Frame:  245
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 874.1862418870573
+Writing FPS: 9.556250902347827
+Bohs FPS: 4.343616348417034
+Frame:  246
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 700.3571120417445
+Writing FPS: 9.53093221636609
+Bohs FPS: 4.4282509996979
+Frame:  247
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 714.0072514507676
+Writing FPS: 9.70322869112078
+Bohs FPS: 4.505328756430103
+Frame:  248
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 906.76875678258
+Writing FPS: 9.561432028669717
+Bohs FPS: 4.5146422557069465
+Frame:  249
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 802.0133743645237
+Writing FPS: 9.476512879793406
+Bohs FPS: 4.566943217302077
+Frame:  250
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 647.8144037606394
+Writing FPS: 9.44490356120127
+Bohs FPS: 4.464469833803328
+Frame:  251
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 896.8135319543346
+Writing FPS: 9.572830530246403
+Bohs FPS: 4.469646216865422
+Frame:  252
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 843.1234011042623
+Writing FPS: 9.708965506335472
+Bohs FPS: 4.389799826004274
+Frame:  253
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 824.2609677158365
+Writing FPS: 9.545439398569043
+Bohs FPS: 4.25483585390006
+Frame:  254
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 803.8268589234762
+Writing FPS: 9.439793919487245
+Bohs FPS: 4.45650997975923
+Frame:  255
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 861.7851706860356
+Writing FPS: 9.53075871768412
+Bohs FPS: 4.46739929215522
+Frame:  256
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 828.4585451364665
+Writing FPS: 9.502567845643387
+Bohs FPS: 4.4360813073708725
+Frame:  257
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 649.6564941651583
+Writing FPS: 9.697492256628111
+Bohs FPS: 4.572893172429506
+Frame:  258
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 721.0086045627431
+Writing FPS: 9.728233622053377
+Bohs FPS: 4.513774760914959
+Frame:  259
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 685.7704013418461
+Writing FPS: 9.666808224185292
+Bohs FPS: 4.321383148908261
+Frame:  260
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 633.8465166129866
+Writing FPS: 9.709197872691723
+Bohs FPS: 4.339406713447789
+Frame:  261
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 790.1296998116393
+Writing FPS: 9.271346347840405
+Bohs FPS: 4.12695947004134
+Frame:  262
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 749.2354051529575
+Writing FPS: 8.84897302004601
+Bohs FPS: 4.037481735594119
+Frame:  263
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 465.35458388902435
+Writing FPS: 8.577263119885567
+Bohs FPS: 3.7113375401461495
+Frame:  264
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 623.106535008189
+Writing FPS: 9.293216845717337
+Bohs FPS: 3.8595179168022713
+Frame:  265
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 697.3048469526574
+Writing FPS: 9.628439297782016
+Bohs FPS: 4.072812354520035
+Frame:  266
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 835.5272887022377
+Writing FPS: 9.378172841018637
+Bohs FPS: 4.538269248156142
+Frame:  267
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 721.0626733907552
+Writing FPS: 9.611633767715166
+Bohs FPS: 4.419597643278741
+Frame:  268
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 773.7590451858904
+Writing FPS: 9.340484807011478
+Bohs FPS: 4.455270534028753
+Frame:  269
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 890.6147021949664
+Writing FPS: 9.479101297417147
+Bohs FPS: 4.5458052336631924
+Frame:  270
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 779.0030630306771
+Writing FPS: 9.6094561353421
+Bohs FPS: 4.583800705295502
+Frame:  271
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 687.8104174371363
+Writing FPS: 9.597349626630681
+Bohs FPS: 4.545035534497795
+Frame:  272
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 871.6078112493942
+Writing FPS: 9.542179946887037
+Bohs FPS: 4.395681237909751
+Frame:  273
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 888.5950601751484
+Writing FPS: 9.631638097287182
+Bohs FPS: 4.553030394815156
+Frame:  274
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 904.2924048877636
+Writing FPS: 9.707660219533887
+Bohs FPS: 4.454694438966356
+Frame:  275
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 703.2581245207523
+Writing FPS: 9.710971764701764
+Bohs FPS: 4.330813427885974
+Frame:  276
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 867.6285195003841
+Writing FPS: 9.389284681657053
+Bohs FPS: 4.428122836323719
+Frame:  277
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 888.4711101361906
+Writing FPS: 9.453002126478278
+Bohs FPS: 4.457954264934364
+Frame:  278
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 818.0447585662424
+Writing FPS: 9.659385064820277
+Bohs FPS: 4.5645531337183245
+Frame:  279
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 682.4555022566617
+Writing FPS: 9.469329495152717
+Bohs FPS: 4.431354066968575
+Frame:  280
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 887.5673996311584
+Writing FPS: 9.512530561629827
+Bohs FPS: 4.431269060465636
+Frame:  281
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 704.9884276466154
+Writing FPS: 9.528563097059335
+Bohs FPS: 4.476247366312585
+Frame:  282
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 817.5572045286499
+Writing FPS: 9.543400488993464
+Bohs FPS: 4.570312997202253
+Frame:  283
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 742.6275649072971
+Writing FPS: 9.558274842253475
+Bohs FPS: 4.399406449677727
+Frame:  284
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 733.8830116757915
+Writing FPS: 9.650574879928993
+Bohs FPS: 4.434669860490484
+Frame:  285
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 886.9934823369537
+Writing FPS: 9.485870828603773
+Bohs FPS: 4.532499097260924
+Frame:  286
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 577.4452206097502
+Writing FPS: 9.697525923536544
+Bohs FPS: 4.531747800458301
+Frame:  287
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 901.3215176520993
+Writing FPS: 9.701399555923942
+Bohs FPS: 4.518718949140199
+Frame:  288
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 636.8757423682117
+Writing FPS: 9.69415324581687
+Bohs FPS: 4.507388908546967
+Frame:  289
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 732.9583518015122
+Writing FPS: 9.340115602236299
+Bohs FPS: 4.332615573462008
+Frame:  290
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 902.5498839322555
+Writing FPS: 9.51058663818368
+Bohs FPS: 4.335586556452269
+Frame:  291
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 777.993973710028
+Writing FPS: 9.722122016841622
+Bohs FPS: 4.435768180454776
+Frame:  292
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 893.6845990810665
+Writing FPS: 9.49555996162128
+Bohs FPS: 4.391098318063576
+Frame:  293
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 716.7831916816668
+Writing FPS: 9.68006804004395
+Bohs FPS: 4.3552792763830395
+Frame:  294
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 891.6502305712255
+Writing FPS: 9.518020663645308
+Bohs FPS: 4.507840611138477
+Frame:  295
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 876.8645429329861
+Writing FPS: 9.482198296342535
+Bohs FPS: 4.284190582735242
+Frame:  296
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 863.1434302224275
+Writing FPS: 9.518853283538554
+Bohs FPS: 4.469333706992985
+Frame:  297
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 749.2954749443466
+Writing FPS: 9.51676267827399
+Bohs FPS: 4.537548115363118
+Frame:  298
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 784.0640548328853
+Writing FPS: 9.719945055095737
+Bohs FPS: 4.443240563223996
+Frame:  299
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 893.1450225725476
+Writing FPS: 9.667026521737638
+Bohs FPS: 4.511279185935549
+Frame:  300
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 783.2325573435961
+Writing FPS: 9.391767004241313
+Bohs FPS: 4.4536402813065115
+Frame:  301
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 827.6049279913921
+Writing FPS: 9.550268405991645
+Bohs FPS: 4.5156726375909395
+Frame:  302
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 797.9820629449418
+Writing FPS: 9.570330535952603
+Bohs FPS: 4.480061731670275
+Frame:  303
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 859.5495960147798
+Writing FPS: 9.412123296697263
+Bohs FPS: 4.515897870727439
+Frame:  304
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 715.5276659381558
+Writing FPS: 9.736321998612617
+Bohs FPS: 4.371864900159306
+Frame:  305
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 881.7797842897418
+Writing FPS: 9.38358929779127
+Bohs FPS: 4.483191151246645
+Frame:  306
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 883.4437342632725
+Writing FPS: 9.74866099703745
+Bohs FPS: 4.391978899070318
+Frame:  307
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 757.84559651166
+Writing FPS: 9.57285710564447
+Bohs FPS: 4.328803292633212
+Frame:  308
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 887.1178073732434
+Writing FPS: 9.587552043989541
+Bohs FPS: 4.297315515126721
+Frame:  309
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 765.5221090922843
+Writing FPS: 9.50496561264924
+Bohs FPS: 4.243363067215136
+Frame:  310
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 650.539785403418
+Writing FPS: 9.757225781851393
+Bohs FPS: 4.523520160685265
+Frame:  311
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 596.3178565132644
+Writing FPS: 9.587793343090244
+Bohs FPS: 4.5251879973514955
+Frame:  312
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 837.9743144451635
+Writing FPS: 9.554501768322412
+Bohs FPS: 4.2979879639807805
+Frame:  313
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 637.2998877893697
+Writing FPS: 9.668305012519241
+Bohs FPS: 4.388271487856915
+Frame:  314
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 681.1014773162772
+Writing FPS: 9.743109852962933
+Bohs FPS: 4.444043157224643
+Frame:  315
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 896.8585734784382
+Writing FPS: 9.531422861289995
+Bohs FPS: 4.381596326219699
+Frame:  316
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 879.3164544929324
+Writing FPS: 9.406323999554655
+Bohs FPS: 4.4575423879374245
+Frame:  317
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 816.759246466282
+Writing FPS: 9.654624630362527
+Bohs FPS: 4.5306207987100935
+Frame:  318
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 867.9063841459529
+Writing FPS: 9.587059555748846
+Bohs FPS: 4.504919302048613
+Frame:  319
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 792.0886189561548
+Writing FPS: 9.530019284369509
+Bohs FPS: 4.243222804095231
+Frame:  320
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 505.09106542789715
+Writing FPS: 9.213948218543209
+Bohs FPS: 3.868663216695879
+Frame:  321
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 436.1321532985038
+Writing FPS: 9.6700540801654
+Bohs FPS: 4.397831360749996
+Frame:  322
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 803.4613112437363
+Writing FPS: 9.610933274676743
+Bohs FPS: 4.403615220135408
+Frame:  323
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 702.3339964068523
+Writing FPS: 9.607898768864505
+Bohs FPS: 4.486073411273515
+Frame:  324
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 779.1639104580776
+Writing FPS: 9.611718668910376
+Bohs FPS: 4.411928901009363
+Frame:  325
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 753.7987689322481
+Writing FPS: 9.437045240004293
+Bohs FPS: 4.483693501709504
+Frame:  326
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 827.4987773480198
+Writing FPS: 9.407566319325184
+Bohs FPS: 4.539762158316201
+Frame:  327
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 739.7396264420763
+Writing FPS: 9.611032296381074
+Bohs FPS: 4.542534975636305
+Frame:  328
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 761.8467163713824
+Writing FPS: 9.779213427160023
+Bohs FPS: 4.503784304763148
+Frame:  329
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 766.3786616265362
+Writing FPS: 9.599306607518518
+Bohs FPS: 4.502317027410783
+Frame:  330
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 759.4058104789966
+Writing FPS: 9.457697158188056
+Bohs FPS: 4.350728722914245
+Frame:  331
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 869.8337313266773
+Writing FPS: 9.767357275158954
+Bohs FPS: 4.39825583822214
+Frame:  332
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 692.2039149427181
+Writing FPS: 9.772594940690988
+Bohs FPS: 4.471233452167422
+Frame:  333
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 708.5821341985971
+Writing FPS: 9.594601509184198
+Bohs FPS: 4.523639090322911
+Frame:  334
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 903.1473782816225
+Writing FPS: 9.65222101757056
+Bohs FPS: 4.425566433561367
+Frame:  335
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 804.2017935478949
+Writing FPS: 9.643184060577614
+Bohs FPS: 4.432583068857247
+Frame:  336
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 780.907742682112
+Writing FPS: 9.615688341694822
+Bohs FPS: 4.492793451475694
+Frame:  337
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 799.7792609132706
+Writing FPS: 9.690610683002058
+Bohs FPS: 4.551928194282044
+Frame:  338
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 676.3982335079565
+Writing FPS: 9.642507691481399
+Bohs FPS: 4.505373432741247
+Frame:  339
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 882.876694670518
+Writing FPS: 9.672778885974896
+Bohs FPS: 4.5509687888443375
+Frame:  340
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 679.078409057797
+Writing FPS: 9.538840101264299
+Bohs FPS: 4.462232589277448
+Frame:  341
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 862.7963921970891
+Writing FPS: 9.64030601146601
+Bohs FPS: 4.4793533591138495
+Frame:  342
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 737.2962020314535
+Writing FPS: 9.67613520684875
+Bohs FPS: 4.418555245549358
+Frame:  343
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 907.9757496057649
+Writing FPS: 9.651051654355784
+Bohs FPS: 4.471744884197768
+Frame:  344
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 612.7465998636267
+Writing FPS: 9.704431357773863
+Bohs FPS: 4.499268065816739
+Frame:  345
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 905.3624618447769
+Writing FPS: 9.661599296320297
+Bohs FPS: 4.386898571284793
+Frame:  346
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 851.0913544075328
+Writing FPS: 9.709826213039403
+Bohs FPS: 4.354931270930146
+Frame:  347
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 781.7990916223811
+Writing FPS: 9.752425701342363
+Bohs FPS: 4.4360352594155
+Frame:  348
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 897.3221216346573
+Writing FPS: 9.645095218319986
+Bohs FPS: 4.474042882767015
+Frame:  349
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 886.546829037755
+Writing FPS: 9.608206084430071
+Bohs FPS: 4.513229084570579
+Frame:  350
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 788.2525150228139
+Writing FPS: 9.829317827651563
+Bohs FPS: 4.396697018299933
+Frame:  351
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 867.7113332726066
+Writing FPS: 9.65700444744974
+Bohs FPS: 4.488273995950168
+Frame:  352
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 739.9109443695559
+Writing FPS: 9.653124247168225
+Bohs FPS: 4.527552848451075
+Frame:  353
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 765.401992939977
+Writing FPS: 9.810481029382894
+Bohs FPS: 4.483800213662533
+Frame:  354
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 686.781111799314
+Writing FPS: 9.665038751971457
+Bohs FPS: 4.473640916279223
+Frame:  355
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 896.9446477599109
+Writing FPS: 9.542632593801638
+Bohs FPS: 4.468740330207871
+Frame:  356
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 781.7361421898476
+Writing FPS: 9.41861072835293
+Bohs FPS: 4.476363522598293
+Frame:  357
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 857.9390244904756
+Writing FPS: 9.634087436075749
+Bohs FPS: 4.4967026039543665
+Frame:  358
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 670.3985519685872
+Writing FPS: 9.728020311481924
+Bohs FPS: 4.482939686623144
+Frame:  359
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 697.841575999538
+Writing FPS: 9.64016595970413
+Bohs FPS: 4.438703287520068
+Frame:  360
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 897.9941505467491
+Writing FPS: 9.604890533634261
+Bohs FPS: 4.585255921589846
+Frame:  361
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 709.0544122361356
+Writing FPS: 9.705121811063355
+Bohs FPS: 4.461497238676489
+Frame:  362
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 661.0713586033719
+Writing FPS: 9.565839270682599
+Bohs FPS: 4.337869111938254
+Frame:  363
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 886.7936911055597
+Writing FPS: 9.651708728362676
+Bohs FPS: 4.487775492528868
+Frame:  364
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 894.2296255548139
+Writing FPS: 9.633143036686473
+Bohs FPS: 4.3716196341888915
+Frame:  365
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 899.0040833233045
+Writing FPS: 9.54269132904791
+Bohs FPS: 4.35978153675742
+Frame:  366
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 715.450365336823
+Writing FPS: 9.780954449216571
+Bohs FPS: 4.480423901147453
+Frame:  367
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 706.731261856792
+Writing FPS: 9.802326768512758
+Bohs FPS: 4.475916383006306
+Frame:  368
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 667.2992663223056
+Writing FPS: 9.658486633546984
+Bohs FPS: 4.572211187675447
+Frame:  369
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 898.4992367843505
+Writing FPS: 9.631391710591735
+Bohs FPS: 4.48369402439523
+Frame:  370
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 792.6467744350392
+Writing FPS: 9.653896328492248
+Bohs FPS: 4.383180554507322
+Frame:  371
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 672.230494414588
+Writing FPS: 9.63479669258953
+Bohs FPS: 4.497668332276848
+Frame:  372
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 740.7687252894112
+Writing FPS: 9.4853872013808
+Bohs FPS: 4.454799675785859
+Frame:  373
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 762.8178184764512
+Writing FPS: 9.432452270924488
+Bohs FPS: 4.494827262887187
+Frame:  374
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 676.9481552527529
+Writing FPS: 9.708776981952862
+Bohs FPS: 4.380198054949257
+Frame:  375
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 881.6616147310153
+Writing FPS: 9.63212951684358
+Bohs FPS: 4.4397654447066275
+Frame:  376
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 388.5580532866989
+Writing FPS: 9.094482974684993
+Bohs FPS: 4.5085619259132725
+Frame:  377
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 816.6231815436564
+Writing FPS: 9.636570058694478
+Bohs FPS: 4.360231039050884
+Frame:  378
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 819.9019724651523
+Writing FPS: 9.577497692174187
+Bohs FPS: 4.562770112854178
+Frame:  379
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 695.667176046618
+Writing FPS: 9.631019556974186
+Bohs FPS: 4.53120922690435
+Frame:  380
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 891.0344999636162
+Writing FPS: 9.719905469265388
+Bohs FPS: 4.481772851660418
+Frame:  381
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 681.7813036451031
+Writing FPS: 9.797971798270414
+Bohs FPS: 4.505422210301025
+Frame:  382
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 889.5475494745986
+Writing FPS: 9.609974661666042
+Bohs FPS: 4.418817502515357
+Frame:  383
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 841.2827542820378
+Writing FPS: 9.571698188394594
+Bohs FPS: 4.44655226831755
+Frame:  384
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 316.8000659017844
+Writing FPS: 9.683343155637685
+Bohs FPS: 4.449718725715581
+Frame:  385
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 741.6565491672526
+Writing FPS: 9.688259892601927
+Bohs FPS: 4.342158550587867
+Frame:  386
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 867.4388607207205
+Writing FPS: 9.632416023587288
+Bohs FPS: 4.484555243315637
+Frame:  387
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 758.7477929689445
+Writing FPS: 9.409309429616464
+Bohs FPS: 4.537386844773672
+Frame:  388
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 910.4325555775537
+Writing FPS: 9.788781394806316
+Bohs FPS: 4.594496155651239
+Frame:  389
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 892.235764507826
+Writing FPS: 9.532420295227968
+Bohs FPS: 4.513861882511645
+Frame:  390
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 647.1867761225967
+Writing FPS: 9.585131819572153
+Bohs FPS: 4.4643284442891495
+Frame:  391
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 892.816487785944
+Writing FPS: 9.771228475090329
+Bohs FPS: 4.336998506194655
+Frame:  392
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 858.3241564633479
+Writing FPS: 9.587119942111622
+Bohs FPS: 4.486190621485314
+Frame:  393
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 680.6212166235141
+Writing FPS: 9.57317308938373
+Bohs FPS: 4.270548816472184
+Frame:  394
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 910.9509051648309
+Writing FPS: 9.72397864287877
+Bohs FPS: 4.432569806634178
+Frame:  395
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 669.9319148820844
+Writing FPS: 9.627391360960667
+Bohs FPS: 4.435882914411371
+Frame:  396
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 888.2722306239483
+Writing FPS: 9.620935154879161
+Bohs FPS: 4.406006483050604
+Frame:  397
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 869.6007576965211
+Writing FPS: 9.549020301558516
+Bohs FPS: 4.497529929579211
+Frame:  398
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 683.9440040574937
+Writing FPS: 9.627726064163767
+Bohs FPS: 4.513697340423857
+Frame:  399
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 659.0754358197078
+Writing FPS: 9.594689515879192
+Bohs FPS: 4.487568018518695
+Frame:  400
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 864.3146936409028
+Writing FPS: 9.580314217062973
+Bohs FPS: 4.443931930709509
+Frame:  401
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 812.6830569398568
+Writing FPS: 9.127282973050757
+Bohs FPS: 4.37626074601678
+Frame:  402
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 900.0600339227525
+Writing FPS: 9.563581178999726
+Bohs FPS: 4.502670923605048
+Frame:  403
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 778.1883154078106
+Writing FPS: 9.615299649410188
+Bohs FPS: 4.2265912778061905
+Frame:  404
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 703.7530446220553
+Writing FPS: 9.129515654730236
+Bohs FPS: 4.409476006268029
+Frame:  405
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 707.2535928459961
+Writing FPS: 9.519465383768464
+Bohs FPS: 4.063185574954782
+Frame:  406
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 807.5887500488064
+Writing FPS: 9.522171166248771
+Bohs FPS: 4.362611793948865
+Frame:  407
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 515.6220593349423
+Writing FPS: 9.36675254510824
+Bohs FPS: 4.403373204041924
+Frame:  408
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 705.3564061091133
+Writing FPS: 9.343054519946957
+Bohs FPS: 4.412851253693209
+Frame:  409
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 631.8907688559849
+Writing FPS: 9.671148737975654
+Bohs FPS: 4.2559246674110005
+Frame:  410
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 627.6144063300347
+Writing FPS: 9.760526935726439
+Bohs FPS: 4.229751149192664
+Frame:  411
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 674.7365154162871
+Writing FPS: 9.112178821535533
+Bohs FPS: 3.8116173240034117
+Frame:  412
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 815.4797630941974
+Writing FPS: 9.312600541746512
+Bohs FPS: 3.751234639167412
+Frame:  413
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 633.2251995882513
+Writing FPS: 8.660038781042292
+Bohs FPS: 3.854502817855637
+Frame:  414
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 828.7173775724477
+Writing FPS: 8.210988037788303
+Bohs FPS: 3.431456024233274
+Frame:  415
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 120.0429321539763
+Writing FPS: 8.84174791135109
+Bohs FPS: 3.0866825498083856
+Frame:  416
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 158.2423202645073
+Writing FPS: 7.976076619597666
+Bohs FPS: 3.5607747841399653
+Frame:  417
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 763.0925701027356
+Writing FPS: 9.28874664349874
+Bohs FPS: 3.819338666003281
+Frame:  418
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 868.1459874653145
+Writing FPS: 9.551402616299749
+Bohs FPS: 3.8873423615625944
+Frame:  419
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 762.1835032340355
+Writing FPS: 9.288096217981419
+Bohs FPS: 3.9467607081874494
+Frame:  420
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 890.994804666871
+Writing FPS: 9.416688415290778
+Bohs FPS: 4.211206864550413
+Frame:  421
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 712.955034648064
+Writing FPS: 9.587464811610806
+Bohs FPS: 4.355788695952268
+Frame:  422
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 881.7860045525424
+Writing FPS: 9.33233698814243
+Bohs FPS: 4.009798407546112
+Frame:  423
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 899.6389748321286
+Writing FPS: 9.025825504267868
+Bohs FPS: 3.8017391945547336
+Frame:  424
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 543.1382091220609
+Writing FPS: 8.793938352380062
+Bohs FPS: 4.019153420311881
+Frame:  425
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 114.87694324288844
+Writing FPS: 9.161511697795381
+Bohs FPS: 3.8212530474925686
+Frame:  426
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 603.9198018962638
+Writing FPS: 9.349521443814783
+Bohs FPS: 4.000300918637439
+Frame:  427
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 492.3210228528745
+Writing FPS: 9.103746780808521
+Bohs FPS: 4.317552348486598
+Frame:  428
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 768.0698021607551
+Writing FPS: 9.499158754506151
+Bohs FPS: 4.307482561125922
+Frame:  429
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 172.5493335765696
+Writing FPS: 9.242783996786635
+Bohs FPS: 4.439633440598496
+Frame:  430
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 672.397284596773
+Writing FPS: 9.628808934146845
+Bohs FPS: 4.407345583610292
+Frame:  431
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 884.712260610141
+Writing FPS: 9.447754827503475
+Bohs FPS: 4.093096011644057
+Frame:  432
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 757.4621382376007
+Writing FPS: 9.540737518089582
+Bohs FPS: 4.170154653522719
+Frame:  433
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 887.8629138686557
+Writing FPS: 9.687159950408128
+Bohs FPS: 3.731692308206785
+Frame:  434
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 471.6017908006966
+Writing FPS: 9.332560647088675
+Bohs FPS: 4.037576578543252
+Frame:  435
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 785.4817830324922
+Writing FPS: 9.503211809998843
+Bohs FPS: 4.53714196516632
+Frame:  436
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 726.0888064752432
+Writing FPS: 9.424536571735889
+Bohs FPS: 4.449227344067551
+Frame:  437
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 902.7706936089884
+Writing FPS: 9.687191481117518
+Bohs FPS: 4.373889715428748
+Frame:  438
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 689.2003001737381
+Writing FPS: 9.466521650915865
+Bohs FPS: 4.391783351045037
+Frame:  439
+Reading frame
+Writing frame
+Ball detection
+Reading FPS: 802.4922198853557
+Writing FPS: 9.715147786534752
+Bohs FPS: 4.21209199028691
+Frame:  440
+Reading frame
+Writing frame
+Ball detection
+KeyboardInterrupt
+This code is reached
+Average FPS: 2.2683474241900687
+GST_ARGUS: Cleaning up
+CONSUMER: Done Success
+GST_ARGUS: Done Success
