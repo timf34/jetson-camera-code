@@ -11,6 +11,9 @@ import os
 import sys
 
 from config import BohsConfig
+
+# TODO: 5/11/22 -> I think multiprocessing would probably be better and more efficient here than multithreading (it seems wasteful to have a whole thread dedicated to timing, although I'm not too sure how it works tbh)
+
 # TODO: I should look more into threading.Timer and the best way to use!
 # TODO: look into subprocess more! It will be useful for looging all the output from the terminal it seems 
 
