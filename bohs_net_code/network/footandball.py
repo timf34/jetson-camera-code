@@ -212,7 +212,9 @@ class FootAndBall(nn.Module):
             labels = torch.cat([ball_labels], dim=0)
 
             # TODO: Note that I have changed the output here to include the raw ball feature map
-            temp = {'boxes': boxes, 'labels': labels, 'scores': scores, 'ball_feature_map': ball_feature_map}
+            # temp = {'boxes': boxes, 'labels': labels, 'scores': scores, 'ball_feature_map': ball_feature_map}
+            # Removing the ball feature map key, will clean up later 
+            temp = {'boxes': boxes, 'labels': labels, 'scores': scores}
             output.append(temp)
 
         return output
@@ -251,6 +253,8 @@ class FootAndBall(nn.Module):
         assert x[0].shape[3] == width // self.ball_downsampling_factor
 
         ball_feature_map = self.ball_classifier(x[0])
+
+        print("phase is: ", self.phase)
 
         # change
         # if self.phase in ['eval', 'detect', 'train']:
