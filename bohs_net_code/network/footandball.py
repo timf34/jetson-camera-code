@@ -254,8 +254,6 @@ class FootAndBall(nn.Module):
 
         ball_feature_map = self.ball_classifier(x[0])
 
-        print("phase is: ", self.phase)
-
         # change
         # if self.phase in ['eval', 'detect', 'train']:
         if self.phase in ['eval', 'detect']:
