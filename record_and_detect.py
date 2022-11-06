@@ -1,4 +1,5 @@
 import cv2
+import datetime
 import json
 import os
 import time 
@@ -47,7 +48,9 @@ def main():
     # For working on my laptop
     # cap = cv2.VideoCapture(0)
 
-    writer = cv2.VideoWriter('filename.avi',
+    now = datetime.datetime.now()
+    video_name = f"{now.strftime('time_%H_%M_%S_date_%d_%m_%Y_')}.avi"
+    writer = cv2.VideoWriter(video_name,
                             cv2.VideoWriter_fourcc(*'MJPG'),
                             5, FRAME_SIZE)
 
