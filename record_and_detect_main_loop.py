@@ -122,7 +122,7 @@ def record_and_detect_match_mode():
                     count+=1
 
                     if time.time() > TWENTYTWO_5_MIN_TIMEOUT:
-                        print("22.5 minute timeout")
+                        print("25 minute timeout")
                         raise KeyboardInterrupt
 
                     print("Reading FPS:", reading_fps.fps())
