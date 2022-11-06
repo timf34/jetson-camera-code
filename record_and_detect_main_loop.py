@@ -20,7 +20,7 @@ import os
 from config import BohsConfig
 from utils import get_ip_address, save_to_json_file
 
-DEBUG = True
+DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
 
 today = datetime.now()
@@ -38,16 +38,16 @@ def get_seconds_till_match():
 
     returns int
     """
-    current_time = datetime.today()
+    current_time = datetime.now()
     time_of_match = current_time.replace(day=current_time.day,
                                        hour=conf.hour,
                                        minute=conf.minute,
                                        second=conf.second,
                                        microsecond=conf.microsecond)
     delta_t = time_of_match-current_time
-     
-    print("current time is ", current_time, "\ntime of the match is ", time_of_match) 
-    return delta_t.seconds+1  
+
+    print("current time is ", current_time, "\ntime of the match is ", time_of_match)
+    return delta_t.seconds+1
 
 
 def record_and_detect_match_mode():
@@ -121,8 +121,8 @@ def record_and_detect_match_mode():
                     json_dict["data"].append(dets)
                     count+=1
 
-                    if time.time() > THREE_MIN_TIMEOUT:
-                        print("3 minute timeout")
+                    if time.time() > TWENTYTWO_5_MIN_TIMEOUT:
+                        print("22.5 minute timeout")
                         raise KeyboardInterrupt
 
                     print("Reading FPS:", reading_fps.fps())
@@ -141,7 +141,6 @@ def record_and_detect_match_mode():
     cv2.destroyAllWindows()
     print("Video saved to", video_name)
 
-
     print("Now lets save json_dict to a file")
     save_to_json_file(json_dict)
     print("File saved")
@@ -159,34 +158,19 @@ if __name__ == '__main__':
     # Check if directory exists, else create a new one
     if not os.path.isdir(path):	
         os.makedirs(path)
-        print("the following folder was created: " + path)
+        print(f"the following folder was created: {path}")
     else:
-        print("The following folder arleady exists: " + path)
+        print(f"The following folder arleady exists: {path}")
 
-    # Print IP address 
+    # Print IP address
     # TODO: we need to add this to our file directory above!
     main_ip_address = get_ip_address()
     print("main ip address: ")
 
-    if DEBUG is False:      
-    # Find the difference between the current time, and the time of the match - this will set our timer 
-        seconds_till_match = get_seconds_till_match()
-    else:
-        seconds_till_match = 1 # for debugging we have this setup so it starts basically instantly
-        
-
+    seconds_till_match = get_seconds_till_match() if DEBUG is False else 1
     print("the match begins in ", seconds_till_match, " seconds")
 
     _timeout = time.time() + seconds_till_match
-
-    # print("prior to timer t")
-    # if DEBUG is False:
-    #     t = threading.Timer(seconds_till_match, record_and_detect_match_mode)
-    # else:
-    #     t = threading.Timer(seconds_till_match, record_and_detect_match_mode)
-    #
-    # print("prior to t start")
-    # t.start()
 
     # Going to try to use a while loop instead of a timer
     while time.time() < _timeout:
