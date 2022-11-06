@@ -38,13 +38,13 @@ def get_seconds_till_match():
 
     returns int
     """
-    current_time=datetime.today()
-    time_of_match=current_time.replace(day=current_time.day,
+    current_time = datetime.today()
+    time_of_match = current_time.replace(day=current_time.day,
                                        hour=conf.hour,
                                        minute=conf.minute,
                                        second=conf.second,
                                        microsecond=conf.microsecond)
-    delta_t=time_of_match-current_time
+    delta_t = time_of_match-current_time
      
     print("current time is ", current_time, "\ntime of the match is ", time_of_match) 
     return delta_t.seconds+1  
@@ -57,7 +57,7 @@ def record_and_detect_match_mode():
 
     # For working on my laptop
     # cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width='+str(WIDTH)+', height='+str(HEIGHT)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+    cap = cv2.VideoCapture(f'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width={str(WIDTH)}, height={str(HEIGHT)}, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
 
     now = datetime.now()
     video_name = f"{now.strftime('time_%H_%M_%S_date_%d_%m_%Y_')}.avi"
@@ -75,12 +75,10 @@ def record_and_detect_match_mode():
     bohs_net = BohsNetDetector()
 
     ONE_MIN_TIMEOUT = time.time() + 60  # 1 minute from now
-    TWO_MIN_TIMEOUT = time.time() + 120  # 2 minutes from now 
+    TWO_MIN_TIMEOUT = time.time() + 120  # 2 minutes from now
     THREE_MIN_TIMEOUT = time.time() + 180  # 3 minutes from now
     FIVE_MIN_TIMEOUT = time.time() + 300  # 5 minutes from now
     TWENTYTWO_5_MIN_TIMEOUT = time.time() + 1350  # 22.5 minutes from now
-
-    # TODO: note that in its current setup, this code will stop after the timeout - I want it on a loop! But I want to save the video and json file after the timeout before restarting. 
 
     # Camera and detection loop
     try:
@@ -126,7 +124,7 @@ def record_and_detect_match_mode():
                     if time.time() > THREE_MIN_TIMEOUT:
                         print("3 minute timeout")
                         raise KeyboardInterrupt
-                
+
                     print("Reading FPS:", reading_fps.fps())
                     print("Writing FPS:", writing_fps.fps())
                     print("Bohs FPS:", bohs_fps.fps())
@@ -142,7 +140,7 @@ def record_and_detect_match_mode():
     writer.release()
     cv2.destroyAllWindows()
     print("Video saved to", video_name)
-    
+
 
     print("Now lets save json_dict to a file")
     save_to_json_file(json_dict)
@@ -179,12 +177,28 @@ if __name__ == '__main__':
 
     print("the match begins in ", seconds_till_match, " seconds")
 
+    _timeout = time.time() + seconds_till_match
 
-    print("prior to timer t")
-    if DEBUG is False: 
-        t = threading.Timer(seconds_till_match, record_and_detect_match_mode)
-    else:
-        t = threading.Timer(seconds_till_match, record_and_detect_match_mode)
-        
-    print("prior to t start")
-    t.start()
+    # print("prior to timer t")
+    # if DEBUG is False:
+    #     t = threading.Timer(seconds_till_match, record_and_detect_match_mode)
+    # else:
+    #     t = threading.Timer(seconds_till_match, record_and_detect_match_mode)
+    #
+    # print("prior to t start")
+    # t.start()
+
+    # Going to try to use a while loop instead of a timer
+    while time.time() < _timeout:
+        print("waiting for match to start")
+        time.sleep(1)
+
+    print("Match has started")
+    record_and_detect_match_mode()
+    print("Match section has ended")
+
+    # Repeat the same process for the second half of the match
+    time.sleep(5)
+    record_and_detect_match_mode()
+
+
