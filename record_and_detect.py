@@ -10,6 +10,7 @@ from typing import Dict, List
 
 from fps import FPS
 from bohs_net_detector import BohsNetDetector
+from utils import save_to_json_file
 
 print(cv2.__version__)
 
@@ -17,22 +18,6 @@ WIDTH: int = 1280
 HEIGHT: int = 720
 
 FRAME_SIZE = (WIDTH, HEIGHT)
-
-
-def save_to_json_file(data: Dict[str, List]) -> None:
-    # Create our filename based off the current time and date
-    filename = time.strftime("%H%M-%d_%m_%Y") + ".json"
-
-    # Create the directory if it doesn't exist
-    if not os.path.exists("logs/jetson3"):
-        os.makedirs("logs/jetson3")
-
-    # Create the full path to the file
-    full_path = os.path.join("logs/jetson3", filename)
-
-    # Save the data to the file
-    with open(full_path, "w") as f:
-        json.dump(data, f)
 
 
 def main():
