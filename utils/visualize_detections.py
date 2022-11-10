@@ -1,14 +1,17 @@
 import cv2
+import json
 
-from typing import List, Dict
-
+from typing import List, Dict, Iterator
 
 """
     Plan:
         - Write function to parse the Json file 
         - Run through the json file (can create an iterator) and video frame by frame, and draw a box if there's a detection. 
         - Save the video with the boxes drawn on it.
+        
+    Keep in mind that I want something reusable here ideally.   
 """
+
 
 class VisualizeDetections:
     def __init__(self, video_path: str, json_path: str, output_path: str):
@@ -37,4 +40,24 @@ class VisualizeDetections:
                             color, 2)
 
         return image
+
+    def json_file_iterator(self) -> Iterator[Dict]:
+        """
+            Returns an iterator of the json file.
+            Yielding individual detections
+
+            For example:
+                {'boxes': [], 'labels': [], 'scores': [], 'bohs_fps': 4.572921967528001, 'writing_fps': 8.064095365373616, 'reading_fps': 960.8012315022345}
+                {'boxes': [[499.5, 447.5, 519.5, 467.5]], 'labels': [1], 'scores': [0.993833065032959], 'bohs_fps': 4.742011144482181, 'writing_fps': 8.169459356867176, 'reading_fps': 969.534323529826}
+        """
+        with open(self.json_path, 'r') as f:
+            yield from json.load(f)['data']
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
 
