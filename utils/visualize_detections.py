@@ -56,7 +56,7 @@ class VisualizeDetections:
 
     def visualize_dets(self) -> None:
         """
-        Processes the json file, drawing detections onto a video
+        Processes the json file, drawing detections onto a video which is saved to the output path.
         """
         # Check if self.video_sequence is open
         if not self.video_sequence.isOpened():
@@ -66,8 +66,8 @@ class VisualizeDetections:
         dets = self.json_file_iterator()
 
         # Create the output video
-        output_sequence = cv2.VideoWriter(self.output_path, cv2.VideoWriter_fourcc(*'XVID'), self.fps,
-                                   (self.width, self.height))
+        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        output_sequence = cv2.VideoWriter(self.output_path, fourcc, self.fps, (self.width, self.height))
 
         while self.video_sequence.isOpened():
             # Read in the frame
