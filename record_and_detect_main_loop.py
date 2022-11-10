@@ -1,19 +1,13 @@
 import cv2
 import datetime
-import os
 from torch import Tensor as Tensor
 import time 
 
 from copy import deepcopy
-from typing import Dict, List
 
-from fps import FPS
+from utils.fps import FPS
 from bohs_net_detector import BohsNetDetector
-from utils import save_to_json_file
 
-import threading
-from threading import Thread
-from time import sleep 
 from datetime import datetime
 import os
 
