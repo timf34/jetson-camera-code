@@ -20,11 +20,11 @@ def save_to_json_file(data: Dict[str, List]) -> None:
     filename = time.strftime("%H%M-%d_%m_%Y") + ".json"
 
     # Create the directory if it doesn't exist
-    if not os.path.exists("logs/jetson3"):
-        os.makedirs("logs/jetson3")
+    if not os.path.exists("../logs/jetson3"):
+        os.makedirs("../logs/jetson3")
 
     # Create the full path to the file
-    full_path = os.path.join("logs/jetson3", filename)
+    full_path = os.path.join("../logs/jetson3", filename)
 
     # Save the data to the file
     with open(full_path, "w") as f:

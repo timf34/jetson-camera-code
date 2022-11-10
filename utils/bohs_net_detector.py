@@ -35,8 +35,3 @@ class BohsNetDetector:
         image = self.prep_image(image)
         with torch.no_grad():
             return self.model(image)[0]
-
-
-
-
-

@@ -11,4 +11,6 @@
 # /etc/network/if-up.d/ directory and which will run this file.
 
 git fetch --all
+
+# Note: I could probably change the below to '../stream_port1234.sh' but want to wait till I can test it
 git checkout origin/main -- config.py stream_port1234.sh

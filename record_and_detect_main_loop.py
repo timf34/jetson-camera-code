@@ -1,24 +1,18 @@
 import cv2
 import datetime
-import os
 from torch import Tensor as Tensor
 import time 
 
 from copy import deepcopy
-from typing import Dict, List
 
-from fps import FPS
-from bohs_net_detector import BohsNetDetector
-from utils import save_to_json_file
+from utils.fps import FPS
+from utils.bohs_net_detector import BohsNetDetector
 
-import threading
-from threading import Thread
-from time import sleep 
 from datetime import datetime
 import os
 
 from config import BohsConfig
-from utils import get_ip_address, save_to_json_file
+from utils.utility_funcs import get_ip_address, save_to_json_file
 
 DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
