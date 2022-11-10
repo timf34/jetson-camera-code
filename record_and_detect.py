@@ -5,7 +5,7 @@ from torch import Tensor as Tensor
 from copy import deepcopy
 
 from utils.fps import FPS
-from bohs_net_detector import BohsNetDetector
+from utils.bohs_net_detector import BohsNetDetector
 from utils import save_to_json_file
 
 print(cv2.__version__)

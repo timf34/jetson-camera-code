@@ -6,7 +6,7 @@ import time
 from copy import deepcopy
 
 from utils.fps import FPS
-from bohs_net_detector import BohsNetDetector
+from utils.bohs_net_detector import BohsNetDetector
 
 from datetime import datetime
 import os
