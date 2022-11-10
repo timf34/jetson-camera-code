@@ -12,7 +12,7 @@ from datetime import datetime
 import os
 
 from config import BohsConfig
-from utils.utils import get_ip_address, save_to_json_file
+from utils.utility_funcs import get_ip_address, save_to_json_file
 
 DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
