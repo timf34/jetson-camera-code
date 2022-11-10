@@ -17,6 +17,7 @@ class VisualizeDetections:
     def __init__(self, video_path: str, json_path: str, output_path: str):
         self.video_path: str = video_path
         self.json_path: str = json_path
+        self.output_path: str = output_path
         self.ball_label: int = 1
 
         # I might want to see if I can do a sort post init here to initialize these other things.
@@ -27,7 +28,7 @@ class VisualizeDetections:
 
     def draw_bboxes(self, image, detections):
         font = cv2.FONT_HERSHEY_SIMPLEX
-        for box, label, score in zip(detections['boxes'], detections['labels'], detections['scores']):
+        for box, label, score, bohs_fps, writing_fps, reading_fps in zip(detections['boxes'], detections['labels'], detections['scores']):
             if label == self.ball_label:
                 x1, y1, x2, y2 = box
                 x = (x1 + x2) / 2
@@ -52,6 +53,42 @@ class VisualizeDetections:
         """
         with open(self.json_path, 'r') as f:
             yield from json.load(f)['data']
+
+    def visualize_dets(self) -> None:
+        """
+        Processes the json file, drawing detections onto a video
+        """
+        # Check if self.video_sequence is open
+        if not self.video_sequence.isOpened():
+            raise IOError("Couldn't open video")
+
+        # Get our generator
+        dets = self.json_file_iterator()
+
+        # Create the output video
+        output_sequence = cv2.VideoWriter(self.output_path, cv2.VideoWriter_fourcc(*'XVID'), self.fps,
+                                   (self.width, self.height))
+
+        while self.video_sequence.isOpened():
+            # Read in the frame
+            ret, frame = self.video_sequence.read()
+
+            if not ret:
+                print("End of video")
+                break
+
+            # Get the next detection from the generator
+            det = next(dets)
+
+            # Draw the detections on the frame
+            frame = self.draw_bboxes(frame, det)
+
+            # Write the frame to the output video
+            output_sequence.write(frame)
+
+        # Release the video
+        self.video_sequence.release()
+        output_sequence.release()
 
 
 def main():
