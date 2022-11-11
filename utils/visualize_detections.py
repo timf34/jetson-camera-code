@@ -1,6 +1,7 @@
 import cv2
 import json
 
+from dataclasses import dataclass
 from typing import List, Dict, Iterator
 
 """
@@ -13,6 +14,17 @@ from typing import List, Dict, Iterator
 """
 
 
+@dataclass
+class Paths:
+    print("Paths for Bohs 6/11/22")
+    json_path1: str = r"C:\Users\timf3\PycharmProjects\jetson-camera-code\data\6_11_22\1922-06_11_2022.json"
+    json_path2: str = r"C:\Users\timf3\PycharmProjects\jetson-camera-code\data\6_11_22\1945-06_11_2022.json"
+
+    # Note: the spaces here may be an issue.
+    video_path1: str = r"C:\Users\timf3\OneDrive - Trinity College Dublin\Documents\Documents\datasets\Datasets\Bohs\6_11_22\time_19_00_09_date_06_11_2022_.avi"
+    video_path2: str = r"C:\Users\timf3\OneDrive - Trinity College Dublin\Documents\Documents\datasets\Datasets\Bohs\6_11_22\time_19_00_09_date_06_11_2022_.avi"
+
+
 class VisualizeDetections:
     def __init__(self, video_path: str, json_path: str, output_path: str):
         self.video_path: str = video_path
@@ -23,12 +35,12 @@ class VisualizeDetections:
         # I might want to see if I can do a sort post init here to initialize these other things.
         self.video_sequence: cv2.VideoCapture = cv2.VideoCapture(self.video_path)
         self.fps = self.video_sequence.get(cv2.CAP_PROP_FPS)
-        self.width = self.video_sequence.get(cv2.CAP_PROP_FRAME_WIDTH)
-        self.height = self.video_sequence.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        self.width = int(self.video_sequence.get(cv2.CAP_PROP_FRAME_WIDTH))
+        self.height = int(self.video_sequence.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     def draw_bboxes(self, image, detections):
         font = cv2.FONT_HERSHEY_SIMPLEX
-        for box, label, score, bohs_fps, writing_fps, reading_fps in zip(detections['boxes'], detections['labels'], detections['scores']):
+        for box, label, score  in zip(detections['boxes'], detections['labels'], detections['scores']):
             if label == self.ball_label:
                 x1, y1, x2, y2 = box
                 x = (x1 + x2) / 2
@@ -36,9 +48,13 @@ class VisualizeDetections:
                 color = (0, 0, 255)
                 radius = 25
                 cv2.circle(image, (int(x), int(y)), radius, color, 2)
-                cv2.putText(image, '{:0.2f}'.format(score), (max(0, int(x - radius)), max(0, (y - radius - 10))), font,
-                            1,
-                            color, 2)
+
+                # Round `score` to 2 decimal places, and convert to string
+                # score = str(round(score, 2))
+                # Getting weird error - will just ignore for now.
+                # cv2.putText(image, f"{score}", (max(0, int(x - radius)), max(0, (y - radius - 10))), font,
+                #             1,
+                #             color, 2)
 
         return image
 
@@ -62,12 +78,14 @@ class VisualizeDetections:
         if not self.video_sequence.isOpened():
             raise IOError("Couldn't open video")
 
+        print(f"Processing video: {self.video_path} and json: {self.json_path}")
+
         # Get our generator
         dets = self.json_file_iterator()
 
         # Create the output video
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        output_sequence = cv2.VideoWriter(self.output_path, fourcc, self.fps, (self.width, self.height))
+        output_sequence = cv2.VideoWriter(filename=self.output_path, fourcc=fourcc, fps=self.fps, frameSize=(self.width, self.height))
 
         while self.video_sequence.isOpened():
             # Read in the frame
@@ -92,7 +110,14 @@ class VisualizeDetections:
 
 
 def main():
-    pass
+    bohs_paths = Paths()
+    # First half
+    vd1 = VisualizeDetections(bohs_paths.video_path1, bohs_paths.json_path1, "output1.avi")
+    vd1.visualize_dets()
+
+    # Second half
+    vd2 = VisualizeDetections(bohs_paths.video_path2, bohs_paths.json_path2, "output2.avi")
+    vd2.visualize_dets()
 
 
 if __name__ == '__main__':
