@@ -24,7 +24,7 @@ client.connect(hostname='192.168.84.1', username='timf34/timf3', password=PASSWO
 # Open a SFTP session
 sftp = client.open_sftp()
 
-# Send the file
+# Send the file. Note that the target path needs to be to a file - a directory won't work!
 sftp.put('test_yolo.jpg', 'C:/Users/timf3/Downloads/test_yolo.jpg')
 
 # Close the SFTP session and SSH client
