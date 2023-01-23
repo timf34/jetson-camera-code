@@ -8,6 +8,9 @@ from windows_config import PASSWORD
 # Note that the early timeout is crucial in getting the stream to turn off.
 # pipeline = "gst-launch-1.0 nvarguscamerasrc sensor_id=0 timeout=10 ! \"video/x-raw(memory:NVMM), width=1920, height=1080, framerate=60/1\" ! nvjpegenc ! multifilesink location=test_yolo2.jpg max-files=1 max-file-duration=1000000000"
 
+# Note: for now, we are writing the password on the Jetsons manually - this is not ideal, but it works for now.
+#  Going forward, we should use a key file. And be very conscious of whether I'm typing the password in correctly!
+
 
 class SendImage:
     def __init__(self):
@@ -38,5 +41,5 @@ class SendImage:
 
 if __name__ == '__main__':
     send_image = SendImage()
-    send_image.capture_image()
+    # send_image.capture_image()
     send_image.send_image()
