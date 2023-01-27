@@ -76,7 +76,7 @@ def record_in_batches_match_mode():
 
         # pipeline = Gst.parse_launch("nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM),width=1920,height=1080,framerate=30/1 ! nvvidconv ! nvoverlaysink")
         now = datetime.now()
-        pipeline = Gst.parse_launch("nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM),width=1920,height=1080,framerate=60/1 ! nvv4l2h264enc ! h264parse ! mp4mux ! filesink location={}/jetson1_date:{}_time:_{}.mp4".format(path, now.strftime("%d_%m_%Y"), now.strftime("%H_%M_%S")))
+        pipeline = Gst.parse_launch(f"nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM),width=1920,height=1080,framerate=60/1 ! nvv4l2h264enc ! h264parse ! mp4mux ! filesink location={path}/jetson1_date:{now.strftime('%d_%m_%Y')}_time:_{now.strftime('%H_%M_%S')})")
         pipeline.set_state(Gst.State.PLAYING)
         if i==1 or i==3:
             # This is for halftime, plus extra time in case 
