@@ -20,6 +20,11 @@ from config import BohsConfig
 # TODO: This is a big one, **the paths to creating new folders are hardcoded**. I need to replace these with env variables or similar,
 
 
+# Note: this file will be a bit harder to refactor locally as it uses GStreamer instead of OpenCV. This might explain the performance difference
+# between the two versions of the code.
+# It would be very useful to have GStremaer working locally on windows for this... I can work away with record_and_detect_main_loop.py for now though
+
+
 DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
 # sys.stdout = open("test123.txt", "w")
