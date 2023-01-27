@@ -1,5 +1,12 @@
+"""
+This file executes code for recording video and detecting the ball using BohsNet at the same time.
+It is only to be used locally for testing, and not for a match day at Bohs.
+"""
+
+
 import cv2
 import datetime
+import os
 from torch import Tensor as Tensor
 
 from copy import deepcopy
@@ -16,6 +23,17 @@ HEIGHT: int = 720
 FRAME_SIZE = (WIDTH, HEIGHT)
 
 
+def get_capture():
+    """Check if the OS is using Windows or Linux and return the correct capture object"""
+    if os.name == 'nt':
+        return cv2.VideoCapture(0)  # Windows
+    else:
+        return cv2.VideoCapture(
+            'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
+            'nvvidconv ! video/x-raw, width=' + str(WIDTH) + ', height=' + str(HEIGHT) + ', format=BGRx ! '
+            'videoconvert ! video/x-raw, format=BGR ! appsink')  # Linux
+
+
 def main():
 
     # This isn't very clean but I am going to keep track of the pipelines that didn't work here for now 
@@ -24,7 +42,7 @@ def main():
 
     json_dict = {"data": []}
 
-    cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width='+str(WIDTH)+', height='+str(HEIGHT)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+    cap = get_capture()
 
     # For working on my laptop
     # cap = cv2.VideoCapture(0)
