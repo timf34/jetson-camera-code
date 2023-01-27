@@ -12,7 +12,7 @@ from typing import Tuple
 from config import BohsConfig
 from utils.fps import FPS
 from utils.bohs_net_detector import BohsNetDetector
-from utils.utility_funcs import get_ip_address, save_to_json_file
+from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_create_dir
 
 
 # Constants
@@ -25,12 +25,8 @@ today = datetime.now()
 conf = BohsConfig()
 
 
-def get_seconds_till_match():
-    """
-    This function finds the difference in time (in seconds) beteween the current time, and the time of the match 
-
-    returns int
-    """
+def get_seconds_till_match() -> int:
+    """Get the number of seconds till the match starts"""
     current_time = datetime.now()
     time_of_match = current_time.replace(day=current_time.day,
                                        hour=conf.hour,
@@ -39,11 +35,11 @@ def get_seconds_till_match():
                                        microsecond=conf.microsecond)
     delta_t = time_of_match-current_time
 
-    print("current time is ", current_time, "\ntime of the match is ", time_of_match)
+    print(f"Current time is {current_time}\nTime of the match is {time_of_match}")
     return delta_t.seconds+1
 
 
-def get_capture():
+def get_capture() -> cv2.VideoCapture:
     """Check if the OS is using Windows or Linux and return the correct capture object"""
     if os.name == 'nt':
         return cv2.VideoCapture(0)  # Windows
@@ -76,7 +72,12 @@ def initialize_fps_timers() -> Tuple[FPS, FPS, FPS, FPS]:
     return avg_fps, reading_fps, writing_fps, bohs_fps
 
 
-def record_and_detect_match_mode():
+def get_timeout(timeout_minute_legnth: int) -> float:
+    """Return the time in seconds that the timeout will end"""
+    return time.time() + (timeout_minute_legnth * 60)
+
+
+def record_and_detect_match_mode() -> None:
     
     # Initialization
     json_dict = {"data": []}
@@ -91,11 +92,7 @@ def record_and_detect_match_mode():
 
     bohs_net = BohsNetDetector()
 
-    ONE_MIN_TIMEOUT = time.time() + 60  # 1 minute from now
-    TWO_MIN_TIMEOUT = time.time() + 120  # 2 minutes from now
-    THREE_MIN_TIMEOUT = time.time() + 180  # 3 minutes from now
-    FIVE_MIN_TIMEOUT = time.time() + 300  # 5 minutes from now
-    TWENTYTWO_5_MIN_TIMEOUT = time.time() + 1350  # 22.5 minutes from now
+    timeout = get_timeout(2)
 
     # Camera and detection loop
     try:
@@ -137,7 +134,7 @@ def record_and_detect_match_mode():
                     json_dict["data"].append(dets)
                     count+=1
 
-                    if time.time() > TWENTYTWO_5_MIN_TIMEOUT:
+                    if time.time() > timeout:
                         print("25 minute timeout")
                         raise KeyboardInterrupt
 
@@ -157,7 +154,6 @@ def record_and_detect_match_mode():
     cv2.destroyAllWindows()
     print("Video saved to", video_name)
 
-    print("Now lets save json_dict to a file")
     save_to_json_file(json_dict)
     print("File saved")
 
@@ -170,18 +166,11 @@ if __name__ == '__main__':
     else:
         path = "../tim/bohsVids/test"
 
+    check_and_create_dir(path)
 
-    # Check if directory exists, else create a new one
-    if not os.path.isdir(path):	
-        os.makedirs(path)
-        print(f"the following folder was created: {path}")
-    else:
-        print(f"The following folder arleady exists: {path}")
-
-    # Print IP address
     # TODO: we need to add this to our file directory above!
     main_ip_address = get_ip_address()
-    print("main ip address: ")
+    print(f"main ip address: {main_ip_address}")
 
     seconds_till_match = get_seconds_till_match() if DEBUG is False else 1
     print("the match begins in ", seconds_till_match, " seconds")
