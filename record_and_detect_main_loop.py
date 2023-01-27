@@ -1,31 +1,30 @@
 import cv2
 import datetime
-from torch import Tensor as Tensor
-import time 
+import os
+import time
+
 
 from copy import deepcopy
-
-from utils.fps import FPS
-from utils.bohs_net_detector import BohsNetDetector
-
 from datetime import datetime
-import os
+from torch import Tensor as Tensor
+from typing import Tuple
 
 from config import BohsConfig
+from utils.fps import FPS
+from utils.bohs_net_detector import BohsNetDetector
 from utils.utility_funcs import get_ip_address, save_to_json_file
 
+
+# Constants
 DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
-
+WIDTH: int = 1280
+HEIGHT: int = 720
+FRAME_SIZE = (WIDTH, HEIGHT)
 today = datetime.now()
 conf = BohsConfig()
 
-WIDTH: int = 1280
-HEIGHT: int = 720
 
-FRAME_SIZE = (WIDTH, HEIGHT)
-
-    
 def get_seconds_till_match():
     """
     This function finds the difference in time (in seconds) beteween the current time, and the time of the match 
@@ -44,25 +43,49 @@ def get_seconds_till_match():
     return delta_t.seconds+1
 
 
+def get_capture():
+    """Check if the OS is using Windows or Linux and return the correct capture object"""
+    if os.name == 'nt':
+        return cv2.VideoCapture(0)  # Windows
+    else:
+        return cv2.VideoCapture(
+            'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
+            'nvvidconv ! video/x-raw, width=' + str(WIDTH) + ', height=' + str(HEIGHT) + ', format=BGRx ! '
+            'videoconvert ! video/x-raw, format=BGR ! appsink')  # Linux
+
+
+def create_video_writer(video_name: str) -> cv2.VideoWriter:
+    """Create a video writer object"""
+    return cv2.VideoWriter(video_name,
+                           cv2.VideoWriter_fourcc(*'MJPG'),
+                           5, FRAME_SIZE)
+
+
+def create_datetime_video_name() -> str:
+    """Create a video name with the current date and time"""
+    now = datetime.now()
+    return f"{now.strftime('time_%H_%M_%S_date_%d_%m_%Y_')}.avi"
+
+
+def initialize_fps_timers() -> Tuple[FPS, FPS, FPS, FPS]:
+    """Initialize the FPS timers"""
+    avg_fps = FPS()
+    reading_fps = FPS()
+    writing_fps = FPS()
+    bohs_fps = FPS()
+    return avg_fps, reading_fps, writing_fps, bohs_fps
+
+
 def record_and_detect_match_mode():
     
     # Initialization
     json_dict = {"data": []}
 
-    # For working on my laptop
-    # cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture(f'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width={str(WIDTH)}, height={str(HEIGHT)}, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+    cap = get_capture()
+    video_name = create_datetime_video_name()
+    writer = create_video_writer(video_name=video_name)
 
-    now = datetime.now()
-    video_name = f"{now.strftime('time_%H_%M_%S_date_%d_%m_%Y_')}.avi"
-    writer = cv2.VideoWriter(video_name,
-                            cv2.VideoWriter_fourcc(*'MJPG'),
-                            5, FRAME_SIZE)
-
-    avg_fps = FPS()
-    reading_fps = FPS()
-    writing_fps = FPS()
-    bohs_fps = FPS()
+    avg_fps, reading_fps, writing_fps, bohs_fps = initialize_fps_timers()
 
     count = 0
 
@@ -87,7 +110,6 @@ def record_and_detect_match_mode():
 
                     # Read the next frame
                     reading_fps.start()
-                    print("Reading frame")
                     ret_val, img = cap.read()
                     reading_fps.stop()
 
@@ -95,7 +117,7 @@ def record_and_detect_match_mode():
                     img = cv2.resize(img, FRAME_SIZE)
 
                     if not ret_val:
-                        print("Breaking!")
+                        print("Note ret_val. Breaking!")
                         break
 
                     # Write the frame to the file
