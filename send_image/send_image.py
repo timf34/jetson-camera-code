@@ -1,3 +1,4 @@
+import os
 import paramiko
 import subprocess
 from time import sleep
@@ -25,7 +26,7 @@ class SendImage:
         self.laptop_password: str = PASSWORD
 
         # Send the file. Note that the target path needs to be to a file - a directory won't work!
-        self.target_file: str = 'C:/Users/timf3/Downloads/test_yolo.jpg'
+        self.target_file: str = os.getcwd() + '/' + self.image_name
 
     def capture_image(self) -> None:
         subprocess.run(self.pipeline, shell=True)
@@ -34,7 +35,13 @@ class SendImage:
     def send_image(self) -> None:
         self.client.connect(self.laptop_ipv4_address, username=self.laptop_username, password=self.laptop_password)
         sftp = self.client.open_sftp()
-        sftp.put(self.image_name, self.target_file)
+
+        # Ensure that the target file exists
+        if os.path.exists(self.target_file):
+            print(f"Sending {self.image_name} to {self.laptop_ipv4_address}")
+            sftp.put(self.image_name, self.target_file)
+        else:
+            print(f"File {self.image_name} does not exist!")
         sftp.close()
         self.client.close()
 
