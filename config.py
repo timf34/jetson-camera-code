@@ -5,7 +5,7 @@
 class BohsConfig:
     def __init__(self):
         self.hour: int = 19
-        self.minute: int = 00
+        self.minute: int = 45
         self.second: int = 1
         self.microsecond: int = 1
 
