@@ -25,8 +25,9 @@ class SendImage:
         self.laptop_username: str = 'timf34/timf3'  # found via `whoami` on the windows machine
         self.laptop_password: str = PASSWORD
 
-        # Send the file. Note that the target path needs to be to a file - a directory won't work!
-        self.target_file: str = os.getcwd() + '/' + self.image_name
+        # Send the file. Note that the target path needs to be to a file - a directory won't work! This is where files
+        # will be sent to on my laptop!
+        self.target_file: str = 'C:/Users/timf3/Downloads/test_yolo.jpg'
 
     def capture_image(self) -> None:
         subprocess.run(self.pipeline, shell=True)
