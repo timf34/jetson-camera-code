@@ -16,6 +16,7 @@ from windows_config import PASSWORD
 class SendImage:
     def __init__(self):
         self.image_name: str = 'test_yolo.jpg'
+        self.image_path: str = f'{os.getcwd()}/{self.image_name}'
         self.pipeline: str = f"gst-launch-1.0 nvarguscamerasrc sensor_id=0 timeout=10 ! \"video/x-raw(memory:NVMM), width=1920, height=1080, framerate=60/1\" ! nvjpegenc ! multifilesink location={self.image_name} max-files=1 max-file-duration=1000000000"
 
         self.client = paramiko.SSHClient()
@@ -37,12 +38,12 @@ class SendImage:
         self.client.connect(self.laptop_ipv4_address, username=self.laptop_username, password=self.laptop_password)
         sftp = self.client.open_sftp()
 
-        # Ensure that the target file exists
-        if os.path.exists(self.target_file):
+        # Ensure that we have our image locally
+        if os.path.exists(self.image_path):
             print(f"Sending {self.image_name} to {self.laptop_ipv4_address}")
             sftp.put(self.image_name, self.target_file)
         else:
-            print(f"File {self.image_name} does not exist!")
+            print(f"File {self.image_path} does not exist!")
         sftp.close()
         self.client.close()
 
