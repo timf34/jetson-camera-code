@@ -50,5 +50,5 @@ class SendImage:
 
 if __name__ == '__main__':
     send_image = SendImage()
-    # send_image.capture_image()
+    send_image.capture_image()
     send_image.send_image()
