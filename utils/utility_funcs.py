@@ -13,7 +13,7 @@ def get_ip_address() -> str:
     return s.getsockname()[0]
 
 
-def save_to_json_file(data: Dict[str, List], dir: str = "../logs/jetson3") -> None:
+def save_to_json_file(data: Dict[str, List], dir: str = f"{os.getcwd()}/logs/jetson3") -> None:
     """Save the data to a json file"""
     filename = time.strftime("%H%M-%d_%m_%Y") + ".json"
     check_and_create_dir(dir)
