@@ -3,7 +3,6 @@ import datetime
 import os
 import time
 
-
 from copy import deepcopy
 from datetime import datetime
 from torch import Tensor as Tensor
@@ -21,6 +20,7 @@ CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
 WIDTH: int = 1280
 HEIGHT: int = 720
 FRAME_SIZE = (WIDTH, HEIGHT)
+LOG_DIR = f"{os.getcwd()}/logs/laptop"
 today = datetime.now()
 conf = BohsConfig()
 
@@ -77,6 +77,7 @@ def get_timeout(timeout_minute_legnth: int) -> float:
     return time.time() + (timeout_minute_legnth * 60)
 
 
+# TODO: rename this function?
 def record_and_detect_match_mode() -> None:
     
     # Initialization
@@ -95,13 +96,19 @@ def record_and_detect_match_mode() -> None:
     timeout = get_timeout(2)
 
     # Camera and detection loop
+    # TODO: need to try and break this up a bit.
+    #  the FPS counters take up a lot of lines of code... I don't think they need to be used for all ops, such as the cap reading.
+
+    # TODO: split up this block?
+
+    # TODO: *********** More than anything, I need to run this code and see what it looks like rn ***********
+
+    # TODO: Also save the logs within this project, not the PycharmProjects dir!
     try:
-        while True:
+        while True:  # I'm not sure if I need this out while True loop. If the cap is opened it should be fine.
             if cap.isOpened():
 
                 print("cap.isOpened:", cap.isOpened())
-
-                avg_fps.start()
 
                 while cap.isOpened():
 
@@ -119,19 +126,17 @@ def record_and_detect_match_mode() -> None:
 
                     # Write the frame to the file
                     writing_fps.start()
-                    print("Writing frame")
                     writer.write(img)
                     writing_fps.stop()
-                    avg_fps.update()
 
                     # Detect the ball
                     bohs_fps.start()
-                    print("Ball detection")
                     dets = bohs_net.detect(img)
                     bohs_fps.stop()
+
                     dets.update({"bohs_fps": deepcopy(bohs_fps.fps()), "writing_fps": deepcopy(writing_fps.fps()), "reading_fps": deepcopy(reading_fps.fps())})
                     dets = {key: value.tolist() if isinstance(value, Tensor) else value for key, value in dets.items()}
-                    json_dict["data"].append(dets)
+                    json_dict["data"].append(dets)  # We save this file at the end of the match.
                     count+=1
 
                     if time.time() > timeout:
@@ -154,14 +159,13 @@ def record_and_detect_match_mode() -> None:
     cv2.destroyAllWindows()
     print("Video saved to", video_name)
 
-    save_to_json_file(json_dict)
+    save_to_json_file(json_dict)  # Save json file at the end of the match.
     print("File saved")
 
 
-if __name__ == '__main__':
-    
-    # Set our file directory 
-    if DEBUG is False: 
+def main():
+    # Set our file directory
+    if DEBUG is False:
         path = "../tim/bohsVids/" + today.strftime('%m_%d_%Y_tim@192.168.73.207')
     else:
         path = "../tim/bohsVids/test"
@@ -191,3 +195,5 @@ if __name__ == '__main__':
     record_and_detect_match_mode()
 
 
+if __name__ == '__main__':
+    main()
