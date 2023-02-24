@@ -1,5 +1,6 @@
 import cv2
 import datetime
+import json
 import os
 import time
 
@@ -12,6 +13,23 @@ from config import BohsConfig
 from utils.fps import FPS
 from utils.bohs_net_detector import BohsNetDetector
 from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_create_dir
+
+import os
+import threading
+from time import time, sleep
+
+from config import *
+from fov_net.IOTClient import IOTClient
+from fov_net.IOTContext import IOTContext, IOTCredentials
+from fov_net.camera_send_messages import initialize_iot_manager
+
+
+received_count: int = 0
+count: int = 0
+received_all_event = threading.Event()
+
+# Start a timer at 0 seconds
+start_time = time()
 
 
 # Constants
@@ -83,6 +101,12 @@ def record_and_detect_match_mode() -> None:
     # Initialization
     json_dict = {"data": []}
 
+    iot_manager = initialize_iot_manager()
+    connect_future = iot_manager.connect()
+    connect_future.result()
+    print("Connected!")
+
+
     cap = get_capture()
     video_name = create_datetime_video_name()
     writer = create_video_writer(video_name=video_name)
@@ -139,6 +163,13 @@ def record_and_detect_match_mode() -> None:
                     json_dict["data"].append(dets)  # We save this file at the end of the match.
                     count+=1
 
+                    # Send the data to the cloud
+                    message = json.dumps({
+                        "dets": dets,
+                        "time": time.time()
+                    })
+                    iot_manager.publish(payload=message)
+
                     if time.time() > timeout:
                         print("25 minute timeout")
                         raise KeyboardInterrupt
@@ -161,6 +192,10 @@ def record_and_detect_match_mode() -> None:
 
     save_to_json_file(json_dict)  # Save json file at the end of the match.
     print("File saved")
+
+    disconnect_future = iot_manager.disconnect()
+    disconnect_future.result()
+    print("Disconnected!")
 
 
 def main():
