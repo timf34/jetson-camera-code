@@ -23,13 +23,13 @@ def initialize_args():
     parser.add_argument("-n", "--camera_id", action="store", default="0", dest="camera_id",
                         help="The camera ID (required)")
     parser.add_argument("-c", "--cert_path", action="store",
-                        default="./certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-certificate.pem.crt",
+                        default="/home/tim/jetson-camera-code/certificates/tims/camera_send_messages/a14899325642fe1cad3a4454d45b988752ec93cdf6a5078a6864bec1f6af838f-certificate.pem.crt",
                         dest="cert_path", help="Cert ending in .pem.crt")
     parser.add_argument("-k", "--priv_key_path", action="store",
-                        default="./certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-private.pem.key",
+                        default="/home/tim/jetson-camera-code/certificates/tims/camera_send_messages/a14899325642fe1cad3a4454d45b988752ec93cdf6a5078a6864bec1f6af838f-private.pem.key",
                         dest="priv_key_path", help="Private key ending in .pem.key")
     parser.add_argument("-r", "--root_ca_path", action="store",
-                        default="./certificates/tims/camera_send_messages/root.pem",
+                        default="/home/tim/jetson-camera-code/certificates/tims/camera_send_messages/AmazonRootCA1.pem",
                         dest="root_ca_path", help="Root CA ending in .pem (usually: AmazonRootCA1.pem")
     parser.add_argument("-u", "--client_id", action="store", default="user5", dest="client_id", help="Username")
     args = parser.parse_args()

@@ -1,4 +1,5 @@
 /.idea
+/certificates
 *.mp4
 *.avi
 test_file.py
