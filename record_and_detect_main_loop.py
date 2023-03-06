@@ -32,7 +32,7 @@ start_time = time.time()
 
 
 # Constants
-DEBUG = False
+DEBUG = True
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
 WIDTH: int = 1280
 HEIGHT: int = 720
