@@ -15,7 +15,7 @@ class BohsConfig:
 
         self.hour: int = 17
         self.minute: int = 1
-        self.second: int = 1
+        self.second: int = 2
         self.microsecond: int = 1
 
         if self.jetson_name == "jetson1":
