@@ -1,20 +1,14 @@
 import cv2
 import datetime
-import json
 import os
 import time
 
-from copy import deepcopy
 from datetime import datetime
-from torch import Tensor as Tensor
 from typing import Tuple
 
 from config import BohsConfig
 from utils.fps import FPS
-from utils.bohs_net_detector import BohsNetDetector
 from utils.utility_funcs import get_ip_address, check_and_create_dir
-
-import threading
 
 from config import *
 
@@ -24,7 +18,6 @@ start_time = time.time()
 # Constants
 DEBUG = True
 WINDOWS = True
-CURRENT_TIME = datetime.now()  # not sure if this is bad practice but it works
 WIDTH: int = 1280
 HEIGHT: int = 720
 FRAME_SIZE = (WIDTH, HEIGHT)
@@ -34,148 +27,153 @@ conf = BohsConfig()
 jetson_name: str = conf.jetson_name[-1]
 
 
-def get_seconds_till_match() -> int:
-    """Get the number of seconds till the match starts"""
-    current_time = datetime.now()
-    time_of_match = current_time.replace(day=current_time.day,
-                                         hour=conf.hour,
-                                         minute=conf.minute,
-                                         second=conf.second,
-                                         microsecond=conf.microsecond)
-    delta_t = time_of_match - current_time
+class VideoRecorder:
+    def __init__(self, debug: bool = True):
+        self.debug: bool = debug
+        self.conf: BohsConfig = BohsConfig()
+        self.width: int = 1280
+        self.height: int = 720
+        self.frame_size: Tuple[int, int] = (self.width, self.height)
+        self.log_dir: str = f"{os.getcwd()}/logs/laptop"
+        self.today: datetime = datetime.now()
+        self.jetson_name: str = self.conf.jetson_name[-1]  # The final character of the jetson name (i.e. jetson1 -> 1)
 
-    print(f"Current time is {current_time}\nTime of the match is {time_of_match}")
-    return delta_t.seconds + 1
+    def get_seconds_till_match(self) -> int:
+        """Get the number of seconds till the match starts"""
+        current_time = datetime.now()
+        time_of_match = current_time.replace(day=current_time.day,
+                                             hour=self.conf.hour,
+                                             minute=self.conf.minute,
+                                             second=self.conf.second,
+                                             microsecond=self.conf.microsecond)
+        delta_t = time_of_match - current_time
 
+        print(f"Current time is {current_time}\nTime of the match is {time_of_match}")
+        return delta_t.seconds + 1
 
-def get_capture() -> cv2.VideoCapture:
-    """Check if the OS is using Windows or Linux and return the correct capture object"""
-    if os.name == 'nt':
-        return cv2.VideoCapture(0)  # Windows
-    else:
-        return cv2.VideoCapture(
-            'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
-            'nvvidconv ! video/x-raw, width=' + str(WIDTH) + ', height=' + str(HEIGHT) + ', format=BGRx ! '
-                                                                                         'videoconvert ! video/x-raw, format=BGR ! appsink')  # Linux
+    @staticmethod
+    def get_capture() -> cv2.VideoCapture:
+        """Check if the OS is using Windows or Linux and return the correct capture object"""
+        if os.name == 'nt':
+            return cv2.VideoCapture(0)  # Windows
+        else:
+            return cv2.VideoCapture(
+                'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
+                'nvvidconv ! video/x-raw, width=' + str(WIDTH) + ', height=' + str(HEIGHT) + ', format=BGRx ! '
+                                                         'videoconvert ! video/x-raw, format=BGR ! appsink')  # Linux
 
+    @staticmethod
+    def create_video_writer(video_name: str) -> cv2.VideoWriter:
+        """Create a video writer object"""
+        return cv2.VideoWriter(video_name,
+                               cv2.VideoWriter_fourcc(*'MJPG'),
+                               5, FRAME_SIZE)
 
-def create_video_writer(video_name: str) -> cv2.VideoWriter:
-    """Create a video writer object"""
-    return cv2.VideoWriter(video_name,
-                           cv2.VideoWriter_fourcc(*'MJPG'),
-                           5, FRAME_SIZE)
+    @staticmethod
+    def create_datetime_video_name() -> str:
+        """Create a video name with the current date and time"""
+        now = datetime.now()
+        return f"{now.strftime('time_%H_%M_%S_date_%d_%m_%Y_')}.avi"
 
+    @staticmethod
+    def initialize_fps_timers() -> Tuple[FPS, FPS, FPS, FPS]:
+        """Initialize the FPS timers"""
+        avg_fps = FPS()
+        reading_fps = FPS()
+        writing_fps = FPS()
+        bohs_fps = FPS()
+        return avg_fps, reading_fps, writing_fps, bohs_fps
 
-def create_datetime_video_name() -> str:
-    """Create a video name with the current date and time"""
-    now = datetime.now()
-    return f"{now.strftime('time_%H_%M_%S_date_%d_%m_%Y_')}.avi"
-
-
-def initialize_fps_timers() -> Tuple[FPS, FPS, FPS, FPS]:
-    """Initialize the FPS timers"""
-    avg_fps = FPS()
-    reading_fps = FPS()
-    writing_fps = FPS()
-    bohs_fps = FPS()
-    return avg_fps, reading_fps, writing_fps, bohs_fps
-
-
-def get_timeout(timeout_minute_legnth: int) -> float:
-    """Return the time in seconds that the timeout will end"""
-    return time.time() + (timeout_minute_legnth * 60)
-
-
-def record_video() -> None:
-    cap = get_capture()
-    video_name = create_datetime_video_name()
-    writer = create_video_writer(video_name=video_name)
-
-    avg_fps, reading_fps, writing_fps, bohs_fps = initialize_fps_timers()
-
-    _count = 0
-
-    timeout = get_timeout(2)
-
-    # Camera loop
-    try:
-        while True:  # I'm not sure if I need this out while True loop. If the cap is opened it should be fine.
-            if cap.isOpened():
-
-                print("cap.isOpened:", cap.isOpened())
-
-                while cap.isOpened():
-
-                    # Read the next frame
-                    reading_fps.start()
-                    ret_val, img = cap.read()
-                    reading_fps.stop()
-
-                    # Resize the frame to (720, 1280)
-                    img = cv2.resize(img, FRAME_SIZE)
-
-                    if not ret_val:
-                        print("Note ret_val. Breaking!")
-                        break
-
-                    # Write the frame to the file
-                    writing_fps.start()
-                    writer.write(img)
-                    writing_fps.stop()
-
-                    _count += 1
-
-                    if time.time() > timeout:
-                        print("25 minute timeout")
-                        raise KeyboardInterrupt
-
-                    print("Reading FPS:", reading_fps.fps())
-                    print("Writing FPS:", writing_fps.fps())
-                    print("Frame: ", _count)
-
-            else:
-                print("camera open failed")
-    except KeyboardInterrupt:
-        print("KeyboardInterrupt")
-
-    print("This code is reached")
-    cap.release()
-    writer.release()
-    cv2.destroyAllWindows()
-    print("Video saved to", video_name)
+    @staticmethod
+    def get_timeout(timeout_minute_length: int) -> float:
+        """Return the time in seconds that the timeout will end"""
+        return time.time() + (timeout_minute_length * 60)
 
 
-def main():
-    # Set our file directory
-    if DEBUG is False:
-        path = "../tim/bohsVids/" + today.strftime('%m_%d_%Y_tim@192.168.73.207')
-    else:
-        path = "../tim/bohsVids/test"
+    def record_video(self) -> None:
+        cap = self.get_capture()
+        video_name = self.create_datetime_video_name()
+        writer = self.create_video_writer(video_name=video_name)
 
-    check_and_create_dir(path)
+        avg_fps, reading_fps, writing_fps, bohs_fps = self.initialize_fps_timers()
+        frame_counter = 0
+        timeout = self.get_timeout(2)
 
-    # TODO: we need to add this to our file directory above!
-    main_ip_address = get_ip_address()
-    print(f"main ip address: {main_ip_address}")
+        # Camera loop
+        try:
+            while True:  # I'm not sure if I need this out while True loop. If the cap is opened it should be fine.
+                if cap.isOpened():
+                    print("cap.isOpened: ", cap.isOpened())
+                    while cap.isOpened():
 
-    seconds_till_match = get_seconds_till_match() if DEBUG is False else 1
-    print("the match begins in ", seconds_till_match, " seconds")
+                        # Read the next frame
+                        reading_fps.start()
+                        ret_val, img = cap.read()
+                        reading_fps.stop()
 
-    _timeout = time.time() + seconds_till_match
+                        # Resize the frame to (720, 1280)
+                        img = cv2.resize(img, FRAME_SIZE)
 
-    # Going to try to use a while loop instead of a timer
-    while time.time() < _timeout:
-        print("waiting for match to start")
-        time.sleep(1)
+                        if not ret_val:
+                            print("Note ret_val. Breaking!")
+                            break
 
-    print("Match has started")
-    record_video()
-    print("Match section has ended")
+                        # Write the frame to the file
+                        writing_fps.start()
+                        writer.write(img)
+                        writing_fps.stop()
 
-    # Repeat the same process for the second half of the match
-    time.sleep(5)
-    record_video()
+                        frame_counter += 1
+
+                        if time.time() > timeout:
+                            print("25 minute timeout")
+                            raise KeyboardInterrupt
+
+                        print("Reading FPS:", reading_fps.fps())
+                        print("Writing FPS:", writing_fps.fps())
+                        print("Frame: ", frame_counter)
+
+                else:
+                    print("camera open failed")
+        except KeyboardInterrupt:
+            print("KeyboardInterrupt")
+
+        cap.release()
+        writer.release()
+        cv2.destroyAllWindows()
+        print("Video saved to", video_name)
+
+    def run(self) -> None:
+        # Set our file directory
+        if DEBUG is False:
+            path = "../tim/bohsVids/" + today.strftime('%m_%d_%Y_tim@192.168.73.207')
+        else:
+            path = "../tim/bohsVids/test"
+
+        check_and_create_dir(path)
+
+        main_ip_address = get_ip_address()
+        print(f"main ip address: {main_ip_address}")
+
+        seconds_till_match = self.get_seconds_till_match() if DEBUG is False else 1
+        print("the match begins in ", seconds_till_match, " seconds")
+
+        _timeout = time.time() + seconds_till_match
+
+        # Going to try to use a while loop instead of a timer
+        while time.time() < _timeout:
+            print("waiting for match to start")
+            time.sleep(1)
+
+        print("Match has started")
+        self.record_video()
+        print("Match section has ended")
+
+        # Repeat the same process for the second half of the match
+        time.sleep(5)
+        self.record_video()
 
 
 if __name__ == '__main__':
-    main()
+    video_recorder = VideoRecorder(debug=DEBUG)
+    video_recorder.run()
