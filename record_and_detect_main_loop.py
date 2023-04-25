@@ -14,7 +14,6 @@ from utils.fps import FPS
 from utils.bohs_net_detector import BohsNetDetector
 from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_create_dir
 
-import os
 import threading
 
 from config import *
@@ -40,6 +39,7 @@ FRAME_SIZE = (WIDTH, HEIGHT)
 LOG_DIR = f"{os.getcwd()}/logs/laptop"
 today = datetime.now()
 conf = BohsConfig()
+jetson_name: str = conf.jetson_name[-1]
 
 
 def get_seconds_till_match() -> int:
@@ -165,7 +165,8 @@ def record_and_detect_match_mode() -> None:
                     # Send the data to the cloud
                     message = json.dumps({
                         "dets": dets,
-                        "time": time.time()
+                        "time": time.time(),
+                        "camera": jetson_name
                     })
                     iot_manager.publish(payload=message)
 
