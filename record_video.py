@@ -12,20 +12,6 @@ from utils.utility_funcs import get_ip_address, check_and_create_dir
 
 from config import *
 
-# Start a timer at 0 seconds
-start_time = time.time()
-
-# Constants
-DEBUG = True
-WINDOWS = True
-WIDTH: int = 1280
-HEIGHT: int = 720
-FRAME_SIZE = (WIDTH, HEIGHT)
-LOG_DIR = f"{os.getcwd()}/logs/laptop"
-today = datetime.now()
-conf = BohsConfig()
-jetson_name: str = conf.jetson_name[-1]
-
 
 class VideoRecorder:
     def __init__(self, debug: bool = True):
@@ -46,28 +32,27 @@ class VideoRecorder:
                                              minute=self.conf.minute,
                                              second=self.conf.second,
                                              microsecond=self.conf.microsecond)
-        delta_t = time_of_match - current_time
-
         print(f"Current time is {current_time}\nTime of the match is {time_of_match}")
+        delta_t = time_of_match - current_time
         return delta_t.seconds + 1
 
-    @staticmethod
-    def get_capture() -> cv2.VideoCapture:
+    def get_capture(self) -> cv2.VideoCapture:
         """Check if the OS is using Windows or Linux and return the correct capture object"""
         if os.name == 'nt':
             return cv2.VideoCapture(0)  # Windows
         else:
             return cv2.VideoCapture(
                 'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
-                'nvvidconv ! video/x-raw, width=' + str(WIDTH) + ', height=' + str(HEIGHT) + ', format=BGRx ! '
-                                                         'videoconvert ! video/x-raw, format=BGR ! appsink')  # Linux
+                'nvvidconv ! video/x-raw, width=' + str(self.width) + ', height=' + str(self.height) + ', format=BGRx '
+                '! videoconvert ! video/x-raw, format=BGR ! appsink')  # Linux
 
-    @staticmethod
-    def create_video_writer(video_name: str) -> cv2.VideoWriter:
+    # TODO: I might want to give this a path to save to, and not just a video name... idk. I could pass a full path
+    #  rather than just a video name
+    def create_video_writer(self, video_name: str) -> cv2.VideoWriter:
         """Create a video writer object"""
         return cv2.VideoWriter(video_name,
                                cv2.VideoWriter_fourcc(*'MJPG'),
-                               5, FRAME_SIZE)
+                               5, self.frame_size)
 
     @staticmethod
     def create_datetime_video_name() -> str:
@@ -84,57 +69,57 @@ class VideoRecorder:
         bohs_fps = FPS()
         return avg_fps, reading_fps, writing_fps, bohs_fps
 
-    @staticmethod
-    def get_timeout(timeout_minute_length: int) -> float:
-        """Return the time in seconds that the timeout will end"""
-        return time.time() + (timeout_minute_length * 60)
-
+    def get_timeout(self, timeout_minute_length: float = 22.5) -> float:
+        """Return the time in minutes that the video should be recorded for (default is 22.5 minutes)"""
+        if self.debug is True:
+            return time.time() + 10  # 10-second video if in debug mode
+        else:
+            return time.time() + (timeout_minute_length * 60)
 
     def record_video(self) -> None:
+        """Record and save a video for as long as set in the timeout"""
         cap = self.get_capture()
         video_name = self.create_datetime_video_name()
         writer = self.create_video_writer(video_name=video_name)
 
         avg_fps, reading_fps, writing_fps, bohs_fps = self.initialize_fps_timers()
         frame_counter = 0
-        timeout = self.get_timeout(2)
+        timeout = self.get_timeout(22.5)
 
         # Camera loop
         try:
-            while True:  # I'm not sure if I need this out while True loop. If the cap is opened it should be fine.
-                if cap.isOpened():
-                    print("cap.isOpened: ", cap.isOpened())
-                    while cap.isOpened():
+            if cap.isOpened():
+                print(f"cap.isOpened: {cap.isOpened()}")
+                while cap.isOpened():
+                    # Read the next frame
+                    reading_fps.start()
+                    ret_val, img = cap.read()
+                    reading_fps.stop()
 
-                        # Read the next frame
-                        reading_fps.start()
-                        ret_val, img = cap.read()
-                        reading_fps.stop()
+                    # Resize the frame to (720, 1280)
+                    img = cv2.resize(img, self.frame_size)
 
-                        # Resize the frame to (720, 1280)
-                        img = cv2.resize(img, FRAME_SIZE)
+                    if not ret_val:
+                        print("Note ret_val. Breaking!")
+                        break
 
-                        if not ret_val:
-                            print("Note ret_val. Breaking!")
-                            break
+                    # Write the frame to the file
+                    writing_fps.start()
+                    writer.write(img)
+                    writing_fps.stop()
 
-                        # Write the frame to the file
-                        writing_fps.start()
-                        writer.write(img)
-                        writing_fps.stop()
+                    frame_counter += 1
 
-                        frame_counter += 1
+                    if time.time() > timeout:
+                        print("Timeout reached. Breaking!")
+                        raise KeyboardInterrupt
 
-                        if time.time() > timeout:
-                            print("25 minute timeout")
-                            raise KeyboardInterrupt
+                    print("Reading FPS:", reading_fps.fps())
+                    print("Writing FPS:", writing_fps.fps())
+                    print("Frame: ", frame_counter)
 
-                        print("Reading FPS:", reading_fps.fps())
-                        print("Writing FPS:", writing_fps.fps())
-                        print("Frame: ", frame_counter)
-
-                else:
-                    print("camera open failed")
+            else:
+                print("Camera not opened")
         except KeyboardInterrupt:
             print("KeyboardInterrupt")
 
@@ -145,8 +130,8 @@ class VideoRecorder:
 
     def run(self) -> None:
         # Set our file directory
-        if DEBUG is False:
-            path = "../tim/bohsVids/" + today.strftime('%m_%d_%Y_tim@192.168.73.207')
+        if self.debug is False:
+            path = "../tim/bohsVids/" + self.today.strftime('%m_%d_%Y_tim@192.168.73.207')
         else:
             path = "../tim/bohsVids/test"
 
@@ -155,7 +140,7 @@ class VideoRecorder:
         main_ip_address = get_ip_address()
         print(f"main ip address: {main_ip_address}")
 
-        seconds_till_match = self.get_seconds_till_match() if DEBUG is False else 1
+        seconds_till_match = self.get_seconds_till_match() if self.debug is False else 1
         print("the match begins in ", seconds_till_match, " seconds")
 
         _timeout = time.time() + seconds_till_match
@@ -175,5 +160,5 @@ class VideoRecorder:
 
 
 if __name__ == '__main__':
-    video_recorder = VideoRecorder(debug=DEBUG)
+    video_recorder = VideoRecorder(debug=True)
     video_recorder.run()
