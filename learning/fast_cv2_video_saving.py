@@ -65,7 +65,7 @@ def main():
     threads = []
 
     # create a thread for each frame
-    for i in range(FPS):
+    for _ in range(FPS):
         t = threading.Thread(target=save_frame, args=(writer, get_frame(cam)))
         threads.append(t)
         t.start()
@@ -87,4 +87,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

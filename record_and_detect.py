@@ -1,110 +1,143 @@
 import cv2
-import datetime
-from torch import Tensor as Tensor
+import json
+import os
+import time
 
-from copy import deepcopy
+from torch import Tensor
+from typing import Dict
 
-from utils.fps import FPS
+
+from config import BohsConfig
+from record_video import VideoRecorder
 from utils.bohs_net_detector import BohsNetDetector
-from utils.utility_funcs import save_to_json_file
-
-print(cv2.__version__)
-
-WIDTH: int = 1280
-HEIGHT: int = 720
-
-FRAME_SIZE = (WIDTH, HEIGHT)
+from utils.fps import FPS
+from utils.logger import Logger
+from utils.utility_funcs import get_log_file_path, check_and_create_dir, get_aws_iot_manager
 
 
-def main():
+# TODO: I might want to extend the iot_manager class to set a longer timeout/ keepalive value
+class VideoDetector(VideoRecorder):
+    def __init__(self, debug: bool = False, width: int = 1280, height: int = 720):
+        super().__init__(debug=debug, width=width, height=height)
+        self.config: BohsConfig = BohsConfig()
+        self.bohs_net: BohsNetDetector = BohsNetDetector()
+        self.log_file_path: str = get_log_file_path(jetson_name=self.config.jetson_name)
+        self.logger: Logger = Logger(
+            log_file_path=self.log_file_path,
+            buffer_size=100,
+            print_to_console=True,
+            console_buffer_size=2
+        )
+        self.iot_manager = get_aws_iot_manager(self.config)
 
-    # This isn't very clean but I am going to keep track of the pipelines that didn't work here for now 
-    # This wouldn't work. Apparently `nvvidconv` is needed
-    # cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! video/x-raw, width='+str(dispW)+', height='+str(dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+    @staticmethod
+    def convert_det_tensor_to_dict(det_tensor: Dict[str, Tensor]) -> Dict[str, Tensor]:
+        """Converts our detection dict with tensor to a dict with list"""
+        print(det_tensor)
+        return {key: value.tolist() if isinstance(value, Tensor) else value for key, value in det_tensor.items()}
 
-    json_dict = {"data": []}
+    def record_and_detect(self, video_length_mins: float, video_path: str) -> None:
+        """
+        Record and save a video for as long as set in the timeout; also perform ball detection
 
-    cap = cv2.VideoCapture('nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! nvvidconv ! video/x-raw, width='+str(WIDTH)+', height='+str(HEIGHT)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink')
+        :param video_length_mins: The length of the video in minutes
+        :param video_path: The path to save the video to (i.e. ./videos/) - does not include file name
+        """
+        # json_dict = {"data": []}
+        cap = self.get_capture()
 
-    # For working on my laptop
-    # cap = cv2.VideoCapture(0)
+        video_name = self.create_datetime_video_name()
+        video_path = os.path.join(video_path, video_name)
 
-    now = datetime.datetime.now()
-    video_name = f"{now.strftime('time_%H_%M_%S_date_%d_%m_%Y_')}.avi"
-    writer = cv2.VideoWriter(video_name,
-                            cv2.VideoWriter_fourcc(*'MJPG'),
-                            5, FRAME_SIZE)
+        writer = self.create_video_writer(video_name=video_path)
+        avg_fps, reading_fps, writing_fps, bohs_fps = self.initialize_fps_timers()
+        frame_counter = 0
+        timeout = self.get_timeout(video_length_mins)
 
-    avg_fps = FPS()
-    reading_fps = FPS()
-    writing_fps = FPS()
-    bohs_fps = FPS()
+        self.iot_manager.connect()
 
-    count = 0
-
-    bohs_net = BohsNetDetector()
-
-    try:
-        while True:
+        try:
             if cap.isOpened():
-
-                print("cap.isOpened:", cap.isOpened())
-
-                avg_fps.start()
-
                 while cap.isOpened():
 
                     # Read the next frame
                     reading_fps.start()
-                    print("Reading frame")
                     ret_val, img = cap.read()
                     reading_fps.stop()
 
                     # Resize the frame to (720, 1280)
-                    img = cv2.resize(img, FRAME_SIZE)
+                    img = cv2.resize(img, self.frame_size)
 
                     if not ret_val:
-                        print("Breaking!")
+                        print("Not ret_val. Breaking!")
                         break
 
                     # Write the frame to the file
                     writing_fps.start()
-                    print("Writing frame")
                     writer.write(img)
                     writing_fps.stop()
-                    avg_fps.update()
+                    frame_counter += 1
 
                     # Detect the ball
                     bohs_fps.start()
-                    print("Ball detection")
-                    dets = bohs_net.detect(img)
+                    dets = self.bohs_net.detect(img)
                     bohs_fps.stop()
-                    dets.update({"bohs_fps": deepcopy(bohs_fps.fps()), "writing_fps": deepcopy(writing_fps.fps()), "reading_fps": deepcopy(reading_fps.fps())})
+
+                    # dets.update({"bohs_fps": deepcopy(bohs_fps.fps()), "writing_fps": deepcopy(writing_fps.fps()),
+                    #              "reading_fps": deepcopy(reading_fps.fps())})
                     dets = {key: value.tolist() if isinstance(value, Tensor) else value for key, value in dets.items()}
-                    json_dict["data"].append(dets)
-                    count+=1
+                    # json_dict["data"].append(dets)  # We save this file at the end of the match.
+                    #
+                    # # Send the data to the cloud
+                    aws_message = json.dumps({
+                        "dets": dets,
+                        "time": time.time(),
+                        "camera": self.jetson_name
+                    })
+                    self.iot_manager.publish(payload=aws_message)
 
-                    # Exit if any key is pressed
-                    # print("Reading FPS:", reading_fps.fps())
-                    # print("Writing FPS:", writing_fps.fps())
-                    # print("Bohs FPS:", bohs_fps.fps())
-                    # print("Frame: ", count)
+                    self.logger.log(aws_message)
 
+                    if time.time() > timeout:
+                        print("25 minute timeout")
+                        raise KeyboardInterrupt
+
+                    self.logger.log(
+                        f"Reading FPS: {reading_fps.fps()} - Writing FPS: {writing_fps.fps()} - "
+                        f"Bohs FPS: {bohs_fps.fps()} - Frame: {frame_counter}"
+                    )
             else:
-                print ("camera open failed")
-    except KeyboardInterrupt:
-        print("KeyboardInterrupt")
+                print("camera open failed")
+        except KeyboardInterrupt:
+            print("KeyboardInterrupt")
 
-    print("This code is reached")
-    cap.release()
-    writer.release()
-    avg_fps.stop()
-    print("Average FPS:", avg_fps.average_fps())
+        cap.release()
+        writer.release()
+        cv2.destroyAllWindows()
+        print("Video saved to", video_name)
 
-    print("Now lets save json_dict to a file")
-    save_to_json_file(json_dict)
-    print("File saved")
+        # TODO: this function has a silly default (cwd + /logs/jetson3 + date_time_file_name.json)
+        # save_to_json_file(json_dict)  # Save json file at the end of the match.
+        self.iot_manager.disconnect()
+
+    def record_and_detect_full_match_in_batches(self) -> None:
+        """
+        Records videos + does ball detection for the full match in batches of 22.5-minutes + one 10-minute batch
+        for halftime
+        """
+        path = self.get_video_path()
+        check_and_create_dir(path)
+
+        seconds_till_match = self.get_seconds_till_match()
+        self.wait_for_match_to_start(seconds_till_match)
+
+        for i in range(5):
+            if (i == 2) or (i > 5):
+                self.record_and_detect(video_length_mins=10, video_path=path)
+            else:
+                self.record_and_detect(video_length_mins=22.5, video_path=path)
 
 
 if __name__ == '__main__':
-    main()
+    video_detector = VideoDetector(debug=True)
+    video_detector.record_and_detect_full_match_in_batches()

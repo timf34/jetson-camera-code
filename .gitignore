@@ -2,7 +2,12 @@
 *.mp4
 *.avi
 test_file.py
+videos/
 
 send_image/windows_config.py
 calls_match_config_file.sh
 config.py
+
+# Ignore all AWS certs
+*.pem
+*.pem.key

@@ -12,13 +12,6 @@ import sys
 
 from config import BohsConfig
 
-# TODO: 5/11/22 -> I think multiprocessing would probably be better and more efficient here than multithreading (it seems wasteful to have a whole thread dedicated to timing, although I'm not too sure how it works tbh)
-
-# TODO: I should look more into threading.Timer and the best way to use!
-# TODO: look into subprocess more! It will be useful for looging all the output from the terminal it seems 
-
-# TODO: This is a big one, **the paths to creating new folders are hardcoded**. I need to replace these with env variables or similar,
-
 
 DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
@@ -76,7 +69,7 @@ def record_in_batches_match_mode():
 
         # pipeline = Gst.parse_launch("nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM),width=1920,height=1080,framerate=30/1 ! nvvidconv ! nvoverlaysink")
         now = datetime.now()
-        pipeline = Gst.parse_launch("nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM),width=1920,height=1080,framerate=60/1 ! nvv4l2h264enc ! h264parse ! mp4mux ! filesink location={}/jetson1_date:{}_time:_{}.mp4".format(path, now.strftime("%d_%m_%Y"), now.strftime("%H_%M_%S")))
+        pipeline = Gst.parse_launch(f"nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM),width=1920,height=1080,framerate=60/1 ! nvv4l2h264enc ! h264parse ! mp4mux ! filesink location={path}/jetson1_date:{now.strftime('%d_%m_%Y')}_time:_{now.strftime('%H_%M_%S')})")
         pipeline.set_state(Gst.State.PLAYING)
         if i==1 or i==3:
             # This is for halftime, plus extra time in case 
@@ -112,8 +105,6 @@ def record_test_mode():
         sleep(5)
         main_loop.quit()
         thread.join()
-
-
 
 
 if __name__ == '__main__':
