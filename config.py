@@ -8,7 +8,10 @@ import os
 class BohsConfig:
     def __init__(self):
 
-        self.jetson_name = os.environ.get('JETSON_NAME')
+        if os.name == 'nt':
+            self.jetson_name = "jetson1"  # If we're on windows, just assume we're on jetson1
+        else:
+            self.jetson_name = os.environ.get('JETSON_NAME')
 
         self.hour: int = 17
         self.minute: int = 1
@@ -39,11 +42,11 @@ class BohsConfig:
         return f"hour: {self.hour}, minute: {self.minute}, second: {self.second}, microsecond: {self.microsecond}"
 
 
-def test():
+def _test():
     x = BohsConfig()
     print(x)
     print(x.hour)
 
 
 if __name__ == "__main__":
-    test()
+    _test()
