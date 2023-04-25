@@ -32,7 +32,7 @@ start_time = time.time()
 
 
 # Constants
-DEBUG = True
+DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
 WIDTH: int = 1280
 HEIGHT: int = 720
@@ -165,7 +165,8 @@ def record_and_detect_match_mode() -> None:
                     # Send the data to the cloud
                     message = json.dumps({
                         "dets": dets,
-                        "time": time.time()
+                        "time": time.time(),
+			"camera": "1"
                     })
                     iot_manager.publish(payload=message)
 

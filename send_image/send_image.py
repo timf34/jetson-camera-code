@@ -22,7 +22,7 @@ class SendImage:
         self.client = paramiko.SSHClient()
         self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-        self.laptop_ipv4_address: str = '192.168.84.1'
+        self.laptop_ipv4_address: str = '192.168.141.1'
         self.laptop_username: str = 'timf34/timf3'  # found via `whoami` on the windows machine
         self.laptop_password: str = PASSWORD
 
