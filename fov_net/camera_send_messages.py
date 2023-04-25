@@ -6,8 +6,8 @@ from time import time, sleep
 
 # from config import *
 CAMERA_TOPIC: str = "cameras/bohs"
-from IOTClient import IOTClient
-from IOTContext import IOTContext, IOTCredentials
+from fov_net.IOTClient import IOTClient
+from fov_net.IOTContext import IOTContext, IOTCredentials
 
 
 received_count: int = 0

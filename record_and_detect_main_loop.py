@@ -16,7 +16,6 @@ from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_cre
 
 import os
 import threading
-from time import time, sleep
 
 from config import *
 from fov_net.IOTClient import IOTClient
@@ -29,11 +28,11 @@ count: int = 0
 received_all_event = threading.Event()
 
 # Start a timer at 0 seconds
-start_time = time()
+start_time = time.time()
 
 
 # Constants
-DEBUG = False
+DEBUG = True
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
 WIDTH: int = 1280
 HEIGHT: int = 720

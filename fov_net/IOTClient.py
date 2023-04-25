@@ -1,7 +1,7 @@
 from awscrt import mqtt
 from awsiot import mqtt_connection_builder
 from concurrent import futures
-from IOTContext import IOTContext, IOTCredentials
+from fov_net.IOTContext import IOTContext, IOTCredentials
 from typing import Optional
 
 
