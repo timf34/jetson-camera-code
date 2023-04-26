@@ -12,18 +12,6 @@ import sys
 
 from config import BohsConfig
 
-# TODO: 5/11/22 -> I think multiprocessing would probably be better and more efficient here than multithreading (it seems wasteful to have a whole thread dedicated to timing, although I'm not too sure how it works tbh)
-
-# TODO: I should look more into threading.Timer and the best way to use!
-# TODO: look into subprocess more! It will be useful for looging all the output from the terminal it seems 
-
-# TODO: This is a big one, **the paths to creating new folders are hardcoded**. I need to replace these with env variables or similar,
-
-
-# Note: this file will be a bit harder to refactor locally as it uses GStreamer instead of OpenCV. This might explain the performance difference
-# between the two versions of the code.
-# It would be very useful to have GStremaer working locally on windows for this... I can work away with record_and_detect_main_loop.py for now though
-
 
 DEBUG = False
 CURRENT_TIME = datetime.now() # not sure if this is bad practice but it works
@@ -117,8 +105,6 @@ def record_test_mode():
         sleep(5)
         main_loop.quit()
         thread.join()
-
-
 
 
 if __name__ == '__main__':
