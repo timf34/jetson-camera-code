@@ -128,13 +128,26 @@ class VideoRecorder:
         cv2.destroyAllWindows()
         print("Video saved to", video_name)
 
-    def run(self) -> None:
-        # Set our file directory
-        if self.debug is False:
-            path = "../tim/bohsVids/" + self.today.strftime('%m_%d_%Y_tim@192.168.73.207')
+    def get_vidoe_path(self) -> str:
+        # TODO: path isn't being used for saving the videos yet
+        if os.name == 'nt':
+            return "./videos/"
+        elif self.debug is False:
+            return "../tim/bohsVids/" + self.today.strftime('%m_%d_%Y_tim@192.168.73.207')
         else:
-            path = "../tim/bohsVids/test"
+            return "../tim/bohsVids/test"
 
+    def record_full_match_in_batches(self) -> None:
+        """Records videos for the match. Four 22.5 minute long videos + one 10 minute long video for the halftime"""
+        raise NotImplementedError
+
+    def run(self) -> None:
+        """
+        What does this function do? It sets up the vars for recording the video, then it just calls record_video()
+        twice to record two videos.
+        """
+        # Set our file directory
+        path = self.get_vidoe_path()
         check_and_create_dir(path)
 
         main_ip_address = get_ip_address()
