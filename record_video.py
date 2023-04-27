@@ -14,7 +14,7 @@ from config import *
 
 
 class VideoRecorder:
-    def __init__(self, debug: bool = True):
+    def __init__(self, debug: bool = False):
         self.debug: bool = debug
         self.conf: BohsConfig = BohsConfig()
         self.width: int = 1280
