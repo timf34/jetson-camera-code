@@ -14,13 +14,14 @@ from config import *
 
 
 class VideoRecorder:
-    def __init__(self, debug: bool = False):
+    def __init__(self, debug: bool = False, width: int = 1280, height: int = 720):
         self.debug: bool = debug
         self.conf: BohsConfig = BohsConfig()
-        self.width: int = 1280
-        self.height: int = 720
+        self.width: int = width
+        self.height: int = height
         self.frame_size: Tuple[int, int] = (self.width, self.height)
         self.log_dir: str = f"{os.getcwd()}/logs/laptop"
+        check_and_create_dir(self.log_dir)
         self.today: datetime = datetime.now()
         self.jetson_name: str = self.conf.jetson_name[-1]  # The final character of the jetson name (i.e. jetson1 -> 1)
 
