@@ -122,7 +122,7 @@ class VideoRecorder:
                     img = cv2.resize(img, self.frame_size)
 
                     if not ret_val:
-                        print("Note ret_val. Breaking!")
+                        print("Not ret_val. Breaking!")
                         break
 
                     # Write the frame to the file
@@ -175,36 +175,11 @@ class VideoRecorder:
             else:
                 self.record_video(video_length_mins=22.5, video_path=path)
 
-    def run(self) -> None:
-        """
-        What does this function do? It sets up the vars for recording the video, then it just calls record_video()
-        twice to record two videos.
-        """
-        # Set our file directory
-        path = self.get_vidoe_path()
-        check_and_create_dir(path)
 
-        main_ip_address = get_ip_address()
-        print(f"main ip address: {main_ip_address}")
-
-        seconds_till_match = self.get_seconds_till_match()
-
-        _timeout = time.time() + seconds_till_match
-
-        # Going to try to use a while loop instead of a timer
-        while time.time() < _timeout:
-            print("waiting for match to start")
-            time.sleep(1)
-
-        print("Match has started")
-        self.record_video()
-        print("Match section has ended")
-
-        # Repeat the same process for the second half of the match
-        time.sleep(5)
-        self.record_video()
+def main():
+    video_recorder = VideoRecorder(debug=True)
+    video_recorder.record_full_match_in_batches()
 
 
 if __name__ == '__main__':
-    video_recorder = VideoRecorder(debug=True)
-    video_recorder.record_full_match_in_batches()
+    main()
