@@ -85,10 +85,10 @@ class VideoRecorder:
         if os.name == 'nt':
             return "./videos/"
         elif self.debug is False:
-            video_name = self.create_datetime_video_name()
-
-            # TODO: implement a good naming procedure here.
-            return "../tim/bohsVids/" + self.today.strftime('%m_%d_%Y_tim@192.168.73.207')
+            ip_address = get_ip_address()
+            video_dir_path = f"../tim/bohsVids/{self.today.strftime('%m_%d_%Y@')}_{self.jetson_name}_{ip_address}"
+            check_and_create_dir(video_dir_path)
+            return video_dir_path
         else:
             return "../tim/bohsVids/test"
 
