@@ -26,15 +26,21 @@ class VideoRecorder:
 
     def get_seconds_till_match(self) -> int:
         """Get the number of seconds till the match starts"""
+
+        if self.debug:
+            print("Debug mode is on: seconds till match is 1")
+            return 1
         current_time = datetime.now()
         time_of_match = current_time.replace(day=current_time.day,
                                              hour=self.conf.hour,
                                              minute=self.conf.minute,
                                              second=self.conf.second,
                                              microsecond=self.conf.microsecond)
-        print(f"Current time is {current_time}\nTime of the match is {time_of_match}")
         delta_t = time_of_match - current_time
-        return delta_t.seconds + 1
+        seconds_till_match = delta_t.seconds + 1
+        print(f"get_seconds_till_match()\nCurrent time is {current_time}\nTime of the match is {time_of_match}\nSeconds"
+              f" till match: {seconds_till_match}")
+        return seconds_till_match
 
     def get_capture(self) -> cv2.VideoCapture:
         """Check if the OS is using Windows or Linux and return the correct capture object"""
@@ -130,16 +136,25 @@ class VideoRecorder:
 
     def get_vidoe_path(self) -> str:
         # TODO: path isn't being used for saving the videos yet
+
+        # Ok so this function gets the path... it might as well set the video name too
         if os.name == 'nt':
-            return "./videos/"
+            return "./videos/windows_video.avi"
         elif self.debug is False:
+            video_name = self.create_datetime_video_name()
+
+            # TODO: implement a good naming procedure here.
             return "../tim/bohsVids/" + self.today.strftime('%m_%d_%Y_tim@192.168.73.207')
         else:
             return "../tim/bohsVids/test"
 
     def record_full_match_in_batches(self) -> None:
         """Records videos for the match. Four 22.5 minute long videos + one 10 minute long video for the halftime"""
-        raise NotImplementedError
+        # Set our file directory
+        path = self.get_vidoe_path()
+        check_and_create_dir(path)
+
+        seconds_till_match = self.get_seconds_till_match()
 
     def run(self) -> None:
         """
@@ -153,7 +168,7 @@ class VideoRecorder:
         main_ip_address = get_ip_address()
         print(f"main ip address: {main_ip_address}")
 
-        seconds_till_match = self.get_seconds_till_match() if self.debug is False else 1
+        seconds_till_match = self.get_seconds_till_match()
         print("the match begins in ", seconds_till_match, " seconds")
 
         _timeout = time.time() + seconds_till_match
