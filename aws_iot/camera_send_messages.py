@@ -55,6 +55,7 @@ def initialize_iot_manager(args = initialize_args()):
 
     return iot_manager
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AWS IoT Core MQTT Client")
     parser.add_argument("-n", "--camera_id", action="store", default="0", dest="camera_id", help="The camera ID (required)")
@@ -86,7 +87,6 @@ if __name__ == "__main__":
     iot_manager = IOTClient(iot_context, iot_credentials, publish_topic=CAMERA_TOPIC)
     connect_future = iot_manager.connect()
     connect_future.result()
-    print("Connected!")
 
     while True:
         message = json.dumps({
@@ -102,4 +102,3 @@ if __name__ == "__main__":
 
     disconnect_future = iot_manager.disconnect()
     disconnect_future.result()
-    print("Disconnected!")
