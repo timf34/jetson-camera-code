@@ -1,5 +1,7 @@
 # Notes on this codebase project 
 
+Also note that I've quickly moved a good few files into the `old` folder, so they might not work immediately with imports.
+
 
 - `IOTClient.py`
   - This file defines the IOTClient class

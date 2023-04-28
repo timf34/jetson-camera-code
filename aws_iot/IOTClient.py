@@ -41,7 +41,6 @@ class IOTClient:
 
     def connect(self) -> futures.Future:
         print(f"Connecting to endpoint '{self.credentials.endpoint}' with client ID '{self.credentials.client_id}'")
-
         return self._mqtt_connection.connect()
 
     def disconnect(self) -> futures.Future:
