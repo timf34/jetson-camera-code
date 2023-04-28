@@ -8,6 +8,7 @@ from typing import Tuple
 
 from config import BohsConfig
 from utils.fps import FPS
+from utils.logger import Logger
 from utils.utility_funcs import get_ip_address, check_and_create_dir
 
 from config import *
@@ -20,9 +21,15 @@ class VideoRecorder:
         self.width: int = width
         self.height: int = height
         self.frame_size: Tuple[int, int] = (self.width, self.height)
-        check_and_create_dir(self.log_dir)
         self.today: datetime = datetime.now()
         self.jetson_name: str = self.conf.jetson_name[-1]  # The final character of the jetson name (i.e. jetson1 -> 1)
+        self.log_file_path: str = self.get_log_file_path()
+        self.logger: Logger = Logger(
+            log_file_path=self.log_file_path,
+            buffer_size=100,
+            print_to_console=True,
+            console_buffer_size=2
+        )
 
     def get_log_file_path(self) -> str:
         """Returns the path to the log file"""
@@ -53,13 +60,15 @@ class VideoRecorder:
 
     def get_capture(self) -> cv2.VideoCapture:
         """Check if the OS is using Windows or Linux and return the correct capture object"""
-        if os.name == 'nt':
-            return cv2.VideoCapture(0)  # Windows
-        else:
-            return cv2.VideoCapture(
-                'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
-                'nvvidconv ! video/x-raw, width=' + str(self.width) + ', height=' + str(self.height) + ', format=BGRx '
-                '! videoconvert ! video/x-raw, format=BGR ! appsink')  # Linux
+        return (
+            cv2.VideoCapture(0)
+            if os.name == 'nt'
+            else cv2.VideoCapture(
+                f'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
+                f'nvvidconv ! video/x-raw, width={str(self.width)}, height={str(self.height)}, format=BGRx ! '
+                f'videoconvert ! video/x-raw, format=BGR ! appsink'
+            )
+        )
 
     def create_video_writer(self, video_name: str) -> cv2.VideoWriter:
         """Create a video writer object"""
@@ -145,10 +154,9 @@ class VideoRecorder:
                         print("Timeout reached. Breaking!")
                         raise KeyboardInterrupt
 
-                    print("Reading FPS:", reading_fps.fps())
-                    print("Writing FPS:", writing_fps.fps())
-                    print("Frame: ", frame_counter)
-
+                    self.logger.log(
+                        f"Reading FPS: {reading_fps.fps()} - Writing FPS: {writing_fps.fps()} - Frame: {frame_counter}"
+                    )
             else:
                 print("Camera not opened")
         except KeyboardInterrupt:
