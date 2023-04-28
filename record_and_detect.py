@@ -4,6 +4,7 @@ import os
 import time
 
 from torch import Tensor
+from typing import Dict
 
 
 from config import BohsConfig
@@ -11,13 +12,14 @@ from record_video import VideoRecorder
 from utils.bohs_net_detector import BohsNetDetector
 from utils.fps import FPS
 from utils.logger import Logger
-from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_create_dir
+from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_create_dir, get_aws_iot_manager
 
 
-# Inherit from VideoRecorder
+# TODO: I might want to extend the iot_manager class to set a longer timeout/ keepalive value
 class VideoDetector(VideoRecorder):
     def __init__(self, debug: bool = False, width: int = 1280, height: int = 720):
         super().__init__(debug=debug, width=width, height=height)
+        self.config: BohsConfig = BohsConfig()
         self.bohs_net: BohsNetDetector = BohsNetDetector()
         self.log_file_path: str = self.get_log_file_path()
         self.logger: Logger = Logger(
@@ -26,6 +28,13 @@ class VideoDetector(VideoRecorder):
             print_to_console=True,
             console_buffer_size=2
         )
+        self.iot_manager = get_aws_iot_manager(self.config)
+
+    @staticmethod
+    def convert_det_tensor_to_dict(det_tensor: Dict[str, Tensor]) -> Dict[str, Tensor]:
+        """Converts our detection dict with tensor to a dict with list"""
+        print(det_tensor)
+        return {key: value.tolist() if isinstance(value, Tensor) else value for key, value in det_tensor.items()}
 
     def record_and_detect(self, video_length_mins: float, video_path: str) -> None:
         """
@@ -34,7 +43,7 @@ class VideoDetector(VideoRecorder):
         :param video_length_mins: The length of the video in minutes
         :param video_path: The path to save the video to (i.e. ./videos/) - does not include file name
         """
-        json_dict = {"data": []}
+        # json_dict = {"data": []}
         cap = self.get_capture()
 
         video_name = self.create_datetime_video_name()
@@ -45,9 +54,7 @@ class VideoDetector(VideoRecorder):
         frame_counter = 0
         timeout = self.get_timeout(video_length_mins)
 
-        # iot_manager = initialize_iot_manager()
-        # connect_future = iot_manager.connect()
-        # connect_future.result()
+        self.iot_manager.connect()
 
         try:
             if cap.isOpened():
@@ -87,7 +94,7 @@ class VideoDetector(VideoRecorder):
                         "time": time.time(),
                         "camera": self.jetson_name
                     })
-                    # iot_manager.publish(payload=message)
+                    self.iot_manager.publish(payload=aws_message)
 
                     self.logger.log(aws_message)
 
@@ -111,11 +118,7 @@ class VideoDetector(VideoRecorder):
 
         # TODO: this function has a silly default (cwd + /logs/jetson3 + date_time_file_name.json)
         # save_to_json_file(json_dict)  # Save json file at the end of the match.
-        # print("File saved")
-
-        # disconnect_future = iot_manager.disconnect()
-        # disconnect_future.result()
-        # print("Disconnected!")
+        self.iot_manager.disconnect()
 
     def record_and_detect_full_match_in_batches(self) -> None:
         """
