@@ -5,6 +5,9 @@ import time
 
 from typing import Dict, List
 
+from aws_iot.IOTContext import IOTContext, IOTCredentials
+from aws_iot.IOTClient import IOTClient
+from config import BohsConfig
 
 def get_ip_address() -> str:
     """Get the IP address of the device"""
@@ -30,3 +33,21 @@ def check_and_create_dir(dir_name: str) -> None:
         print(f"Created directory: {dir_name}")
     else:
         print(f"Directory {dir_name} already exists")
+
+
+def get_aws_iot_manager(config: BohsConfig) -> IOTClient:
+    """
+    This function is responsible for managing the connection to AWS IoT Core.
+    It instantiates the IOTClient and IOTCredentials classes.
+    Practically, we will be using most of the methods already contained in the IOTClient class.
+    """
+    iot_context = IOTContext()
+
+    iot_credentials = IOTCredentials(
+        cert_path=config.cert_path,
+        client_id=config.jetson_number,
+        endpoint=config.endpoint,
+        priv_key_path=config.private_key_path,
+        ca_path=config.root_ca_path
+    )
+    return IOTClient(iot_context, iot_credentials, publish_topic=config.publish_topic)
