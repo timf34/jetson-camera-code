@@ -18,6 +18,9 @@ class BohsConfig:
         self.second: int = 2
         self.microsecond: int = 1
 
+        self.camera_topic: str = "cameras/bohs"
+        self.device_topic: str = "devices/bohs"
+
         if self.jetson_name == "jetson1":
             self.path_to_weights: str = "./weights/model_12_06_2022_2349_final_with_augs.pth"
             self.cert_path: str = "./certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-certificate.pem.crt"  # Cert ending in .pem.crt
