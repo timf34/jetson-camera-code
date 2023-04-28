@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     iot_manager = IOTClient(iot_context, iot_credentials, publish_topic=CAMERA_TOPIC)
     connect_future = iot_manager.connect()
-    connect_future.result()
+    connect_future.result()  # Note: .result() needs to be called to ensure that the connection went through - it blocks to wait for the result!
 
     while True:
         message = json.dumps({
