@@ -20,10 +20,15 @@ class VideoRecorder:
         self.width: int = width
         self.height: int = height
         self.frame_size: Tuple[int, int] = (self.width, self.height)
-        self.log_dir: str = f"{os.getcwd()}/logs/laptop"
+        self.log_dir: str = f"{os.getcwd()}/logs/"
         check_and_create_dir(self.log_dir)
         self.today: datetime = datetime.now()
         self.jetson_name: str = self.conf.jetson_name[-1]  # The final character of the jetson name (i.e. jetson1 -> 1)
+
+    def get_log_file_path(self) -> str:
+        """Returns the path to the log file"""
+        check_and_create_dir(self.log_dir)
+        return f"{self.log_dir}/log_{self.today.strftime('%d_%m_%Y')}.log"
 
     def get_seconds_till_match(self) -> int:
         """Get the number of seconds till the match starts"""
@@ -150,7 +155,6 @@ class VideoRecorder:
         writer.release()
         cv2.destroyAllWindows()
         print("Video saved to", video_name)
-
 
     @staticmethod
     def wait_for_match_to_start(seconds_till_match: int) -> bool:
