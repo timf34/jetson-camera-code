@@ -22,13 +22,13 @@ class BohsConfig:
         self.device_topic: str = "devices/bohs"
 
         if self.jetson_name == "jetson1":
-            self.path_to_weights: str = "./weights/model_12_06_2022_2349_final_with_augs.pth"
+            self.path_to_weights: str = "data/weights/model_12_06_2022_2349_final_with_augs.pth"
             self.cert_path: str = "./certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-certificate.pem.crt"  # Cert ending in .pem.crt
             self.private_key_path: str = "./certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-private.pem.key"  # Private key ending in .pem.key
             self.root_ca_path: str = "./certificates/tims/camera_send_messages/root.pem"  # Root CA ending in .pem (usually: AmazonRootCA1.pem)
 
         elif self.jetson_name == "jetson2":
-            self.path_to_weights: str = './weights/model_06_03_2023__0757_35.pth'
+            self.path_to_weights: str = 'data/weights/model_06_03_2023__0757_35.pth'
             self.cert_path: str = "/home/tim/jetson-camera-code/certificates/tims/camera_send_messages/a14899325642fe1cad3a4454d45b988752ec93cdf6a5078a6864bec1f6af838f-certificate.pem.crt"
             self.private_key_path: str = "/home/tim/jetson-camera-code/certificates/tims/camera_send_messages/a14899325642fe1cad3a4454d45b988752ec93cdf6a5078a6864bec1f6af838f-private.pem.key"
             self.root_ca_path: str = "/home/tim/jetson-camera-code/certificates/tims/camera_send_messages/AmazonRootCA1.pem"
