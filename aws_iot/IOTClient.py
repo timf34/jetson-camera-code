@@ -41,11 +41,17 @@ class IOTClient:
 
     def connect(self) -> futures.Future:
         print(f"Connecting to endpoint '{self.credentials.endpoint}' with client ID '{self.credentials.client_id}'")
-        return self._mqtt_connection.connect()
+        connection_future = self._mqtt_connection.connect()
+        connection_future.result() # block and wait for the result of the future
+        print(f"Successfully connected to endpoint '{self.credentials.endpoint}'")
+        return connection_future
 
     def disconnect(self) -> futures.Future:
         print("Disconnecting")
-        return self._mqtt_connection.disconnect()
+        disconnection_future = self._mqtt_connection.disconnect()
+        disconnection_future.result()  # block and wait for the result of the future
+        print(f"Disconnected successfully from endpoint '{self.credentials.endpoint}'")
+        return disconnection_future
 
     def publish(self, topic: str = None, payload: str = None) -> futures.Future:
         if topic is None:
