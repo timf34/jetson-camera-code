@@ -10,7 +10,7 @@ from bohs_net_code.data import augs
 class BohsNetDetector:
     def __init__(self):
         self.model_name: str = 'fb1'
-        self.weights: str = './weights/model_12_06_2022_2349_final_with_augs.pth'
+        self.weights: str = './data/weights/model_12_06_2022_2349_final_with_augs.pth'
         self.state_dict = torch.load(self.weights)
         self.ball_threshold: float = 0.7
         self.device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
