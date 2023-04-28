@@ -3,11 +3,14 @@ import json
 import os
 import time
 
+from torch import Tensor
+
 
 from config import BohsConfig
 from record_video import VideoRecorder
-from utils.fps import FPS
 from utils.bohs_net_detector import BohsNetDetector
+from utils.fps import FPS
+from utils.logger import Logger
 from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_create_dir
 
 
@@ -15,7 +18,14 @@ from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_cre
 class VideoDetector(VideoRecorder):
     def __init__(self, debug: bool = False, width: int = 1280, height: int = 720):
         super().__init__(debug=debug, width=width, height=height)
-        self.bohs_net = BohsNetDetector()
+        self.bohs_net: BohsNetDetector = BohsNetDetector()
+        self.log_file_path: str = self.get_log_file_path()
+        self.logger: Logger = Logger(
+            log_file_path=self.log_file_path,
+            buffer_size=100,
+            print_to_console=True,
+            console_buffer_size=2
+        )
 
     def record_and_detect(self, video_length_mins: float, video_path: str) -> None:
         """
@@ -68,26 +78,27 @@ class VideoDetector(VideoRecorder):
 
                     # dets.update({"bohs_fps": deepcopy(bohs_fps.fps()), "writing_fps": deepcopy(writing_fps.fps()),
                     #              "reading_fps": deepcopy(reading_fps.fps())})
-                    # dets = {key: value.tolist() if isinstance(value, Tensor) else value for key, value in dets.items()}
+                    dets = {key: value.tolist() if isinstance(value, Tensor) else value for key, value in dets.items()}
                     # json_dict["data"].append(dets)  # We save this file at the end of the match.
                     #
                     # # Send the data to the cloud
-                    # message = json.dumps({
-                    #     "dets": dets,
-                    #     "time": time.time(),
-                    #     "camera": self.jetson_name
-                    # })
+                    aws_message = json.dumps({
+                        "dets": dets,
+                        "time": time.time(),
+                        "camera": self.jetson_name
+                    })
                     # iot_manager.publish(payload=message)
+
+                    self.logger.log(aws_message)
 
                     if time.time() > timeout:
                         print("25 minute timeout")
                         raise KeyboardInterrupt
 
-                    print("Reading FPS:", reading_fps.fps())
-                    print("Writing FPS:", writing_fps.fps())
-                    print("Bohs FPS:", bohs_fps.fps())
-                    print("Frame: ", frame_counter)
-
+                    self.logger.log(
+                        f"Reading FPS: {reading_fps.fps()} - Writing FPS: {writing_fps.fps()} - "
+                        f"Bohs FPS: {bohs_fps.fps()} - Frame: {frame_counter}"
+                    )
             else:
                 print("camera open failed")
         except KeyboardInterrupt:
