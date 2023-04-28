@@ -3,18 +3,12 @@ import json
 import os
 import time
 
-from copy import deepcopy
-from torch import Tensor as Tensor
-from typing import Tuple
 
 from config import BohsConfig
+from record_video import VideoRecorder
 from utils.fps import FPS
 from utils.bohs_net_detector import BohsNetDetector
 from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_create_dir
-
-from fov_net.camera_send_messages import initialize_iot_manager
-
-from record_video import VideoRecorder
 
 
 # Inherit from VideoRecorder
@@ -23,7 +17,7 @@ class VideoDetector(VideoRecorder):
         super().__init__(debug=debug, width=width, height=height)
         self.bohs_net = BohsNetDetector()
 
-    def record_and_detect_match_mode(self, video_length_mins: float, video_path: str) -> None:
+    def record_and_detect(self, video_length_mins: float, video_path: str) -> None:
         """
         Record and save a video for as long as set in the timeout; also perform ball detection
 
@@ -99,53 +93,37 @@ class VideoDetector(VideoRecorder):
         except KeyboardInterrupt:
             print("KeyboardInterrupt")
 
-        print("This code is reached")
         cap.release()
         writer.release()
         cv2.destroyAllWindows()
         print("Video saved to", video_name)
 
-        save_to_json_file(json_dict)  # Save json file at the end of the match.
-        print("File saved")
+        # TODO: this function has a silly default (cwd + /logs/jetson3 + date_time_file_name.json)
+        # save_to_json_file(json_dict)  # Save json file at the end of the match.
+        # print("File saved")
 
         # disconnect_future = iot_manager.disconnect()
         # disconnect_future.result()
         # print("Disconnected!")
 
-
-    def main(self):
-        # Set our file directory
-        if self.debug is False:
-            path = "../tim/bohsVids/" + self.today.strftime('%m_%d_%Y_tim@192.168.73.207')
-        else:
-            path = "../tim/bohsVids/test"
-
+    def record_and_detect_full_match_in_batches(self) -> None:
+        """
+        Records videos + does ball detection for the full match in batches of 22.5-minutes + one 10-minute batch
+        for halftime
+        """
+        path = self.get_video_path()
         check_and_create_dir(path)
 
-        # TODO: we need to add this to our file directory above!
-        main_ip_address = get_ip_address()
-        print(f"main ip address: {main_ip_address}")
+        seconds_till_match = self.get_seconds_till_match()
+        self.wait_for_match_to_start(seconds_till_match)
 
-        seconds_till_match = self.get_seconds_till_match() if self.debug is False else 1
-        print("the match begins in ", seconds_till_match, " seconds")
-
-        _timeout = time.time() + seconds_till_match
-
-        # Going to try to use a while loop instead of a timer
-        while time.time() < _timeout:
-            print("waiting for match to start")
-            time.sleep(1)
-
-        print("Match has started")
-        self.record_and_detect_match_mode()
-        print("Match section has ended")
-
-        # Repeat the same process for the second half of the match
-        time.sleep(5)
-        self.record_and_detect_match_mode()
+        for i in range(5):
+            if (i == 2) or (i > 5):
+                self.record_and_detect(video_length_mins=10, video_path=path)
+            else:
+                self.record_and_detect(video_length_mins=22.5, video_path=path)
 
 
 if __name__ == '__main__':
     video_detector = VideoDetector(debug=True)
-    video_detector.main()
-
+    video_detector.record_and_detect_full_match_in_batches()
