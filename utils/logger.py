@@ -38,7 +38,7 @@ class Logger:
         self.console_buffer_size: int = console_buffer_size
 
     def log(self, message: str) -> None:
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
         log_message = f"{timestamp}: {message}\n"
 
         self.buffer.append(log_message)
