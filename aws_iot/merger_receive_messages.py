@@ -5,9 +5,10 @@ from time import time, sleep
 
 from typing import Union, Dict
 
-from config import *
+from aws_iot.iot_config import *
 from IOTClient import IOTClient
 from IOTContext import IOTContext, IOTCredentials
+# from ..utils.logger import Logger
 
 NUM_MESSAGES = 1000
 
@@ -52,18 +53,16 @@ def update_detections_dict(detection: Dict[str, Dict[str, Union[str, float]]]) -
     # Update the detection
     detections[camera_id]["message"] = detection["message"]
     detections[camera_id]["timestamp"] = detection["timestamp"]
-
     current_elapsed_time = time() - start_time
-
     detections["currentTime"] = current_elapsed_time
 
     for key in ["0", "1"]:
         if abs(detections[key]["timestamp"] - current_elapsed_time) > 0.5:
             detections[key]["message"] = ""
             detections[key]["timestamp"] = 0
-            print(f"Stale detection from camera {key} at {current_elapsed_time}")
+            # TODO: not sure what this was
+            # print(f"Stale detection from camera {key} at {current_elapsed_time}")
 
-    print(f"Updated detections dict at {current_elapsed_time} seconds")
     # TODO: integrate triangulation code here.
 
 
@@ -84,7 +83,6 @@ if __name__ == "__main__":
     # IOT Manager receive.
     iot_manager = IOTClient(iot_context, iot_credentials, subscribe_topic=CAMERA_TOPIC, publish_topic=DEVICE_TOPIC)
     connect_future = iot_manager.connect()
-    connect_future.result()
     print("IOT receive manager connected!")
 
     subscribe_future = iot_manager.subscribe(topic=iot_manager.subscribe_topic, handler=on_message_received)
@@ -96,8 +94,6 @@ if __name__ == "__main__":
 
     temp_received_count = 0
     while True:
-        print("received_message: ", received_message)
-
         # If received message is of type bytes, decode it.
         if isinstance(received_message, bytes):
             if received_message != '':  # Check if empty... the first one probs will be. Note: '' works, "" doesn't.
@@ -107,8 +103,8 @@ if __name__ == "__main__":
             continue
 
         received_message_json = json.loads(received_message)
-        received_message_json["message"] = f"{received_count}"
-        received_message_json["timestamp"] = elapsed_time
+        received_message_json["timestamp"] = elapsed_time  # This might be better off with time.time(), or whatever would match the message sent!
+        print("received_message_json post whatever: ", received_message_json, "\n")
 
         # Update the detections dict
         update_detections_dict(received_message_json)
