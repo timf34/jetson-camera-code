@@ -23,8 +23,15 @@ class BohsConfig:
         self.subscribe_topic: str = "devices/bohs"
 
         # TODO: I need to verify these endpoints!
-        if self.jetson_name == "jetson1":
+        if os.name == 'nt':
             # TODO: note these weights aren't being used rn
+            self.path_to_weights: str = "data/weights/model_12_06_2022_2349_final_with_augs.pth"
+            self.cert_path: str = "./aws_iot/certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-certificate.pem.crt"  # Cert ending in .pem.crt
+            self.private_key_path: str = "./aws_iot/certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-private.pem.key"  # Private key ending in .pem.key
+            self.root_ca_path: str = "./aws_iot/certificates/tims/camera_send_messages/root.pem"  # Root CA ending in .pem (usually: AmazonRootCA1.pem)
+            self.endpoint: str = "a13d7wu4wem7v1-ats.iot.eu-west-1.amazonaws.com"
+        if self.jetson_name == "jetson1":
+            # TODO: note these are values for my laptop, not the jetson!
             self.path_to_weights: str = "data/weights/model_12_06_2022_2349_final_with_augs.pth"
             self.cert_path: str = "./aws_iot/certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-certificate.pem.crt"  # Cert ending in .pem.crt
             self.private_key_path: str = "./aws_iot/certificates/tims/camera_send_messages/3da7dc68bfa5d09b723ebb9068a96d54550c1555969088ec7398103e772196d2-private.pem.key"  # Private key ending in .pem.key
