@@ -6,8 +6,8 @@ from time import time, sleep
 
 # from config import *
 CAMERA_TOPIC: str = "cameras/bohs"
-from aws_iot.IOTClient import IOTClient
-from aws_iot.IOTContext import IOTContext, IOTCredentials
+from IOTClient import IOTClient
+from IOTContext import IOTContext, IOTCredentials
 
 
 received_count: int = 0
