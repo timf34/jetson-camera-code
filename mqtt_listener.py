@@ -11,10 +11,6 @@ from aws_iot.IOTContext import IOTContext, IOTCredentials
 from utils.logger import Logger
 from utils.utility_funcs import get_log_file_path
 
-NUM_MESSAGES = 10
-
-received_count = 0
-elapsed_time = 0
 received_all_event = threading.Event()
 
 # Start a timer at 0 seconds
@@ -26,6 +22,10 @@ class MQTTListener:
         self.iot_manager = iot_manager
         self.logger = logger
         self.received_message: str = ""
+        self.received_count: int = 0
+        self.elapsed_time = 0
+        
+        # TODO: add a comment explaining or get rid of this. 
         self.detections: Dict = {
             "0": {"message": "", "timestamp": 0},
             "1": {"message": "", "timestamp": 0},
@@ -35,19 +35,14 @@ class MQTTListener:
     def on_message_received(self, topic, payload, dup, qos, retain, **kwargs) -> None:
         print(f"Received message from topic '{topic}' at {time()}: {payload}")
 
-        global received_count
-        global elapsed_time
 
-        received_count += 1
+        self.received_count += 1
         self.received_message = payload
         self.logger.log(f"Received Message : {self.received_message}")
 
         end_time = time()
-        elapsed_time = end_time - start_time
-        print(f"Received {received_count} messages in {elapsed_time} seconds")
-
-        if received_count == NUM_MESSAGES:
-            received_all_event.set()
+        self.elapsed_time = end_time - start_time
+        print(f"Received {self.received_count} messages in {self.elapsed_time} seconds")
 
     def update_detections_dict(self, detection: Dict[str, Dict[str, Union[str, float]]]) -> None:
 
@@ -85,24 +80,24 @@ class MQTTListener:
                 continue
 
             received_message_json = json.loads(self.received_message)
-            received_message_json["timestamp"] = elapsed_time
+            received_message_json["timestamp"] = self.elapsed_time
 
             self.update_detections_dict(received_message_json)
 
             self.logger.log(f"Publishing message: {self.detections}")
-            iot_manager.publish(
-                topic=iot_manager.publish_topic,
+            self.iot_manager.publish(
+                topic=self.iot_manager.publish_topic,
                 payload=json.dumps(self.detections)
             )  # Note: detections will be the triangulated coords
-            temp_received_count = received_count
+            temp_received_count = self.received_count
 
             # Wait until a new message is received.
-            while temp_received_count == received_count:
+            while temp_received_count == self.received_count:
                 sleep(0.01)
 
         received_all_event.wait()  # https://docs.python.org/3/library/threading.html#threading.Event.wait used with .set()
 
-        iot_manager.disconnect()
+        self.iot_manager.disconnect()
 
 
 if __name__ == "__main__":
@@ -120,8 +115,8 @@ if __name__ == "__main__":
         ca_path=os.path.join(cwd, "aws_iot/certificates/tims/merger_receive_messages/AmazonRootCA1.pem")
     )
     # IOT Manager receive.
-    iot_manager = IOTClient(iot_context, iot_credentials, subscribe_topic=CAMERA_TOPIC, publish_topic=DEVICE_TOPIC)
+    iot_client = IOTClient(iot_context, iot_credentials, subscribe_topic=CAMERA_TOPIC, publish_topic=DEVICE_TOPIC)
     log_file_path = get_log_file_path(jetson_name="mqtt_listener")
-    mqtt_listener = MQTTListener(iot_manager=iot_manager, logger=Logger(log_file_path=log_file_path, buffer_size=10))
+    mqtt_listener = MQTTListener(iot_manager=iot_client, logger=Logger(log_file_path=log_file_path, buffer_size=10))
 
     mqtt_listener.run()
