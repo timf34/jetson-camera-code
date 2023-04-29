@@ -40,6 +40,7 @@ class MQTTListener:
 
         received_count += 1
         self.received_message = payload
+        self.logger.log(f"Received Message : {self.received_message}")
 
         end_time = time()
         elapsed_time = end_time - start_time
@@ -61,14 +62,9 @@ class MQTTListener:
         self.detections["currentTime"] = current_elapsed_time
 
         for key in ["0", "1"]:
-            # TODO: Here was the bug! The timestamp was removed from the code in here! Fix this up once I get back
             if abs(self.detections[key]["timestamp"] - current_elapsed_time) > 0.5:
                 self.detections[key]["message"] = ""
                 # print(f"Stale detection from camera {key} at {current_elapsed_time}")
-
-        print(self.detections)
-
-        # TODO: integrate triangulation code here.
 
     def run(self) -> None:
         # Connect iot_manager
@@ -90,11 +86,10 @@ class MQTTListener:
 
             received_message_json = json.loads(self.received_message)
             received_message_json["timestamp"] = elapsed_time
-            print("received_message_json:", received_message_json, "\n")
 
-            # Update the detections dict
             self.update_detections_dict(received_message_json)
 
+            self.logger.log(f"Publishing message: {self.detections}")
             iot_manager.publish(
                 topic=iot_manager.publish_topic,
                 payload=json.dumps(self.detections)
@@ -127,6 +122,6 @@ if __name__ == "__main__":
     # IOT Manager receive.
     iot_manager = IOTClient(iot_context, iot_credentials, subscribe_topic=CAMERA_TOPIC, publish_topic=DEVICE_TOPIC)
     log_file_path = get_log_file_path(jetson_name="mqtt_listener")
-    mqtt_listener = MQTTListener(iot_manager=iot_manager, logger=Logger(log_file_path=log_file_path))
+    mqtt_listener = MQTTListener(iot_manager=iot_manager, logger=Logger(log_file_path=log_file_path, buffer_size=10))
 
     mqtt_listener.run()
