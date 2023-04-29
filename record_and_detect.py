@@ -6,7 +6,6 @@ import time
 from torch import Tensor
 from typing import Dict
 
-
 from config import BohsConfig
 from record_video import VideoRecorder
 from utils.bohs_net_detector import BohsNetDetector
@@ -110,11 +109,10 @@ class VideoDetector(VideoRecorder):
                 print("camera open failed")
         except KeyboardInterrupt:
             print("KeyboardInterrupt")
-
-        cap.release()
-        writer.release()
-        cv2.destroyAllWindows()
-        print("Video saved to", video_name)
+        finally:
+            cap.release()
+            writer.release()
+            print("Video saved to", video_name)
 
         # TODO: this function has a silly default (cwd + /logs/jetson3 + date_time_file_name.json)
         # save_to_json_file(json_dict)  # Save json file at the end of the match.
