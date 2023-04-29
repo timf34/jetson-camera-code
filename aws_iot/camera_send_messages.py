@@ -92,6 +92,7 @@ if __name__ == "__main__":
         message = json.dumps({
         "camera": args.camera_id,
         "message": f"Test Message {str(count + 1)}",
+        "time": time(),
         })
 
         print(f"Sending message at {time()}")
