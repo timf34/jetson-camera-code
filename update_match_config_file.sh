@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This file will git pull just the config.py and stream_port1234.sh file within jetson-camera-code folder.
+# This file will git pull just the iot_config.py and stream_port1234.sh file within jetson-camera-code folder.
 # It will update these files once the jetson connects to the internet
 # Here is the main resources:
 # 1) https://askubuntu.com/questions/258580/how-to-run-a-script-depending-on-internet-connection
