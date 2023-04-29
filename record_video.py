@@ -9,7 +9,7 @@ from typing import Tuple
 from config import BohsConfig
 from utils.fps import FPS
 from utils.logger import Logger
-from utils.utility_funcs import get_ip_address, check_and_create_dir
+from utils.utility_funcs import get_ip_address, check_and_create_dir, get_log_file_path
 
 from config import *
 
@@ -23,7 +23,7 @@ class VideoRecorder:
         self.frame_size: Tuple[int, int] = (self.width, self.height)
         self.today: datetime = datetime.now()
         self.jetson_name: str = self.conf.jetson_name[-1]  # The final character of the jetson name (i.e. jetson1 -> 1)
-        self.log_file_path: str = self.get_log_file_path()
+        self.log_file_path: str = get_log_file_path(jetson_name=self.conf.jetson_name)
         self.logger: Logger = Logger(
             log_file_path=self.log_file_path,
             buffer_size=100,

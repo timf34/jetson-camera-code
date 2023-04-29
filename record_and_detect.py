@@ -12,7 +12,7 @@ from record_video import VideoRecorder
 from utils.bohs_net_detector import BohsNetDetector
 from utils.fps import FPS
 from utils.logger import Logger
-from utils.utility_funcs import get_ip_address, save_to_json_file, check_and_create_dir, get_aws_iot_manager
+from utils.utility_funcs import get_log_file_path, check_and_create_dir, get_aws_iot_manager
 
 
 # TODO: I might want to extend the iot_manager class to set a longer timeout/ keepalive value
@@ -21,7 +21,7 @@ class VideoDetector(VideoRecorder):
         super().__init__(debug=debug, width=width, height=height)
         self.config: BohsConfig = BohsConfig()
         self.bohs_net: BohsNetDetector = BohsNetDetector()
-        self.log_file_path: str = self.get_log_file_path()
+        self.log_file_path: str = get_log_file_path(jetson_name=self.config.jetson_name)
         self.logger: Logger = Logger(
             log_file_path=self.log_file_path,
             buffer_size=100,

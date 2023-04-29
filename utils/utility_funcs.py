@@ -3,11 +3,29 @@ import os
 import socket
 import time
 
+from datetime import datetime
 from typing import Dict, List
 
 from aws_iot.IOTContext import IOTContext, IOTCredentials
 from aws_iot.IOTClient import IOTClient
 from config import BohsConfig
+
+
+def get_log_file_path(jetson_name: str) -> str:
+    """
+    Returns the path to the log file
+
+    Args:
+        jetson_name (str): The name of the jetson device
+    """
+    today = datetime.now()
+    if os.name == 'nt':
+        log_dir = f"{os.getcwd()}/logs/laptop"
+    else:
+        log_dir = f"{os.getcwd()}/logs/{jetson_name}"
+    check_and_create_dir(log_dir)
+    return f"{log_dir}/{today.strftime('%d_%m_%Y')}.log"
+
 
 def get_ip_address() -> str:
     """Get the IP address of the device"""
