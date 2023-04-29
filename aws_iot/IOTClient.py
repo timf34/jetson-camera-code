@@ -1,7 +1,7 @@
 from awscrt import mqtt
 from awsiot import mqtt_connection_builder
 from concurrent import futures
-from .IOTContext import IOTContext, IOTCredentials
+from IOTContext import IOTContext, IOTCredentials
 from typing import Optional
 
 
@@ -79,6 +79,12 @@ class IOTClient:
             qos=mqtt.QoS.AT_MOST_ONCE,
             callback=handler,
         )
+
+        subscribe_result = subscribe_future.result() # block and wait for the result of the future
+        print(
+            f"Successfully subscribed to topic '{topic}' with "
+            f"packet id '{packet_id}' and qos `{str(subscribe_result['qos'])}`"
+          )
 
         return subscribe_future
 
