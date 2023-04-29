@@ -30,6 +30,7 @@ class Logger:
             console_buffer_size: int = 10
     ):
         self.log_file_path: str = log_file_path
+        print(f"Log file path: {self.log_file_path}")
         self.log_file = None
         self.buffer: List[str] = []
         self.buffer_size: int = buffer_size
