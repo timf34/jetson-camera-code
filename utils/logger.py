@@ -38,6 +38,13 @@ class Logger:
         self.console_buffer: List[str] = []
         self.console_buffer_size: int = console_buffer_size
 
+        self.create_log_file()
+
+    def create_log_file(self) -> None:
+        os.makedirs(os.path.dirname(self.log_file_path), exist_ok=True)
+        with open(self.log_file_path, "a") as log_file:
+            log_file.write(f"Created log file at {self.log_file_path}\n")
+
     def log(self, message: str) -> None:
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
         log_message = f"{timestamp}: {message}\n"
@@ -53,20 +60,10 @@ class Logger:
                 self.flush_console_buffer()
 
     def flush_buffer(self) -> None:
-        if not self.log_file:
-            # If the log file isn't open, try to open it
-            try:
-                self.log_file = open(self.log_file_path, "a")
-            except FileNotFoundError:
-                # If the file doesn't exist, create it and try again
-                os.makedirs(os.path.dirname(self.log_file_path), exist_ok=True)
-                self.log_file = open(self.log_file_path, "a")
-
-        # If the file is open, write the buffered log messages to it
-        if self.log_file:
-            self.log_file.writelines(self.buffer)
-            self.log_file.flush()
-            self.buffer.clear()
+        with open(self.log_file_path, "a") as log_file:
+            log_file.writelines(self.buffer)
+            log_file.flush()
+        self.buffer.clear()
 
     def flush_console_buffer(self):
         console_message = "".join(self.console_buffer)
