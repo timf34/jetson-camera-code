@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import threading
 from time import time, sleep
 
@@ -10,6 +11,8 @@ from aws_iot.IOTClient import IOTClient
 from aws_iot.IOTContext import IOTContext, IOTCredentials
 from camera_utils.logger import Logger
 from camera_utils.utility_funcs import get_log_file_path
+sys.path.append("../TriangulationAndErrorHandling")
+from triangulation_logic import create_tracker_instance, MultiCameraTracker, Detections, ThreeDPoints
 
 received_all_event = threading.Event()
 
@@ -18,12 +21,18 @@ start_time = time()
 
 
 class MQTTListener:
-    def __init__(self, iot_manager: IOTClient, logger: Logger):
+    def __init__(
+            self,
+            iot_manager: IOTClient,
+            logger: Logger,
+            tracker: MultiCameraTracker = None,
+    ):
         self.iot_manager = iot_manager
         self.logger = logger
         self.received_message: str = ""
         self.received_count: int = 0
         self.elapsed_time = 0
+        self.tracker: MultiCameraTracker = tracker
         
         # TODO: add a comment explaining or get rid of this. 
         self.detections: Dict = {
@@ -47,13 +56,10 @@ class MQTTListener:
     def update_detections_dict(self, detection: Dict[str, Dict[str, Union[str, float]]]) -> None:
 
         camera_id = detection["camera"]
-
         # Update the detection
         self.detections[camera_id]["message"] = detection["message"]
         self.detections[camera_id]["timestamp"] = detection["timestamp"]
-
         current_elapsed_time = time() - start_time
-
         self.detections["currentTime"] = current_elapsed_time
 
         for key in ["0", "1"]:
@@ -61,43 +67,53 @@ class MQTTListener:
                 self.detections[key]["message"] = ""
                 # print(f"Stale detection from camera {key} at {current_elapsed_time}")
 
-    def run(self) -> None:
-        # Connect iot_manager
+    def prepare_to_receive(self) -> None:
         self.iot_manager.connect()
-        # Subscribe to the topic
         self.iot_manager.subscribe(topic=CAMERA_TOPIC, handler=self.on_message_received)
-
         if not received_all_event.is_set():
             print("Waiting to receive message.")
 
+    def decode_received_message(self) -> None:
+        # If received message is of type bytes, decode it.
+        if isinstance(self.received_message, bytes):
+            if self.received_message != '':  # Check if empty... the first one probs will be. Note: '' works, "" doesn't.
+                self.received_message = self.received_message.decode("utf-8")
+
+    def process_received_message(self) -> None:
+        received_message_json = json.loads(self.received_message)
+        received_message_json["timestamp"] = self.elapsed_time
+        self.update_detections_dict(received_message_json)
+
+        # TODO: Here I would convert the received_message to a Detections object and pass it to the tracker.
+
+        self.logger.log(f"Publishing message: {self.detections}")
+        self.iot_manager.publish(
+            topic=self.iot_manager.publish_topic,
+            payload=json.dumps(self.detections)
+        )
+
+    def wait_for_new_message(self) -> None:
+        temp_received_count = self.received_count
+        while temp_received_count == self.received_count:
+            sleep(0.01)
+
+    def cleanup(self) -> None:
+        received_all_event.wait()
+        self.iot_manager.disconnect()
+
+    def main_loop(self) -> None:
         while True:
-            # If received message is of type bytes, decode it.
-            if isinstance(self.received_message, bytes):
-                if self.received_message != '':  # Check if empty... the first one probs will be. Note: '' works, "" doesn't.
-                    self.received_message = self.received_message.decode("utf-8")
-            elif len(self.received_message) == 0:
+            self.decode_received_message()
+            if len(self.received_message) == 0:
                 print("received_message is empty. Continuing...")
                 continue
+            self.process_received_message()
+            self.wait_for_new_message()
 
-            received_message_json = json.loads(self.received_message)
-            received_message_json["timestamp"] = self.elapsed_time
-
-            self.update_detections_dict(received_message_json)
-
-            self.logger.log(f"Publishing message: {self.detections}")
-            self.iot_manager.publish(
-                topic=self.iot_manager.publish_topic,
-                payload=json.dumps(self.detections)
-            )  # Note: detections will be the triangulated coords
-            temp_received_count = self.received_count
-
-            # Wait until a new message is received.
-            while temp_received_count == self.received_count:
-                sleep(0.01)
-
-        received_all_event.wait()  # https://docs.python.org/3/library/threading.html#threading.Event.wait used with .set()
-
-        self.iot_manager.disconnect()
+    def run(self) -> None:
+        self.prepare_to_receive()
+        self.main_loop()
+        self.cleanup()
 
 
 if __name__ == "__main__":
