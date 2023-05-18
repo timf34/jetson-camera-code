@@ -162,4 +162,7 @@ if __name__ == "__main__":
     log_file_path = get_log_file_path(jetson_name="mqtt_listener")
     mqtt_listener = MQTTListener(iot_manager=iot_client, logger=Logger(log_file_path=log_file_path, buffer_size=10))
 
-    mqtt_listener.run()
+    try:
+        mqtt_listener.run()
+    except Exception as e:
+        mqtt_listener.logger.log(f"Fatal error: {e}")
