@@ -8,10 +8,10 @@ from typing import Dict
 
 from config import BohsConfig
 from record_video import VideoRecorder
-from utils.bohs_net_detector import BohsNetDetector
-from utils.fps import FPS
-from utils.logger import Logger
-from utils.utility_funcs import get_log_file_path, check_and_create_dir, get_aws_iot_manager
+from camera_utils.bohs_net_detector import BohsNetDetector
+from camera_utils.fps import FPS
+from camera_utils.logger import Logger
+from camera_utils.utility_funcs import get_log_file_path, check_and_create_dir, get_aws_iot_manager
 
 
 # TODO: I might want to extend the iot_manager class to set a longer timeout/ keepalive value

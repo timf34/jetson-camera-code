@@ -8,7 +8,7 @@ from typing import Union, Dict
 from aws_iot.iot_config import *
 from IOTClient import IOTClient
 from IOTContext import IOTContext, IOTCredentials
-# from ..utils.logger import Logger
+# from ..camera_utils.logger import Logger
 
 NUM_MESSAGES = 1000
 

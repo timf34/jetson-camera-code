@@ -11,9 +11,9 @@ from torch import Tensor as Tensor
 
 from copy import deepcopy
 
-from utils.fps import FPS
-from utils.bohs_net_detector import BohsNetDetector
-from utils.utility_funcs import save_to_json_file
+from camera_utils.fps import FPS
+from camera_utils.bohs_net_detector import BohsNetDetector
+from camera_utils.utility_funcs import save_to_json_file
 
 print(cv2.__version__)
 

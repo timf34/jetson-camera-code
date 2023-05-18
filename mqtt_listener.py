@@ -8,8 +8,8 @@ from typing import Union, Dict
 from aws_iot.iot_config import *
 from aws_iot.IOTClient import IOTClient
 from aws_iot.IOTContext import IOTContext, IOTCredentials
-from utils.logger import Logger
-from utils.utility_funcs import get_log_file_path
+from camera_utils.logger import Logger
+from camera_utils.utility_funcs import get_log_file_path
 
 received_all_event = threading.Event()
 

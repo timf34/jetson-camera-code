@@ -15,9 +15,9 @@ import json
 # since it is subscribed to that same topic.
 
 # Parse arguments
-from utils import command_line_utils
+from camera_utils import command_line_utils
 
-# This is essentially just argeparse, but have a utils file which stores a number of useful commands to add
+# This is essentially just argeparse, but have a camera_utils file which stores a number of useful commands to add
 cmdUtils = command_line_utils.CommandLineUtils("PubSub - Send and recieve messages through an MQTT connection.")
 cmdUtils.add_common_mqtt_commands()
 cmdUtils.add_common_topic_message_commands()
@@ -30,7 +30,7 @@ cmdUtils.register_command("client_id", "tim_testing_mqtt_pub_sub", "Client ID to
 cmdUtils.register_command("count", "10", "The number of messages to send (optional, default='10').", default=100, type=int)
 cmdUtils.register_command("is_ci", "<str>", "If present the sample will run in CI mode (optional, default='None')")
 cmdUtils.register_command("endpoint", "<str", "meh", default="a13d7wu4wem7v1-ats.iot.eu-west-1.amazonaws.com")
-# Needs to be called so the command utils parse the commands
+# Needs to be called so the command camera_utils parse the commands
 cmdUtils.get_args()
 
 # Start a timer at 0 seconds

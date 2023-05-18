@@ -62,7 +62,7 @@ class SingleMessageBenchmark:
             context=IOTContext(),
             credentials=IOTCredentials(
                 cert_path=r"C:\Users\timf3\OneDrive - Trinity College Dublin\Documents\fov\SebsFovWork\fov\fov-net\certificates\tims\jetson0\a14899325642fe1cad3a4454d45b988752ec93cdf6a5078a6864bec1f6af838f-certificate.pem.crt",
-                client_id="jetson0",
+                client_id="jetson2",
                 endpoint="a13d7wu4wem7v1-ats.iot.eu-west-1.amazonaws.com",
                 region="eu-west-1",
                 priv_key_path=r"C:\Users\timf3\OneDrive - Trinity College Dublin\Documents\fov\SebsFovWork\fov\fov-net\certificates\tims\jetson0\a14899325642fe1cad3a4454d45b988752ec93cdf6a5078a6864bec1f6af838f-private.pem.key",
