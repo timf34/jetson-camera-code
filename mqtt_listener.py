@@ -68,29 +68,41 @@ class MQTTListener:
                 # print(f"Stale detection from camera {key} at {current_elapsed_time}")
 
     def prepare_to_receive(self) -> None:
-        self.iot_manager.connect()
-        self.iot_manager.subscribe(topic=CAMERA_TOPIC, handler=self.on_message_received)
-        if not received_all_event.is_set():
-            print("Waiting to receive message.")
+        try:
+            self.iot_manager.connect()
+            self.iot_manager.subscribe(topic=CAMERA_TOPIC, handler=self.on_message_received)
+            if not received_all_event.is_set():
+                self.logger.log("Waiting to receive message.")
+        except Exception as e:
+            self.logger.log(f"Error preparing to receive: {e}")
+            raise
 
     def decode_received_message(self) -> None:
-        # If received message is of type bytes, decode it.
-        if isinstance(self.received_message, bytes):
-            if self.received_message != '':  # Check if empty... the first one probs will be. Note: '' works, "" doesn't.
-                self.received_message = self.received_message.decode("utf-8")
+        try:
+            # If received message is of type bytes, decode it.
+            if isinstance(self.received_message, bytes):
+                if self.received_message != '':
+                    self.received_message = self.received_message.decode("utf-8")
+        except Exception as e:
+            self.logger.log(f"Error decoding message: {e}")
+            raise
 
     def process_received_message(self) -> None:
-        received_message_json = json.loads(self.received_message)
-        received_message_json["timestamp"] = self.elapsed_time
-        self.update_detections_dict(received_message_json)
+        try:
+            received_message_json = json.loads(self.received_message)
+            received_message_json["timestamp"] = self.elapsed_time
+            self.update_detections_dict(received_message_json)
 
-        # TODO: Here I would convert the received_message to a Detections object and pass it to the tracker.
+            # TODO: Here I would convert the received_message to a Detections object and pass it to the tracker.
 
-        self.logger.log(f"Publishing message: {self.detections}")
-        self.iot_manager.publish(
-            topic=self.iot_manager.publish_topic,
-            payload=json.dumps(self.detections)
-        )
+            self.logger.log(f"Publishing message: {self.detections}")
+            self.iot_manager.publish(
+                topic=self.iot_manager.publish_topic,
+                payload=json.dumps(self.detections)
+            )
+        except Exception as e:
+            self.logger.log(f"Error processing message: {e}")
+            raise
 
     def wait_for_new_message(self) -> None:
         temp_received_count = self.received_count
@@ -98,22 +110,37 @@ class MQTTListener:
             sleep(0.01)
 
     def cleanup(self) -> None:
-        received_all_event.wait()
-        self.iot_manager.disconnect()
+        try:
+            received_all_event.wait()
+            self.iot_manager.disconnect()
+        except Exception as e:
+            self.logger.log(f"Error during cleanup: {e}")
+            raise
 
     def main_loop(self) -> None:
         while True:
-            self.decode_received_message()
-            if len(self.received_message) == 0:
-                print("received_message is empty. Continuing...")
-                continue
-            self.process_received_message()
-            self.wait_for_new_message()
+            try:
+                self.decode_received_message()
+                if len(self.received_message) == 0:
+                    print("received_message is empty. Continuing...")
+                    continue
+                self.process_received_message()
+                self.wait_for_new_message()
+            except KeyboardInterrupt:
+                print("KeyboardInterrupt received. Exiting...")
+                break
+            except Exception as e:
+                self.logger.log(f"Error in main loop: {e}")
+                break
 
     def run(self) -> None:
-        self.prepare_to_receive()
-        self.main_loop()
-        self.cleanup()
+        try:
+            self.prepare_to_receive()
+            self.main_loop()
+        except Exception as e:
+            self.logger.log(f"Error during run: {e}")
+        finally:
+            self.cleanup()
 
 
 if __name__ == "__main__":
