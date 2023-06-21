@@ -11,11 +11,9 @@ from camera_utils.fps import FPS
 from camera_utils.logger import Logger
 from camera_utils.utility_funcs import get_ip_address, check_and_create_dir, get_log_file_path
 
-from config import *
-
 
 class VideoRecorder:
-    def __init__(self, debug: bool = False, width: int = 1280, height: int = 720):
+    def __init__(self, debug: bool = False, width: int = 1920, height: int = 1080):
         self.debug: bool = debug
         self.conf: BohsConfig = BohsConfig()
         self.width: int = width
@@ -27,54 +25,48 @@ class VideoRecorder:
         self.logger: Logger = Logger(
             log_file_path=self.log_file_path,
             buffer_size=100,
-            print_to_console=True,
+            print_to_console=False,
             console_buffer_size=2
         )
+        print(f"Recording resolution: \nWidth: {self.width}\nHeight: {self.height}")
 
-    def get_log_file_path(self) -> str:
+
+    def get_log_file_path(self):
         """Returns the path to the log file"""
-        if os.name == 'nt':
-            log_dir = f"{os.getcwd()}/logs/laptop"
-        else:
-            log_dir = f"{os.getcwd()}/logs/{self.jetson_name}"
+        log_dir = os.path.join(os.getcwd(), 'logs', 'laptop' if os.name == 'nt' else self.jetson_name)
         check_and_create_dir(log_dir)
-        return f"{log_dir}/{self.today.strftime('%d_%m_%Y')}.log"
+        return os.path.join(log_dir, f'{self.today.strftime("%d_%m_%Y")}.log')
 
-    def get_seconds_till_match(self) -> int:
+    def get_seconds_till_match(self):
         """Get the number of seconds till the match starts"""
-
-        if self.debug:
-            print("Debug mode is on: seconds till match is 1")
-            return 1
         current_time = datetime.now()
-        time_of_match = current_time.replace(day=current_time.day,
-                                             hour=self.conf.hour,
-                                             minute=self.conf.minute,
-                                             second=self.conf.second,
-                                             microsecond=self.conf.microsecond)
-        delta_t = time_of_match - current_time
-        seconds_till_match = delta_t.seconds + 1
-        print(f"get_seconds_till_match()\nCurrent time is {current_time}\nTime of the match is {time_of_match}\nSeconds"
-              f" till match: {seconds_till_match}")
+        match_time = current_time.replace(hour=self.conf.hour, minute=self.conf.minute, second=self.conf.second, microsecond=self.conf.microsecond)
+        seconds_till_match = (match_time - current_time).seconds + 1
+        if self.debug:
+            seconds_till_match = 1
+            print("Debug mode is on: seconds till match is 1")
+        print(f"get_seconds_till_match()\nCurrent time is {current_time}\nTime of the match is {match_time}\nSeconds till match: {seconds_till_match}")
         return seconds_till_match
 
-    def get_capture(self) -> cv2.VideoCapture:
+    def get_capture(self):
         """Check if the OS is using Windows or Linux and return the correct capture object"""
-        return (
-            cv2.VideoCapture(0)
-            if os.name == 'nt'
-            else cv2.VideoCapture(
-                f'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
-                f'nvvidconv ! video/x-raw, width={str(self.width)}, height={str(self.height)}, format=BGRx ! '
-                f'videoconvert ! video/x-raw, format=BGR ! appsink'
-            )
+        if os.name == 'nt':
+            return cv2.VideoCapture(0)
+        return cv2.VideoCapture(
+            f'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=60/1 ! '
+            f'nvvidconv ! video/x-raw, width={self.width}, height={self.height}, format=BGRx ! '
+            f'videoconvert ! video/x-raw, format=BGR ! appsink'
         )
+
 
     def create_video_writer(self, video_name: str) -> cv2.VideoWriter:
         """Create a video writer object"""
-        return cv2.VideoWriter(video_name,
-                               cv2.VideoWriter_fourcc(*'MJPG'),
-                               5, self.frame_size)
+        return cv2.VideoWriter(
+            filename=video_name,
+            fourcc=cv2.VideoWriter_fourcc(*'MJPG'),
+            fps=5, 
+            frameSize=self.frame_size
+        )
 
     @staticmethod
     def create_datetime_video_name() -> str:
@@ -84,33 +76,23 @@ class VideoRecorder:
 
     @staticmethod
     def initialize_fps_timers() -> Tuple[FPS, FPS, FPS, FPS]:
-        """Initialize the FPS timers"""
-        avg_fps = FPS()
-        reading_fps = FPS()
-        writing_fps = FPS()
-        bohs_fps = FPS()
-        return avg_fps, reading_fps, writing_fps, bohs_fps
+        """Initialize the FPS timers -> avg_fps, reading_fps, writing_fps, bohs_fps"""
+        return FPS(), FPS(), FPS(), FPS()
 
     def get_timeout(self, timeout_minute_length: float = 22.5) -> int:
         """Return the time in seconds that the video should be recorded for (default is 22.5 minutes)"""
-        if self.debug is True:
-            return int(time.time() + 10)  # 10-second video if in debug mode
-        else:
-            return int(time.time() + (timeout_minute_length * 60))
+        return int(time.time() + 5 if self.debug else (timeout_minute_length * 60))
 
     def get_video_path(self) -> str:
         """Return the path to save the video to (doesn't include name!)"""
         if os.name == 'nt':
-            return "./videos/"
-        elif self.debug is False:
-            ip_address = get_ip_address()
-            video_dir_path = f"../tim/bohsVids/{self.today.strftime('%m_%d_%Y@')}_{self.jetson_name}_{ip_address}"
-            check_and_create_dir(video_dir_path)
-            return video_dir_path
-        else:
-            return "../tim/bohsVids/test"
+            return os.path.join('.', 'videos')
+        ip_address = get_ip_address()
+        video_dir_path = os.path.join('..', 'tim', 'bohsVids', f"{self.today.strftime('%m_%d_%Y@')}_{self.jetson_name}_{ip_address}" if not self.debug else 'test')
+        check_and_create_dir(video_dir_path)
+        return video_dir_path
 
-    def record_video(self, video_length_mins: float, video_path: str) -> None:
+    def record_video(self, video_length_mins: float, video_path: str, video_name: str) -> None:
         """
         Record and save a video for as long as set in the timeout
 
@@ -119,10 +101,9 @@ class VideoRecorder:
         """
         cap = self.get_capture()
 
-        video_name = self.create_datetime_video_name()
-        video_path = os.path.join(video_path, video_name) # Join the path and the name together
+        full_video_path = os.path.join(video_path, video_name) # Join the path and the name together
 
-        writer = self.create_video_writer(video_name=video_path)
+        writer = self.create_video_writer(video_name=full_video_path)
         avg_fps, reading_fps, writing_fps, bohs_fps = self.initialize_fps_timers()
         frame_counter = 0
         timeout = self.get_timeout(video_length_mins)
@@ -130,6 +111,7 @@ class VideoRecorder:
         # Camera loop
         try:
             if cap.isOpened():
+                print("Recording video...")
                 while cap.isOpened():
                     # Read the next frame
                     reading_fps.start()
@@ -173,9 +155,27 @@ class VideoRecorder:
         time_till_match_starts = time.time() + seconds_till_match
         while time.time() < time_till_match_starts:
             print("waiting for match to start")
-            time.sleep(1)
+            time.sleep(3)
         return True
 
+    def record_and_check_video(self, video_length_seconds: int = 5) -> bool:
+        """Records a quick video and then checks if it's been recorded successfully."""
+        video_path = self.get_video_path()
+        video_name = self.create_datetime_video_name()
+
+        # Record a quick video
+        self.record_video(video_length_seconds/60, video_path, video_name=video_name)
+
+        # Check if the video has been recorded successfully
+        full_video_path = os.path.join(video_path, video_name)
+        if os.path.isfile(full_video_path):
+            print(f"The video has been recorded successfully at {full_video_path}")
+            return True
+        else:
+            print(f"The video recording failed. No file at {full_video_path}")
+            return False
+
+    
     def record_full_match_in_batches(self) -> None:
         """Records videos for the match. Four 22.5-minute long videos + one 10-minute long video for the halftime"""
         # Set our file directory
@@ -185,11 +185,17 @@ class VideoRecorder:
         seconds_till_match = self.get_seconds_till_match()
         self.wait_for_match_to_start(seconds_till_match)  # Blocks until the match starts
 
-        for i in range(5):
+        num_vids = 1 if self.debug is True else 5 
+
+        video_saved_successfully = self.record_and_check_video(video_length_seconds=5)
+        if not video_saved_successfully:
+            raise Exception("Video not saved successfully")
+
+        for i in range(num_vids):
             if (i == 2) or (i > 5):
-                self.record_video(video_length_mins=10, video_path=path)
+                self.record_video(video_length_mins=10, video_path=path, video_name=self.create_datetime_video_name)
             else:
-                self.record_video(video_length_mins=22.5, video_path=path)
+                self.record_video(video_length_mins=22.5, video_path=path, video_name=self.create_datetime_video_name())
 
 
 def main():
