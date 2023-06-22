@@ -14,8 +14,8 @@ class BohsConfig:
             self.jetson_name: str = os.environ.get('JETSON_NAME')
 
         self.jetson_number: str = self.jetson_name[-1]
-        self.hour: int = 17
-        self.minute: int = 1
+        self.hour: int = 19
+        self.minute: int = 45
         self.second: int = 2
         self.microsecond: int = 1
 
