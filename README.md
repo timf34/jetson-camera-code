@@ -1,49 +1,40 @@
-**This README is old, will update it later**
-
-
 # jetson-camera-code
-Backup for the camera controlling code on our Jetsons
+
+Jetson side code for recording videos of the matches, streaming video to laptop for initial setup, and will host the 
+jetson side code for the AI MDS system (i.e. BohsNet for inference, with fovnet for comms). 
 
 
+### Recording video 
 
-**Note that we have to make the `update_jetson_config_file.sh` executable via `chmod +x update_jetson_config_file.py`**
+`record_video.py` in the home directory manages recording videos to local storage. It gets the time of the match from 
+the `config.py` file. It records the match in 22.5 minute chunks, with 10 mins for half time. 
 
-Note that I also have to do the same for the `calls_jetson_update_file.sh` script which will be in the `dispatcher.d` directory... except that I need to prepend the 
-command with sudo (it needs root permission)
-
-Also note that it seems to only work when I hardcode the path into `calls...file.py` file... I don't know why the env variables aren't working
-
-I shouldn't need to make another 
-
-Also note that I need to be careful when running git pull on `calls_jetson_update_file.sh`... even though the main copy will be in the dispatcher.d folder it would be best not to change the original too much, otherwise I could accidentally changed the hardcoded filepaths 
-
-# TODO 
-
-- [ ] Look into making the environment variables work as a path in the .sh scripts. Primarily the `calls_jetson_update_file.sh` script
-
-- [ ] ==**The paths in `main_loop.py` are hardcoded... replace these with environment variables when you can. It could cause some confusion later potentially**==
-
-- [ ] Update the process for a match day in Bohs, absolutely step by step, for when I inevitably (potentially) forget everything! In Notion and in Logseq (experiment with moving over there more! Maybe Obsidian too!) 
-
-## Some notes on usage
-### Streaming to laptop to check camera angle
-This is the code contained within `stream_port1234.sh`:
-- To run, run `bash stream_port1234.sh` from the Jetson's terminal 
-  - Ensure that the IP address within the script equals your **local IP address (ie your laptop's!)**
-- On your laptop, run the `stream1234.sdp` file, just click on it if you have it on your desktop, or open it with VLC player (note this isn't on this repo yet, will make a laptop files directory).
-
-### For recording the matches 
-
-I have added a `record_video.sh` file which should handle everything but 
-I still need to test it. 
-
-### Whats going on in the background
-
-The `calls_jetson_update_file.sh` file gets added to the `/etc/NetworkManager/dispatcher.d` which automatically gets run when the device connects succesfully to the internet. This file runs the `update_match_config_file.sh` within this project's home directory which then updates the `config.py` and `stream_port1234.sh` files. 
-**This means that we only have to update the time of the match, and the IP address of this laptop in case its changed, in preparation for a game** (assuming that the cameras are working ok (I should write some sort of test for them when I have time)). 
+To ensure video recording is working correctly, it includes the `record_and_check_video()` method which records a 
+quick video and relays to the terminal that it recorded correctly. 
 
 
-### Useful commands 
+### Streaming video to laptop
+
+`/scripts/stream_port1234.sh` is a script which streams the video from the Jetson to the laptop. 
+
+Be sure that the IP address in the script is the IP address of the laptop you are streaming to.
+
+### Performing AI inference on the Jetson
+
+`record_and_detect.py` - records video , performs inference, includes fovnet comms code.
+
+
+### Notes 
+
+**Match day setup**
+
+1. Run `bash stream_port1234.sh` on the Jetson to stream video to laptop to check camera angle. Open the corresponding 
+`.sdp` file on the laptop to view the stream.
+1. Start a `tmux` session on the Jetson, and run `python3 record_video.py` to record the match. 
+   2. **...why do we run tmux again? TODO: find this out**
+
+
+### Useful Jetson commands 
 
 - Run `sudo jtop` to get a grpahical overview of RAM, CPU, GPU useage
 
