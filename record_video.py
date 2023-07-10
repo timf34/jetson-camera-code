@@ -158,7 +158,7 @@ class VideoRecorder:
             time.sleep(3)
         return True
 
-    def record_and_check_video(self, video_length_seconds: int = 5) -> bool:
+    def record_and_check_video(self, video_length_seconds: int = 5) -> None:
         """Records a quick video and then checks if it's been recorded successfully."""
         video_path = self.get_video_path()
         video_name = self.create_datetime_video_name()
@@ -170,10 +170,9 @@ class VideoRecorder:
         full_video_path = os.path.join(video_path, video_name)
         if os.path.isfile(full_video_path):
             print(f"The video has been recorded successfully at {full_video_path}")
-            return True
         else:
             print(f"The video recording failed. No file at {full_video_path}")
-            return False
+            raise Exception("Video recording failed")
 
     
     def record_full_match_in_batches(self) -> None:
@@ -182,15 +181,14 @@ class VideoRecorder:
         path = self.get_video_path()
         check_and_create_dir(path)
 
+        # Record a quick video to check if it's been recorded successfully
+        self.record_and_check_video(video_length_seconds=5)
+
+        # Wait for the match to start
         seconds_till_match = self.get_seconds_till_match()
         self.wait_for_match_to_start(seconds_till_match)  # Blocks until the match starts
 
         num_vids = 1 if self.debug is True else 5 
-
-        video_saved_successfully = self.record_and_check_video(video_length_seconds=5)
-        if not video_saved_successfully:
-            raise Exception("Video not saved successfully")
-
         for i in range(num_vids):
             if (i == 2) or (i > 5):
                 self.record_video(video_length_mins=10, video_path=path, video_name=self.create_datetime_video_name)
