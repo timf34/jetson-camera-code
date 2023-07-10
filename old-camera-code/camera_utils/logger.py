@@ -84,7 +84,7 @@ class Logger:
 def main():
     import time
 
-    logger = Logger("../test.log", buffer_size=10)
+    logger = Logger("../../../../PycharmProjects/jetson_camera_code/test.log", buffer_size=10)
 
     for i in range(100):
         logger.log(f"Test message {i}")
